@@ -173,3 +173,11 @@ body {
   margin-left: 8px;
   text-transform: uppercase;
 }
+
+.new-item {
+  color: #00BFFF;
+  font-weight: 700;
+  font-size: 0.8em;
+  margin-left: 8px;
+  text-transform: uppercase;
+}
