@@ -90,10 +90,14 @@ body {
 }
 
 .file-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 1.5rem;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    max-height: 200px; /* Or any height you prefer */
+    overflow-y: auto;  /* Adds a scrollbar only when needed */
+    scrollbar-width: thin; /* For a cleaner scrollbar */
 }
+
 
 .file-list li a {
     color: var(--text-color);
