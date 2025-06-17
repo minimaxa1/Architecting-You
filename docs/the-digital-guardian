@@ -30,7 +30,7 @@
 <body>
     <div class="main-container">
         <header class="main-header">
-            <h1>The Digital Guardian (Advanced)</h1>
+            <h1>The Digital Guardian</h1>
             <p>An Extraction from the Book Architecting You</p>
         </header>
         <main class="content-wrapper">
