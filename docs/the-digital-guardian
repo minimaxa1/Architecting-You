@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Digital Guardian (Advanced) - The Bohemai Project</title>
+    <title>The Digital Guardian - The Bohemai Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --grid-color: rgba(200, 200, 200, 0.1); --text-color: #E0E0E0; --bg-color: #111111; --panel-bg-color: rgba(18, 18, 18, 0.9); --panel-border-color: #444; --highlight-color: #00BFFF; --quote-border-color: #4A90E2; }
