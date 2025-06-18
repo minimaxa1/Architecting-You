@@ -41,9 +41,72 @@
             transition: stroke 0.2s ease-in-out;
         }
 
-        #report-icon-link:hover svg {
-            stroke: #00bfff; /* Icon color on hover */
+        
+#report-icon-link {
+    /* Positioning */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+
+    /* Layout & Sizing for Icon + Text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    width: 80px; /* Give it a bit more width */
+    
+    /* Appearance */
+    border: 1px solid #333;
+    background-color: #1c1c1c;
+    border-radius: 6px;
+    text-decoration: none; /* Removes underline from link */
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#report-icon-link:hover {
+    border-color: #00bfff;
+    transform: translateY(-2px);
+    background-color: #2a2a2a;
+}
+
+/* Container for the SVG to control its size */
+#report-icon-link .icon-container {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px; /* Space between icon and text */
+}
+
+#report-icon-link svg {
+    width: 100%;
+    height: 100%;
+    stroke: #c4c4c4;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease-in-out;
+}
+
+/* The "report" text */
+#report-icon-link .report-text {
+    font-family: 'Source Code Pro', monospace; /* Match your site's font */
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Hover effect for the contents */
+#report-icon-link:hover svg,
+#report-icon-link:hover .report-text {
+    stroke: #00bfff;
+    color: #00bfff;
+}
         }
+        
     </style>
     <!-- END: ADDED STYLES FOR THE REPORT ICON -->
 
