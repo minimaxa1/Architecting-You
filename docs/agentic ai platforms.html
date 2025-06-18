@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete Guide: Automation & Agentic AI Platforms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #121212;
+            --color-surface: #1e1e1e;
+            --color-text: #e0e0e0;
+            --color-text-secondary: #a0a0a0;
+            --color-primary: #e53935; /* A strong red */
+            --color-border: #333333;
+            --color-green: #4CAF50;
+            --color-red-icon: #f44336;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .container { max-width: 1700px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 { color: var(--color-primary); font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        header p { max-width: 900px; margin: 0 auto; color: var(--color-text-secondary); }
+
+        #filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+        .filter-btn.active { box-shadow: 0 0 10px rgba(229, 57, 53, 0.4); }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+        thead { background-color: #000; }
+        th { color: var(--color-primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; }
+        tbody tr { transition: background-color 0.2s ease; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
+        
+        td:nth-child(1) { font-weight: 500; color: var(--color-text); }
+        
+        ul { list-style-type: none; padding-left: 0; }
+        ul li { position: relative; padding-left: 1.2em; margin-bottom: 0.4em; }
+        ul li::before { content: '•'; position: absolute; left: 0; color: var(--color-primary); }
+
+        .highlight-red { color: var(--color-primary); font-weight: 500; }
+        
+        .icon-cell { text-align: center; font-size: 1.4rem; font-weight: bold; vertical-align: middle; }
+        .icon-cell.yes { color: var(--color-green); }
+        .icon-cell.no { color: var(--color-red-icon); }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: var(--color-border);
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
+        
+        @media screen and (max-width: 1200px) {
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            tr { border: 1px solid var(--color-border); margin-bottom: 1rem; border-radius: 8px; background: var(--color-surface); }
+            tbody tr:hover { background-color: var(--color-surface); }
+            td { border: none; border-bottom: 1px solid var(--color-border); position: relative; padding-left: 50%; min-height: 44px; display: flex; align-items: center; }
+            td:last-child { border-bottom: none; }
+            td:before {
+                position: absolute; top: 50%; left: 1rem; transform: translateY(-50%);
+                width: 45%; padding-right: 10px; white-space: nowrap;
+                content: attr(data-label);
+                color: var(--color-primary); font-weight: 700; font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>The Complete Guide: Automation & Agentic AI Platforms</h1>
+            <p>A unified intelligence report covering the entire landscape of automation tools, agentic AI platforms, and the underlying infrastructure. This definitive guide compares platforms from simple no-code tools to sophisticated developer frameworks. Use the filters below to navigate.</p>
+        </header>
+
+        <div id="filter-container">
+            <button class="filter-btn active" data-category="all">Show All</button>
+            <button class="filter-btn" data-category="ai-native">AI-Native Agents</button>
+            <button class="filter-btn" data-category="nocode">No-Code / Low-Code Automation</button>
+            <button class="filter-btn" data-category="developer">Developer-Focused Automation</button>
+            <button class="filter-btn" data-category="enterprise">Enterprise iPaaS</button>
+            <button class="filter-btn" data-category="infrastructure">Infrastructure & Frameworks</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Category</th>
+                        <th>Self-Hostable</th>
+                        <th>Agent-First</th>
+                        <th>Key Features & Benefits</th>
+                        <th>Pricing Model & Costs</th>
+                        <th>Use Case & AI Focus</th>
+                    </tr>
+                </thead>
+                <tbody id="platform-table-body">
+                    
+                    <!-- AI-NATIVE AGENTS -->
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Lindy</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>Focus on creating "AI Employees" for specific roles</li><li>Handles complex, long-running tasks</li><li>Natural language interface for task delegation</li></ul><strong>Benefit:</strong> Aims to create fully autonomous agents to replace or augment human roles, not just connect apps.</td>
+                        <td data-label="Costs"><strong>Tiered SaaS.</strong><br>Pricing based on agent complexity, number of agents, and usage.</td>
+                        <td data-label="AI Focus"><strong>Core Product.</strong> The entire platform is designed to build, deploy, and manage reasoning agents that operate independently.</td>
+                    </tr>
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Empler AI</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>Similar to Lindy, focuses on autonomous "AI employees"</li><li>Delegates complex goals, not just simple tasks</li><li>Connects to company knowledge bases</li></ul><strong>Benefit:</strong> A platform for building and managing a workforce of AI agents that can learn and execute business processes.</td>
+                        <td data-label="Costs"><strong>Tiered SaaS (Presumed).</strong><br>Likely priced based on seats and agent usage.</td>
+                        <td data-label="AI Focus"><strong>Core Product.</strong> An "Agent-as-a-Service" platform where the primary output is a functional, autonomous agent.</td>
+                    </tr>
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Gumloop</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>Visual builder specifically for AI agents</li><li>Connects LLMs, tools (APIs), and data sources</li><li>Manages agent state and memory visually</li></ul><strong>Benefit:</strong> Simplifies the creation of multi-step, reasoning agents in a modern, visual, low-code environment.</td>
+                        <td data-label="Costs"><strong>Tiered SaaS.</strong><br>Offers a free/dev tier, with paid plans based on usage and features.</td>
+                        <td data-label="AI Focus"><strong>Core Product.</strong> A visual platform for the post-LLM world, providing the framework for defining agent behavior and tool access.</td>
+                    </tr>
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Latenode</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>Visual flow builder with code integration (JS/TS)</li><li><span class="highlight-red">Self-hostable for full control & data privacy</span></li><li>Designed for complex, stateful, looping workflows</li></ul><strong>Benefit:</strong> A highly customizable low-code platform that excels at building complex, stateful AI agents. A modern n8n alternative.</td>
+                        <td data-label="Costs"><strong>Open-Source & Cloud SaaS.</strong><br>Free to self-host. Cloud version is usage-based.</td>
+                        <td data-label="AI Focus"><strong>Advanced Agent Builder.</strong> Its architecture (loops, state, code) is purpose-built for creating sophisticated AI agents, bridging the gap between no-code and pure code.</td>
+                    </tr>
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Agentic.ai</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>Platform for building, testing, & deploying agents</li><li>Focus on reliability and production use</li><li>Includes observability and monitoring tools</li></ul><strong>Benefit:</strong> Moves beyond prototypes to offer a managed environment for running reliable, observable autonomous agents at scale.</td>
+                        <td data-label="Costs"><strong>Tiered SaaS (Presumed).</strong><br>Pricing based on agent runs, tokens, and enterprise monitoring.</td>
+                        <td data-label="AI Focus"><strong>Core Product.</strong> An end-to-end platform focused on the full lifecycle of an autonomous agent, from development to production monitoring.</td>
+                    </tr>
+                    <tr data-category="ai-native">
+                        <td data-label="Platform">Lyzr</td>
+                        <td data-label="Category"><span class="category-badge">AI-Native Agents</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell yes">✅</td>
+                        <td data-label="Features & Benefits"><ul><li>SDKs (libraries) for building GenAI apps</li><li>Pre-built "Agent-templates" for common tasks</li><li><span class="highlight-red">Developer-first, code-based approach</span></li></ul><strong>Benefit:</strong> Provides developers with high-level building blocks to rapidly assemble and deploy agents without starting from scratch.</td>
+                        <td data-label="Costs"><strong>Open-Source & Enterprise.</strong><br>Core SDKs are open-source; a managed platform or enterprise support is the likely business model.</td>
+                        <td data-label="AI Focus"><strong>Core Product (as SDK).</strong> A set of tools to *build* agents that can be deployed on any infrastructure. Sits between LangChain and a full platform.</td>
+                    </tr>
+
+                    <!-- NO-CODE / LOW-CODE AUTOMATION -->
+                    <tr data-category="nocode">
+                        <td data-label="Platform">Zapier</td>
+                        <td data-label="Category"><span class="category-badge">No-Code / Low-Code</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Massive connector library (6,000+ apps)</li><li>Simple, linear "If This, Then That" logic</li><li>Extremely easy to use for non-technical users</li></ul><strong>Benefit:</strong> The fastest, simplest way to connect two apps for basic task automation.</td>
+                        <td data-label="Costs"><strong>Tiered, Task-Based.</strong><br><span class="highlight-red">Costs can scale rapidly with high usage.</span></td>
+                        <td data-label="AI Focus"><strong>Orchestrator.</strong> Uses AI as a *step* in a workflow (e.g., call OpenAI). "Zapier Central" adds natural language to build Zaps, but the platform is not agent-native.</td>
+                    </tr>
+                    <tr data-category="nocode">
+                        <td data-label="Platform">Make</td>
+                        <td data-label="Category"><span class="category-badge">No-Code / Low-Code</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Powerful visual workflow builder</li><li>Advanced logic (routers, iterators, error handling)</li><li>Precise data management and transformation</li></ul><strong>Benefit:</strong> Handles complex, multi-step workflows visually that are too difficult for Zapier.</td>
+                        <td data-label="Costs"><strong>Tiered, Operation-Based.</strong><br>Generally more cost-effective than Zapier for high-complexity workflows.</td>
+                        <td data-label="AI Focus"><strong>Orchestrator.</strong> Excellent for building the "body" of an agent. You visually define the logic that calls AI models, processes outputs, and interacts with other tools.</td>
+                    </tr>
+                    <tr data-category="nocode">
+                        <td data-label="Platform">Microsoft Power Automate</td>
+                        <td data-label="Category"><span class="category-badge">No-Code / Low-Code</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li><span class="highlight-red">Unmatched integration with Microsoft 365 & Azure</span></li><li>Includes Desktop flows (RPA)</li><li>AI Builder for pre-built models</li></ul><strong>Benefit:</strong> The default choice for organizations heavily invested in the Microsoft ecosystem.</td>
+                        <td data-label="Costs"><strong>Complex & Bundled.</strong><br>Limited free use in M365 licenses. Per-user and per-flow plans can be confusing.</td>
+                        <td data-label="AI Focus"><strong>Deeply Integrated AI.</strong> Natively uses Azure AI and the "Copilot" ecosystem. AI Builder provides models for forms, text, and prediction without code.</td>
+                    </tr>
+
+                    <!-- DEVELOPER-FOCUSED AUTOMATION -->
+                    <tr data-category="developer">
+                        <td data-label="Platform">n8n</td>
+                        <td data-label="Category"><span class="category-badge">Developer-Focused</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li><span class="highlight-red">Source-available and self-hostable</span></li><li>Visual editor with custom JS/Python nodes</li><li>Includes a dedicated "AI Agent" node</li></ul><strong>Benefit:</strong> Maximum flexibility and control, bridging no-code with pure code. Self-hosting is ideal for data privacy and cost control.</td>
+                        <td data-label="Costs"><strong>"Fair-Code" & Cloud.</strong><br>Free to self-host (pay for server). Cloud plans are execution-based.</td>
+                        <td data-label="AI Focus"><strong>Advanced Builder.</strong> Though not strictly "Agent-First," its dedicated AI nodes and code flexibility make it one of the most powerful platforms for building custom agents.</td>
+                    </tr>
+                    <tr data-category="developer">
+                        <td data-label="Platform">Pipedream</td>
+                        <td data-label="Category"><span class="category-badge">Developer-Focused</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li><span class="highlight-red">Code-native, serverless platform</span></li><li>Write Node.js, Python, Go, Bash in any step</li><li>No servers to manage; instant deployment</li></ul><strong>Benefit:</strong> The power of code without infrastructure management. Built for developers who need ultimate speed and flexibility.</td>
+                        <td data-label="Costs"><strong>Generous Free Tier & PAYG.</strong><br>Highly cost-effective for developer and variable workloads.</td>
+                        <td data-label="AI Focus"><strong>DIY Powerhouse.</strong> The ideal serverless backend for developers building custom agentic logic from scratch with code and connecting to any API or model.</td>
+                    </tr>
+                    <tr data-category="developer">
+                        <td data-label="Platform">Node-RED</td>
+                        <td data-label="Category"><span class="category-badge">Developer-Focused</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Completely free and open-source</li><li>Lightweight, runs anywhere (even Raspberry Pi)</li><li>Highly extensible via a vast library of community nodes</li></ul><strong>Benefit:</strong> Total ownership and extreme extensibility for tech-savvy users, especially popular in IoT.</td>
+                        <td data-label="Costs"><strong>Completely Free.</strong><br>You are responsible for all hosting and maintenance costs ($0 software cost).</td>
+                        <td data-label="AI Focus"><strong>Manual Integrator.</strong> You must find or build nodes to connect to AI services. You construct all logic by wiring nodes; no inherent agentic features.</td>
+                    </tr>
+                    <tr data-category="developer">
+                        <td data-label="Platform">Huginn</td>
+                        <td data-label="Category"><span class="category-badge">Developer-Focused</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Open-source and fully self-hosted</li><li>Creates "agents" that perform scheduled tasks</li><li>Scrapes websites, watches for events, sends digests</li></ul><strong>Benefit:</strong> A powerful, free, self-hosted IFTTT/Zapier for developers who want to run automations on their own servers.</td>
+                        <td data-label="Costs"><strong>Completely Free.</strong><br>Requires a server and technical knowledge (Ruby on Rails) to set up and maintain.</td>
+                        <td data-label="AI Focus"><strong>Basic Trigger/Action.</strong> Uses the term "agent" in the older sense (a bot that does one task). Not designed for modern, LLM-based agentic workflows.</td>
+                    </tr>
+
+                    <!-- ENTERPRISE iPAAS -->
+                    <tr data-category="enterprise">
+                        <td data-label="Platform">Workato</td>
+                        <td data-label="Category"><span class="category-badge">Enterprise iPaaS</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Enterprise-grade governance, security & compliance</li><li>Pre-built "Recipes" for Salesforce, Workday, etc.</li><li>"Copilots" to assist workflow building</li></ul><strong>Benefit:</strong> Securely manages and scales business-critical automations across large organizations with IT oversight.</td>
+                        <td data-label="Costs"><strong>Quote-Based Enterprise.</strong><br><span class="highlight-red">High cost, typically starting in 5-figures annually.</span></td>
+                        <td data-label="AI Focus"><strong>Enterprise AI Integration.</strong> Natively integrates AI/ML for tasks like intelligent document processing, sentiment analysis, and predictive workflows within a secure enterprise context.</td>
+                    </tr>
+                    <tr data-category="enterprise">
+                        <td data-label="Platform">Tray.io</td>
+                        <td data-label="Category"><span class="category-badge">Enterprise iPaaS</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>High-performance, API-first platform</li><li>Universal API Connector for any service</li><li>Strong embedded solution for SaaS companies</li></ul><strong>Benefit:</strong> A scalable, developer-friendly enterprise platform for high-volume, complex API integrations.</td>
+                        <td data-label="Costs"><strong>Quote-Based Enterprise.</strong><br><span class="highlight-red">High cost, geared towards mid-market and enterprise.</span></td>
+                        <td data-label="AI Focus"><strong>AI-Assisted Building.</strong> "Tray Merlin AI" helps users build workflows using natural language. Excellent for connecting to any AI model via its robust HTTP connector.</td>
+                    </tr>
+                    
+                    <!-- INFRASTRUCTURE & FRAMEWORKS -->
+                     <tr data-category="infrastructure">
+                        <td data-label="Platform">Airbyte</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Open-source data integration (ELT) platform</li><li>Huge library of source/destination connectors</li><li><span class="highlight-red">Focused solely on reliable data movement</span></li></ul><strong>Benefit:</strong> The industry standard for moving large volumes of data from apps and databases to data warehouses.</td>
+                        <td data-label="Costs"><strong>Open-Source & Cloud.</strong><br>Free to self-host. Cloud version is credit-based.</td>
+                        <td data-label="AI Focus"><strong>Data Foundation.</strong> Not an agent platform. It is the tool used to *feed data to* AI models and vector stores, a critical prerequisite for RAG and agent training.</td>
+                    </tr>
+                    <tr data-category="infrastructure">
+                        <td data-label="Platform">Apache Airflow</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Workflows as Python code (DAGs)</li><li>Robust scheduling, backfilling, and monitoring</li><li><span class="highlight-red">Industry standard for data engineering</span></li></ul><strong>Benefit:</strong> Orchestrates complex, batch-oriented data pipelines (ETL/ELT) and ML model training jobs at scale.</td>
+                        <td data-label="Costs"><strong>Completely Free (Open-Source).</strong><br>Managed versions available from cloud providers (e.g., AWS MWAA) at a premium.</td>
+                        <td data-label="AI Focus"><strong>MLOps Orchestration.</strong> Not for real-time agents. It is used to orchestrate the *systems* that train and deploy AI models and manage their data dependencies.</td>
+                    </tr>
+                    <tr data-category="infrastructure">
+                        <td data-label="Platform">Directus</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Open-source headless CMS & data platform</li><li>Instantly creates APIs from any SQL database</li><li>Built-in data automation flows</li></ul><strong>Benefit:</strong> Provides an intelligent, API-first "backend-in-a-box" for content and structured data.</td>
+                        <td data-label="Costs"><strong>Open-Source & Cloud.</strong><br>Free to self-host. Tiered cloud plans.</td>
+                        <td data-label="AI Focus"><strong>Structured Memory Backend.</strong> Its flows can integrate AI, but its primary role in an AI stack is to be the clean, structured, and API-accessible "brain" or long-term memory for an agent.</td>
+                    </tr>
+                    <tr data-category="infrastructure">
+                        <td data-label="Platform">LangChain</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell yes">✅</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li><span class="highlight-red">Open-source framework for LLM apps</span></li><li>Provides components for Chains, Agents, and Memory</li><li>LangSmith for debugging and observability</li></ul><strong>Benefit:</strong> The de-facto standard library for developers creating any LLM-powered application, including agents.</td>
+                        <td data-label="Costs"><strong>Open-Source & SaaS.</strong><br>LangChain framework is free. LangSmith (observability) is a paid SaaS product.</td>
+                        <td data-label="AI Focus"><strong>Foundational Framework.</strong> It is not a platform but a code library *used to build agents*. Most agentic platforms and custom solutions use LangChain under the hood.</td>
+                    </tr>
+                    <tr data-category="infrastructure">
+                        <td data-label="Platform">GitHub</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>GitHub Actions for CI/CD & automation</li><li>GitHub Copilot for AI code completion</li><li><span class="highlight-red">The central hub for the developer workflow</span></li></ul><strong>Benefit:</strong> Core infrastructure for code hosting, collaboration, and running automations (Actions) tied to code changes.</td>
+                        <td data-label="Costs"><strong>Tiered.</strong><br>Free for public repos/open source. Paid tiers for private repos, advanced features, and Copilot access.</td>
+                        <td data-label="AI Focus"><strong>AI-Assisted Development.</strong> Not an agent platform, but an enabler. Copilot is a powerful pair programmer; Actions orchestrate AI/ML training and deployment pipelines.</td>
+                    </tr>
+                    <tr data-category="infrastructure">
+                        <td data-label="Platform">Render</td>
+                        <td data-label="Category"><span class="category-badge">Infrastructure</span></td>
+                        <td data-label="Self-Hostable" class="icon-cell no">❌</td>
+                        <td data-label="Agent-First" class="icon-cell no">❌</td>
+                        <td data-label="Features & Benefits"><ul><li>Platform as a Service (PaaS) for easy deployment</li><li>Deploy web services, workers, databases</li><li>Auto-scaling & managed infrastructure</li></ul><strong>Benefit:</strong> The "easy button" for hosting custom applications, including self-hosted tools (like n8n) and agents built with code frameworks.</td>
+                        <td data-label="Costs"><strong>Usage-Based.</strong><br>Free tier for small services. Pay for what you use for compute, bandwidth, and storage.</td>
+                        <td data-label="AI Focus"><strong>Hosting Layer.</strong> Has no native AI capabilities. It is the cloud infrastructure *where you run* your self-built agents and AI applications.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = 1;
+
+            const filterContainer = document.getElementById('filter-container');
+            const tableRows = document.querySelectorAll('#platform-table-body tr');
+            
+            const headers = Array.from(document.querySelectorAll('thead th')).map(th => th.textContent);
+            document.querySelectorAll('tbody tr').forEach(row => {
+                row.querySelectorAll('td').forEach((cell, index) => {
+                    cell.setAttribute('data-label', headers[index]);
+                });
+            });
+
+            filterContainer.addEventListener('click', (e) => {
+                const target = e.target;
+                if (!target.classList.contains('filter-btn')) return;
+
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+
+                const category = target.getAttribute('data-category');
+
+                tableRows.forEach(row => {
+                    row.style.display = (category === 'all' || row.getAttribute('data-category') === category) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
