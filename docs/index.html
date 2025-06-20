@@ -10,30 +10,85 @@
     
     <!-- START: ADDED STYLES FOR THE REPORT ICON -->
     <style>
+   body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #E53935; /* A red color similar to screenshot */
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+        
+        /* This is just a placeholder for the content area */
+        .content-placeholder {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            color: #777;
+            font-size: 1.2rem;
+        }
+
+        /* --- START: ADDED STYLES FOR THE REPORT ICON --- */
+        
+        /* The main link container */
         #report-icon-link {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            padding: 10px;
-            border: 1px solid #333; /* Matches a dark theme border */
-            background-color: #1c1c1c; /* Matches a common dark panel background */
-            border-radius: 4px;
+            /* Positioning for top-right corner */
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            
+            /* Visual Styling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+            text-decoration: none;
             cursor: pointer;
-            z-index: 1000; /* Ensures it stays on top of other content */
             transition: all 0.2s ease-in-out;
         }
 
         #report-icon-link:hover {
-            border-color: #00bfff; /* A bright accent color on hover */
+            border-color: #00bfff; /* Deep Sky Blue */
             transform: translateY(-2px);
+            background-color: #2a2a2a;
+        }
+
+        /* Container for the SVG to control its size */
+        #report-icon-link .icon-container {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 4px; /* Space between icon and text */
         }
 
         #report-icon-link svg {
             width: 100%;
             height: 100%;
-            stroke: #c4c4c4; /* Default icon color */
+            stroke: #c4c4c4;
             stroke-width: 1.5;
             fill: none;
             stroke-linecap: round;
@@ -41,88 +96,55 @@
             transition: stroke 0.2s ease-in-out;
         }
 
-        
-#report-icon-link {
-    /* Positioning */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-
-    /* Layout & Sizing for Icon + Text */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px;
-    width: 80px; /* Give it a bit more width */
-    
-    /* Appearance */
-    border: 1px solid #333;
-    background-color: #1c1c1c;
-    border-radius: 6px;
-    text-decoration: none; /* Removes underline from link */
-    
-    /* Interaction */
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-#report-icon-link:hover {
-    border-color: #00bfff;
-    transform: translateY(-2px);
-    background-color: #2a2a2a;
-}
-
-/* Container for the SVG to control its size */
-#report-icon-link .icon-container {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 4px; /* Space between icon and text */
-}
-
-#report-icon-link svg {
-    width: 100%;
-    height: 100%;
-    stroke: #c4c4c4;
-    stroke-width: 1.5;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke 0.2s ease-in-out;
-}
-
-/* The "report" text */
-#report-icon-link .report-text {
-    font-family: 'Source Code Pro', monospace; /* Match your site's font */
-    font-size: 0.8rem;
-    color: #a0a0a0;
-    transition: color 0.2s ease-in-out;
-}
-
-/* Hover effect for the contents */
-#report-icon-link:hover svg,
-#report-icon-link:hover .report-text {
-    stroke: #00bfff;
-    color: #00bfff;
-}
+        /* The "report" text */
+        #report-icon-link .report-text {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
+            color: #a0a0a0;
+            transition: color 0.2s ease-in-out;
         }
-        
-    </style>
-    <!-- END: ADDED STYLES FOR THE REPORT ICON -->
 
+        /* Hover effect for the contents */
+        #report-icon-link:hover svg,
+        #report-icon-link:hover .report-text {
+            stroke: #00bfff; /* Deep Sky Blue */
+            color: #00bfff;
+        }
+        /* --- END: ADDED STYLES FOR THE REPORT ICON --- */
+    </style>
 </head>
 <body>
+
+    <!-- START: THE CLICKABLE REPORT ICON -->
+    <a id="report-icon-link" href="Ai Horizons7.html" title="View AI Foundations Report">
+        <div class="icon-container">
+            <!-- This is the SVG icon for the report -->
+            <svg viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+        </div>
+        <span class="report-text">AI Foundations</span>
+    </a>
+    <!-- END: THE CLICKABLE REPORT ICON -->
     
-    <!-- START: REBUILT CLICKABLE ICON FOR THE REPORT -->
-<a id="report-icon-link" href="agentic ai platforms.html" target="_blank" title="Open Agentic AI Platforms Report">
-    <div class="icon-container">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <path d="M7 13l3 3 7-7"></path>
-        </svg>
+
+    <div class="container">
+        <h1>The Complete Guide: Automation & Agentic AI Platforms</h1>
+        <p class="subtitle">
+            A unified intelligence report covering the entire landscape of automation tools and agentic AI platforms. This definitive guide
+            compares platforms from simple no-code tools to sophisticated, open-source developer frameworks for building multi-agent
+            systems. Use the filters below to navigate.
+        </p>
+        
+        <!-- Placeholder for your table/content -->
+        <div class="content-placeholder">
+            Your platform comparison table would go here...
+        </div>
     </div>
-    <span class="report-text">agentic platforms report</span>
-</a>
 <!-- END: REBUILT CLICKABLE ICON FOR THE REPORT -->
 
 
