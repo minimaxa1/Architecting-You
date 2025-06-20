@@ -12,11 +12,11 @@
             --color-bg: #121212;
             --color-surface: #1e1e1e;
             --color-text: #e0e0e0;
-            --color-text-secondary: #a0a0a0;
+            --color-text-secondary: #b0b0b0;
             --color-primary: #e53935; /* Strong red */
             --color-border: #333333;
             --color-green: #4CAF50;
-            --color-blue: #2196F3; /* For Open Source Icon */
+            --color-blue: #2196F3;
             --color-red-icon: #f44336;
         }
 
@@ -78,52 +78,48 @@
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
         thead { background-color: #000; }
         th { color: var(--color-primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; }
         tbody tr { transition: background-color 0.2s ease; }
         tbody tr:last-child td { border-bottom: none; }
         tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
         
-        td:nth-child(1) { font-weight: 500; color: var(--color-text); }
-        
-        ul { list-style-type: none; padding-left: 0; }
-        ul li { position: relative; padding-left: 1.2em; margin-bottom: 0.4em; }
-        ul li::before { content: '•'; position: absolute; left: 0; color: var(--color-primary); }
+        td:nth-child(1) a {
+            font-weight: 500;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        td:nth-child(1) a:hover { color: var(--color-primary); text-decoration: underline; }
 
-        .highlight-red { color: var(--color-primary); font-weight: 500; }
-        .description-text { font-size: 0.9rem; color: var(--color-text-secondary); margin-top: 0.5rem; }
-        
-        .icon-cell { text-align: center; font-size: 1.4rem; font-weight: bold; vertical-align: middle; }
-        .icon-cell.yes { color: var(--color-green); }
-        .icon-cell.no { color: var(--color-red-icon); }
-        .icon-cell.os { color: var(--color-blue); }
-
-        .category-badge {
+        .meta-badge {
             display: inline-block;
             padding: 0.3rem 0.7rem;
             border-radius: 12px;
             font-size: 0.8rem;
             font-weight: 500;
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--color-border);
             color: var(--color-text-secondary);
             white-space: nowrap;
         }
-        
+
+        .icon-cell { text-align: center; font-size: 1.4rem; font-weight: bold; }
+        .icon-cell.yes { color: var(--color-green); }
+        .icon-cell.no { color: var(--color-red-icon); }
+        .icon-cell.os { color: var(--color-blue); }
+
         @media screen and (max-width: 1200px) {
-            table, thead, tbody, th, td, tr { display: block; }
-            thead tr { position: absolute; top: -9999px; left: -9999px; }
-            tr { border: 1px solid var(--color-border); margin-bottom: 1rem; border-radius: 8px; background: var(--color-surface); }
-            tbody tr:hover { background-color: var(--color-surface); }
-            td { border: none; border-bottom: 1px solid var(--color-border); position: relative; padding-left: 50%; min-height: 44px; display: flex; align-items: center; flex-wrap: wrap; }
+            thead { display: none; }
+            tr { display: block; border: 1px solid var(--color-border); margin-bottom: 1rem; border-radius: 8px; background: var(--color-surface); }
+            td { display: block; width: 100%; text-align: right; border-bottom: 1px solid var(--color-border); padding-left: 50%; position: relative; }
             td:last-child { border-bottom: none; }
             td:before {
-                position: absolute; top: 1rem; left: 1rem;
-                width: 45%; padding-right: 10px; white-space: nowrap;
                 content: attr(data-label);
-                color: var(--color-primary); font-weight: 700; font-size: 0.8rem;
-                text-align: left;
+                position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+                text-align: left; font-weight: 700; text-transform: uppercase;
+                color: var(--color-primary); font-size: 0.8rem;
             }
         }
     </style>
@@ -139,9 +135,9 @@
         <div id="filter-container">
             <button class="filter-btn active" data-category="all">Show All</button>
             <button class="filter-btn" data-category="ai-native">AI-Native Agents</button>
-            <button class="filter-btn" data-category="nocode">No-Code / Low-Code Automation</button>
-            <button class="filter-btn" data-category="developer">Developer-Focused Automation</button>
-            <button class="filter-btn" data-category="infrastructure">Infrastructure & Frameworks</button>
+            <button class="filter-btn" data-category="nocode">No-Code / Low-Code</button>
+            <button class="filter-btn" data-category="developer">Developer-Focused</button>
+            <button class="filter-btn" data-category="framework">Frameworks</button>
         </div>
 
         <div class="table-wrapper">
@@ -149,127 +145,104 @@
                 <thead>
                     <tr>
                         <th>Platform</th>
-                        <th>Primary Paradigm</th>
+                        <th>Best For</th>
                         <th>Core Agentic Capability</th>
                         <th>Key Differentiator / Strategic Benefit</th>
-                        <th>Self-Hostable</th>
+                        <th>Maturity</th>
+                        <th>Language</th>
                         <th>Open Source</th>
                     </tr>
                 </thead>
                 <tbody id="platform-table-body">
                     
-                    <!-- AI-NATIVE AGENTS -->
                     <tr data-category="ai-native">
-                        <td data-label="Platform">Lindy<span class="category-badge">AI-Native</span></td>
-                        <td data-label="Paradigm">SaaS App (AI Employees)</td>
+                        <td data-label="Platform"><a href="https://www.lindy.ai/" target="_blank">Lindy</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Business Users</span></td>
                         <td data-label="Capability">Autonomous Role Fulfillment</td>
-                        <td data-label="Benefit"><strong>Delegating outcomes, not tasks.</strong> Aims to create fully autonomous "AI Employees" that can handle complex, long-running job functions (e.g., sales development) with minimal human input.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
+                        <td data-label="Benefit"><strong>Delegating outcomes, not tasks.</strong> Creates fully autonomous "AI Employees" for complex job functions (e.g., sales development) with minimal human input.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Production Ready</span></td>
+                        <td data-label="Language"><span class="meta-badge">N/A (SaaS)</span></td>
                         <td data-label="Open Source" class="icon-cell no">❌</td>
                     </tr>
                      <tr data-category="ai-native">
-                        <td data-label="Platform">Gumloop<span class="category-badge">AI-Native</span></td>
-                        <td data-label="Paradigm">Visual Agent Builder</td>
-                        <td data-label="Capability">Stateful, Looping Agents</td>
-                        <td data-label="Benefit"><strong>Visual-first agent design.</strong> Simplifies the creation of multi-step, reasoning agents by connecting LLMs, tools, and data sources in a modern, low-code graph interface.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
+                        <td data-label="Platform"><a href="https://gumloop.com/" target="_blank">Gumloop</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Product Builders</span></td>
+                        <td data-label="Capability">Visual Agent Construction</td>
+                        <td data-label="Benefit"><strong>Visual-first agent design.</strong> Simplifies creating multi-step, reasoning agents by connecting LLMs and tools in a modern, low-code graph interface.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Production Ready</span></td>
+                        <td data-label="Language"><span class="meta-badge">N/A (SaaS)</span></td>
                         <td data-label="Open Source" class="icon-cell no">❌</td>
                     </tr>
-                    <tr data-category="ai-native">
-                        <td data-label="Platform">Agentic.ai<span class="category-badge">AI-Native</span></td>
-                        <td data-label="Paradigm">Managed Agent Platform</td>
-                        <td data-label="Capability">Production-Grade Reliability</td>
-                        <td data-label="Benefit"><strong>From prototype to production.</strong> Focuses on the full agent lifecycle, providing the reliability, observability, and monitoring tools needed to run dependable autonomous agents at scale.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
-                        <td data-label="Open Source" class="icon-cell no">❌</td>
-                    </tr>
-
-                    <!-- NO-CODE / LOW-CODE AUTOMATION -->
                     <tr data-category="nocode">
-                        <td data-label="Platform">Zapier<span class="category-badge">No-Code</span></td>
-                        <td data-label="Paradigm">Visual Trigger-Action</td>
+                        <td data-label="Platform"><a href="https://zapier.com/" target="_blank">Zapier</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Non-Technical Users</span></td>
                         <td data-label="Capability">Linear Workflow Orchestration</td>
-                        <td data-label="Benefit"><strong>Unmatched simplicity and app connectivity (6,000+).</strong> The fastest, simplest way to connect two apps for basic, linear task automation. "Zapier Central" adds an AI conversational builder.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
+                        <td data-label="Benefit"><strong>Unmatched simplicity and app connectivity (6,000+).</strong> The fastest way to connect two apps for basic, linear task automation.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Mature</span></td>
+                        <td data-label="Language"><span class="meta-badge">N/A (SaaS)</span></td>
                         <td data-label="Open Source" class="icon-cell no">❌</td>
                     </tr>
                     <tr data-category="nocode">
-                        <td data-label="Platform">Make<span class="category-badge">No-Code</span></td>
-                        <td data-label="Paradigm">Visual Flow Builder</td>
+                        <td data-label="Platform"><a href="https://www.make.com/" target="_blank">Make</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Power Users</span></td>
                         <td data-label="Capability">Complex Non-Linear Logic</td>
-                        <td data-label="Benefit"><strong>Visualizing complexity.</strong> Handles intricate, multi-step workflows with branching logic, routing, and error handling that are too difficult or expensive to build in Zapier.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
+                        <td data-label="Benefit"><strong>Visualizing complexity.</strong> Handles intricate, multi-step workflows with branching, routing, and error handling that are too difficult for Zapier.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Mature</span></td>
+                        <td data-label="Language"><span class="meta-badge">N/A (SaaS)</span></td>
                         <td data-label="Open Source" class="icon-cell no">❌</td>
                     </tr>
-
-                    <!-- DEVELOPER-FOCUSED AUTOMATION -->
                      <tr data-category="developer">
-                        <td data-label="Platform">n8n<span class="category-badge">Developer</span></td>
-                        <td data-label="Paradigm">Visual Flow Builder (Low-Code)</td>
+                        <td data-label="Platform"><a href="https://n8n.io/" target="_blank">n8n</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Full-Stack Devs</span></td>
                         <td data-label="Capability">Stateful Automation & Basic Agents</td>
-                        <td data-label="Benefit"><strong>The self-hostable power user's choice.</strong> Offers the visual ease of Make but with deep code customizability (JS/Python nodes) and the option for full data control via self-hosting.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Benefit"><strong>The self-hostable power user's choice.</strong> Offers the visual ease of Make but with deep code customizability and full data control via self-hosting.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Mature</span></td>
+                        <td data-label="Language"><span class="meta-badge">TypeScript</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
                     <tr data-category="developer">
-                        <td data-label="Platform">Latenode<span class="category-badge">Developer</span></td>
-                        <td data-label="Paradigm">Visual Flow Builder (Low-Code)</td>
-                        <td data-label="Capability">Stateful Automation & Looping</td>
-                        <td data-label="Benefit"><strong>A modern, self-hostable n8n alternative.</strong> Purpose-built for more complex, stateful AI agents with its native support for looping, error handling, and modern JS/TS code nodes.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Platform"><a href="https://latenode.com/" target="_blank">Latenode</a></td>
+                        <td data-label="Best For"><span class="meta-badge">Full-Stack Devs</span></td>
+                        <td data-label="Capability">Stateful, Looping Workflows</td>
+                        <td data-label="Benefit"><strong>A modern, self-hostable n8n alternative.</strong> Purpose-built for more complex, stateful AI agents with native support for looping and modern JS/TS.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Active Dev</span></td>
+                        <td data-label="Language"><span class="meta-badge">TypeScript</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
                     <tr data-category="developer">
-                        <td data-label="Platform">Pipedream<span class="category-badge">Developer</span></td>
-                        <td data-label="Paradigm">Code-First (Serverless)</td>
-                        <td data-label="Capability">Event-Driven Code Execution</td>
-                        <td data-label="Benefit"><strong>The developer's glue.</strong> Offers the ultimate speed and flexibility for developers who want to write code (Python, Node.js) for any step, without managing servers.</td>
-                        <td data-label="Self-Host" class="icon-cell no">❌</td>
-                        <td data-label="Open Source" class="icon-cell no">❌</td>
-                    </tr>
-                     <!-- NEW: Agno -->
-                    <tr data-category="developer">
-                        <td data-label="Platform">Agno<span class="category-badge">Developer</span></td>
-                        <td data-label="Paradigm">Code-First SDK + UI</td>
+                        <td data-label="Platform"><a href="https://github.com/agno-agi/agno" target="_blank">Agno</a></td>
+                        <td data-label="Best For"><span class="meta-badge">AI/ML Engineers</span></td>
                         <td data-label="Capability">Agent Observability & Evaluation</td>
-                        <td data-label="Benefit"><strong>Build agents that don't break.</strong> An open-source framework focused on testing, replaying, and monitoring agents to ensure they are reliable enough for production use.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Benefit"><strong>Build agents that don't break.</strong> An open-source framework focused on testing, replaying, and monitoring agents to ensure they are reliable enough for production.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Active Dev</span></td>
+                        <td data-label="Language"><span class="meta-badge">Python</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
-
-                    <!-- INFRASTRUCTURE & FRAMEWORKS -->
-                    <tr data-category="infrastructure">
-                        <td data-label="Platform">LangChain<span class="category-badge">Framework</span></td>
-                        <td data-label="Paradigm">Code-First SDK (Python/JS)</td>
+                    <tr data-category="framework">
+                        <td data-label="Platform"><a href="https://github.com/langchain-ai/langchain" target="_blank">LangChain</a></td>
+                        <td data-label="Best For"><span class="meta-badge">AI Developers</span></td>
                         <td data-label="Capability">LLM Application Components</td>
-                        <td data-label="Benefit"><strong>The de-facto standard library for LLM apps.</strong> Provides the essential building blocks (chains, agents, memory, RAG) used by nearly every other platform and custom solution.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Benefit"><strong>The de-facto standard library for LLM apps.</strong> Provides the essential building blocks (chains, agents, memory, RAG) used by most other platforms.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Mature</span></td>
+                        <td data-label="Language"><span class="meta-badge">Python / JS</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
-                    <!-- NEW: CrewAI -->
-                    <tr data-category="infrastructure">
-                        <td data-label="Platform">CrewAI<span class="category-badge">Framework</span></td>
-                        <td data-label="Paradigm">Code-First SDK (Python)</td>
+                    <tr data-category="framework">
+                        <td data-label="Platform"><a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI</a></td>
+                        <td data-label="Best For"><span class="meta-badge">AI Developers</span></td>
                         <td data-label="Capability">Multi-Agent Collaboration</td>
-                        <td data-label="Benefit"><strong>Orchestrating AI teams.</strong> A specialized framework for creating crews of role-playing agents that collaborate on complex tasks, featuring defined processes (e.g., sequential, hierarchical).</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Benefit"><strong>Orchestrating AI teams.</strong> A specialized framework for creating crews of role-playing agents that collaborate on complex tasks with defined processes.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Active Dev</span></td>
+                        <td data-label="Language"><span class="meta-badge">Python</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
-                    <!-- NEW: Autogen -->
-                    <tr data-category="infrastructure">
-                        <td data-label="Platform">Autogen<span class="category-badge">Framework</span></td>
-                        <td data-label="Paradigm">Code-First SDK (Python)</td>
+                    <tr data-category="framework">
+                        <td data-label="Platform"><a href="https://github.com/microsoft/autogen" target="_blank">Autogen</a></td>
+                        <td data-label="Best For"><span class="meta-badge">AI Researchers</span></td>
                         <td data-label="Capability">Conversational Multi-Agent Systems</td>
-                        <td data-label="Benefit"><strong>Flexible multi-agent conversations.</strong> A powerful framework from Microsoft Research for building complex workflows using multiple, conversing agents that can be human-in-the-loop or fully autonomous.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
-                        <td data-label="Open Source" class="icon-cell os">✅</td>
-                    </tr>
-                    <tr data-category="infrastructure">
-                        <td data-label="Platform">Apache Airflow<span class="category-badge">Infrastructure</span></td>
-                        <td data-label="Paradigm">Workflows as Code (DAGs)</td>
-                        <td data-label="Capability">MLOps & Data Orchestration</td>
-                        <td data-label="Benefit"><strong>The data engineer's scheduler.</strong> Not for real-time agents, but the industry standard for orchestrating the complex, batch-oriented data pipelines that train and feed AI models.</td>
-                        <td data-label="Self-Host" class="icon-cell yes">✅</td>
+                        <td data-label="Benefit"><strong>Flexible multi-agent conversations.</strong> A powerful research framework for building complex workflows using multiple, conversing agents.</td>
+                        <td data-label="Maturity"><span class="meta-badge">Active Dev</span></td>
+                        <td data-label="Language"><span class="meta-badge">Python</span></td>
                         <td data-label="Open Source" class="icon-cell os">✅</td>
                     </tr>
                 </tbody>
@@ -282,20 +255,19 @@
             document.body.style.opacity = 1;
 
             const filterContainer = document.getElementById('filter-container');
-            const tableBody = document.getElementById('platform-table-body');
-            const tableRows = tableBody.querySelectorAll('tr');
-            
+            const tableRows = document.querySelectorAll('#platform-table-body tr');
             const headers = Array.from(document.querySelectorAll('thead th')).map(th => th.textContent);
-            
+
+            // Set data-label attributes for mobile view
             tableRows.forEach(row => {
                 row.querySelectorAll('td').forEach((cell, index) => {
-                    // Make sure a header exists for the current cell index
-                    if(headers[index]) {
+                    if (headers[index]) {
                         cell.setAttribute('data-label', headers[index]);
                     }
                 });
             });
 
+            // Filter logic
             filterContainer.addEventListener('click', (e) => {
                 const target = e.target;
                 if (!target.classList.contains('filter-btn')) return;
@@ -306,20 +278,7 @@
                 const category = target.getAttribute('data-category');
 
                 tableRows.forEach(row => {
-                    // Check the first td's badge for the category
-                    const platformCell = row.querySelector('td:first-child');
-                    const badge = platformCell ? platformCell.querySelector('.category-badge') : null;
-                    const rowCategory = badge ? badge.textContent.toLowerCase().replace(' ', '-') : 'unknown';
-
-                    const isDeveloperFocused = (rowCategory === 'developer' || rowCategory === 'framework');
-
-                    if (category === 'all') {
-                        row.style.display = '';
-                    } else if (category === 'developer') {
-                         row.style.display = isDeveloperFocused ? '' : 'none';
-                    } else {
-                        row.style.display = rowCategory === category ? '' : 'none';
-                    }
+                    row.style.display = (category === 'all' || row.getAttribute('data-category') === category) ? '' : 'none';
                 });
             });
         });
