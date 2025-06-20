@@ -116,35 +116,144 @@
 <body>
 
     <!-- START: THE CLICKABLE REPORT ICON -->
-    <a id="report-icon-link" href="Ai Horizons.html" title="View AI Foundations Report">
-        <div class="icon-container">
-            <!-- This is the SVG icon for the report -->
-            <svg viewBox="0 0 24 24">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-        </div>
-        <span class="report-text">AI Foundations</span>
-    </a>
-    <!-- END: THE CLICKABLE REPORT ICON -->
-    
+     /* --- Core Page Styles --- */
+        body {
+            background-color: #121212;
+            /* Grid background from your screenshot */
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    <div class="container">
-        <h1>The Complete Guide: Automation & Agentic AI Platforms</h1>
-        <p class="subtitle">
-            A unified intelligence report covering the entire landscape of automation tools and agentic AI platforms. This definitive guide
-            compares platforms from simple no-code tools to sophisticated, open-source developer frameworks for building multi-agent
-            systems. Use the filters below to navigate.
-        </p>
+        /* --- Top-Right Report Links Container --- */
+        .report-links-container {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between the two boxes */
+        }
+
+        /* --- Individual Clickable Report Card --- */
+        .report-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px; /* Increased width for image */
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .report-card:hover {
+            transform: translateY(-4px);
+            border-color: #00bfff; /* Deep Sky Blue on hover */
+            box-shadow: 0 5px 20px rgba(0, 191, 255, 0.15);
+        }
+
+        .report-card img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover; /* Ensures image covers the area well */
+            border-radius: 4px;
+            margin-bottom: 12px;
+            border: 1px solid #444;
+        }
+
+        .report-card .card-title {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            font-weight: 600;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .report-card:hover .card-title {
+            color: #00bfff;
+        }
+
+        /* --- Main Centered Content --- */
+        .main-content {
+            text-align: center;
+            padding: 20px;
+        }
         
-        <!-- Placeholder for your table/content -->
-        <div class="content-placeholder">
-            Your platform comparison table would go here...
-        </div>
+        .project-title {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5rem; /* Wide spacing like in the image */
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .project-subtitle {
+            font-size: 1rem;
+            color: #888;
+            margin-top: 10px;
+            letter-spacing: 0.1rem;
+        }
+        
+        .extractions-section {
+            max-width: 800px;
+            margin: 60px auto 0 auto;
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .extractions-header {
+            background-color: #333;
+            padding: 8px 15px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        
+        .extractions-content {
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top-Right Clickable Report Boxes -->
+    <div class="report-links-container">
+        
+        <!-- Box 1: AI Foundations Report -->
+        <a href="Ai Horizons.html" class="report-card">
+            <img src="Ai horizons.png" alt="AI Foundations Report Thumbnail">
+            <span class="card-title">AI Foundations</span>
+        </a>
+
+        <!-- Box 2: Agentic AI Platforms Report -->
+        <a href="agentic ai platforms.html" class="report-card">
+            <img src="Agentic AI Platforms.png" alt="Agentic AI Platforms Report Thumbnail">
+            <span class="card-title">Agentic AI Platforms</span>
+        </a>
+
     </div>
+
 <!-- END: REBUILT CLICKABLE ICON FOR THE REPORT -->
 
 
