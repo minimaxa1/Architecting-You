@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I, Robot (1950) by Isaac Asimov - A Bohemai Project Analysis</title>
+    <title>I, Robot by Isaac Asimov - A Bohemai Project Analysis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
@@ -23,10 +23,13 @@
         .content-panel blockquote { font-family: 'Lora', serif; font-size: 1.2rem; font-style: italic; border-left: 4px solid var(--quote-border-color); padding-left: 1.5rem; margin: 2.5rem 2rem; color: #A7C7E7; }
         .content-panel .highlight { background-color: rgba(0, 191, 255, 0.15); padding: 0.1rem 0.3rem; }
         .content-panel .section-divider { border: 0; height: 1px; background-color: #444; margin: 3rem 0; }
-        .intro-block { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem; }
-        .intro-text { flex: 1; }
+        .intro-block { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem; }
+        .intro-text { flex: 1; min-width: 300px; }
         .book-cover { width: 150px; height: auto; border: 1px solid var(--panel-border-color); }
         .call-to-action-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--panel-border-color); }
+        .cta-container { background-color: var(--panel-bg-color); border: 1px solid var(--panel-border-color); backdrop-filter: blur(8px); margin-top: 2rem; }
+        .cta-container .panel-title-bar { background-color: var(--panel-border-color); color: #FFF; padding: 0.5rem 1rem; font-family: 'Source Code Pro', monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+        .cta-container .panel-body { padding: 1.5rem; text-align: center; }
         .button-container { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
         .action-button { font-family: 'Source Code Pro', monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background-color: transparent; color: var(--highlight-color); border: 2px solid var(--highlight-color); padding: 0.7rem 1.2rem; font-size: 0.9rem; text-decoration: none; transition: background-color 0.2s, color 0.2s; }
         .action-button:hover { background-color: var(--highlight-color); color: var(--bg-color); }
@@ -44,7 +47,7 @@
             <div class="content-panel">
 
                 <!-- Article Content Starts Here -->
-                <h2>1. <em>I, Robot</em> (1950) by Isaac Asimov</h2>
+                <h2><em>I, Robot</em> (1950) by Isaac Asimov</h2>
     
                 <div class="intro-block">
                     <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/I_Robot_-_Gnome_Press_1st_edition.jpg" alt="Book cover of I, Robot" class="book-cover">
