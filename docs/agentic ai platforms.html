@@ -6,17 +6,20 @@
     <title>The Complete Guide: Automation & Agentic AI Platforms</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-bg: #121212;
-            --color-surface: #1e1e1e;
-            --color-text: #e0e0e0;
-            --color-text-secondary: #b0b0b0;
-            --color-primary: #e53935; /* Strong red */
-            --color-border: #333333;
+            /* Palette from Bohemai Project for consistency */
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --bg-dark-1: #121212;
+            --bg-dark-2: #1e1e1e; /* Using as surface color */
+            --bg-dark-3: #333333; /* Using as border color */
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #00bfff; /* Cyan/Blue accent */
+            
+            /* Status colors */
             --color-green: #4CAF50;
-            --color-blue: #2196F3;
             --color-red-icon: #f44336;
         }
 
@@ -24,11 +27,17 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
+            color: var(--text-primary);
             line-height: 1.6;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            
+            /* Applying the grid background from the main site */
+            background-color: var(--bg-dark-1);
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
         .container { max-width: 1700px; margin: 0 auto; padding: 2rem; }
@@ -36,12 +45,23 @@
         header {
             text-align: center;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--bg-dark-3);
             padding-bottom: 1.5rem;
         }
 
-        h1 { color: var(--color-primary); font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
-        header p { max-width: 900px; margin: 0 auto; color: var(--color-text-secondary); }
+        h1 { color: var(--accent-color); font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; font-family: 'Source Code Pro', monospace; }
+        header p { max-width: 900px; margin: 0 auto; color: var(--text-secondary); }
+        
+        header .back-link {
+            display: block;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Source Code Pro', monospace;
+        }
+        header .back-link:hover {
+            color: var(--accent-color);
+        }
 
         #filter-container {
             display: flex;
@@ -52,9 +72,9 @@
         }
 
         .filter-btn {
-            background-color: var(--color-surface);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
+            background-color: var(--bg-dark-2);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-dark-3);
             padding: 0.6rem 1.2rem;
             border-radius: 20px;
             cursor: pointer;
@@ -64,34 +84,34 @@
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: var(--color-primary);
-            color: #ffffff;
-            border-color: var(--color-primary);
+            background-color: var(--accent-color);
+            color: #121212; /* Dark text on light button */
+            border-color: var(--accent-color);
         }
-        .filter-btn.active { box-shadow: 0 0 10px rgba(229, 57, 53, 0.4); }
+        .filter-btn.active { box-shadow: 0 0 10px rgba(0, 191, 255, 0.4); }
 
         .table-wrapper {
             overflow-x: auto;
-            background-color: var(--color-surface);
+            background-color: var(--bg-dark-2);
             border-radius: 8px;
-            border: 1px solid var(--color-border);
+            border: 1px solid var(--bg-dark-3);
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--bg-dark-3); vertical-align: middle; }
         thead { background-color: #000; }
-        th { color: var(--color-primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; }
+        th { color: var(--accent-color); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; font-family: 'Source Code Pro', monospace; }
         tbody tr { transition: background-color 0.2s ease; }
         tbody tr:last-child td { border-bottom: none; }
-        tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
+        tbody tr:hover { background-color: rgba(0, 191, 255, 0.05); }
         
         td:nth-child(1) a {
             font-weight: 500;
-            color: var(--color-text);
+            color: var(--text-primary);
             text-decoration: none;
             transition: color 0.2s ease;
         }
-        td:nth-child(1) a:hover { color: var(--color-primary); text-decoration: underline; }
+        td:nth-child(1) a:hover { color: var(--accent-color); text-decoration: underline; }
 
         .meta-badge {
             display: inline-block;
@@ -100,26 +120,26 @@
             font-size: 0.8rem;
             font-weight: 500;
             background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--color-border);
-            color: var(--color-text-secondary);
+            border: 1px solid var(--bg-dark-3);
+            color: var(--text-secondary);
             white-space: nowrap;
         }
 
         .icon-cell { text-align: center; font-size: 1.4rem; font-weight: bold; }
         .icon-cell.yes { color: var(--color-green); }
         .icon-cell.no { color: var(--color-red-icon); }
-        .icon-cell.os { color: var(--color-blue); }
+        .icon-cell.os { color: var(--accent-color); }
 
         @media screen and (max-width: 1200px) {
             thead { display: none; }
-            tr { display: block; border: 1px solid var(--color-border); margin-bottom: 1rem; border-radius: 8px; background: var(--color-surface); }
-            td { display: block; width: 100%; text-align: right; border-bottom: 1px solid var(--color-border); padding-left: 50%; position: relative; }
+            tr { display: block; border: 1px solid var(--bg-dark-3); margin-bottom: 1rem; border-radius: 8px; background: var(--bg-dark-2); }
+            td { display: block; width: 100%; text-align: right; border-bottom: 1px solid var(--bg-dark-3); padding-left: 50%; position: relative; }
             td:last-child { border-bottom: none; }
             td:before {
                 content: attr(data-label);
                 position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
                 text-align: left; font-weight: 700; text-transform: uppercase;
-                color: var(--color-primary); font-size: 0.8rem;
+                color: var(--accent-color); font-size: 0.8rem; font-family: 'Source Code Pro', monospace;
             }
         }
     </style>
@@ -130,6 +150,7 @@
         <header>
             <h1>The Complete Guide: Automation & Agentic AI Platforms</h1>
             <p>A unified intelligence report covering the entire landscape of automation tools and agentic AI platforms. This definitive guide compares platforms from simple no-code tools to sophisticated, open-source developer frameworks for building multi-agent systems. Use the filters below to navigate.</p>
+            <a href="index.html" class="back-link">< Back to The Bohemai Project</a>
         </header>
 
         <div id="filter-container">
@@ -154,7 +175,7 @@
                     </tr>
                 </thead>
                 <tbody id="platform-table-body">
-                    
+                    <!-- Table data remains the same -->
                     <tr data-category="ai-native">
                         <td data-label="Platform"><a href="https://www.lindy.ai/" target="_blank">Lindy</a></td>
                         <td data-label="Best For"><span class="meta-badge">Business Users</span></td>
@@ -251,6 +272,7 @@
     </div>
 
     <script>
+        // JavaScript logic remains the same
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = 1;
 
@@ -258,7 +280,6 @@
             const tableRows = document.querySelectorAll('#platform-table-body tr');
             const headers = Array.from(document.querySelectorAll('thead th')).map(th => th.textContent);
 
-            // Set data-label attributes for mobile view
             tableRows.forEach(row => {
                 row.querySelectorAll('td').forEach((cell, index) => {
                     if (headers[index]) {
@@ -267,7 +288,6 @@
                 });
             });
 
-            // Filter logic
             filterContainer.addEventListener('click', (e) => {
                 const target = e.target;
                 if (!target.classList.contains('filter-btn')) return;
