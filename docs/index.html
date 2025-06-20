@@ -3,259 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <title>The Bohemai Project - An Architecting You Initiative</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- START: ADDED STYLES FOR THE REPORT ICON -->
     <style>
-   body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 40px;
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --text-primary: #e0e0e0;
+            --text-secondary: #888;
+            --accent-color: #00bfff;
+            --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a;
+            --bg-dark-3: #333333;
+            --font-main: 'Source Code Pro', monospace;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        h1 {
-            color: #E53935; /* A red color similar to screenshot */
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
-
-        p.subtitle {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-        }
-        
-        /* This is just a placeholder for the content area */
-        .content-placeholder {
-            margin-top: 50px;
-            padding: 20px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background-color: #1a1a1a;
-            color: #777;
-            font-size: 1.2rem;
-        }
-
-        /* --- START: ADDED STYLES FOR THE REPORT ICON --- */
-        
-        /* The main link container */
-        #report-icon-link {
-            /* Positioning for top-right corner */
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            
-            /* Visual Styling */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            background-color: #1f1f1f;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-
-        #report-icon-link:hover {
-            border-color: #00bfff; /* Deep Sky Blue */
-            transform: translateY(-2px);
-            background-color: #2a2a2a;
-        }
-
-        /* Container for the SVG to control its size */
-        #report-icon-link .icon-container {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 4px; /* Space between icon and text */
-        }
-
-        #report-icon-link svg {
-            width: 100%;
-            height: 100%;
-            stroke: #c4c4c4;
-            stroke-width: 1.5;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.2s ease-in-out;
-        }
-
-        /* The "report" text */
-        #report-icon-link .report-text {
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.8rem;
-            color: #a0a0a0;
-            transition: color 0.2s ease-in-out;
-        }
-
-        /* Hover effect for the contents */
-        #report-icon-link:hover svg,
-        #report-icon-link:hover .report-text {
-            stroke: #00bfff; /* Deep Sky Blue */
-            color: #00bfff;
-        }
-        /* --- END: ADDED STYLES FOR THE REPORT ICON --- */
-    </style>
-</head>
-<body>
-
-    <!-- START: THE CLICKABLE REPORT ICON -->
-     /* --- Core Page Styles --- */
+        /* --- Core Body & Layout --- */
         body {
-            background-color: #121212;
-            /* Grid background from your screenshot */
+            background-color: var(--bg-dark-1);
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
             background-size: 30px 30px;
-            color: #e0e0e0;
-            font-family: 'Roboto', sans-serif;
+            color: var(--text-primary);
+            font-family: var(--font-main);
             margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0;
         }
 
-        /* --- Top-Right Report Links Container --- */
-        .report-links-container {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Space between the two boxes */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        /* --- Individual Clickable Report Card --- */
-        .report-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 180px; /* Increased width for image */
-            padding: 15px;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .report-card:hover {
-            transform: translateY(-4px);
-            border-color: #00bfff; /* Deep Sky Blue on hover */
-            box-shadow: 0 5px 20px rgba(0, 191, 255, 0.15);
-        }
-
-        .report-card img {
-            width: 100%;
-            height: 90px;
-            object-fit: cover; /* Ensures image covers the area well */
-            border-radius: 4px;
-            margin-bottom: 12px;
-            border: 1px solid #444;
-        }
-
-        .report-card .card-title {
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            font-weight: 600;
-            transition: color 0.2s ease-in-out;
-        }
-
-        .report-card:hover .card-title {
-            color: #00bfff;
-        }
-
-        /* --- Main Centered Content --- */
-        .main-content {
+        /* --- Header --- */
+        .main-header {
             text-align: center;
-            padding: 20px;
+            margin-bottom: 50px;
         }
         
-        .project-title {
-            font-family: 'Source Code Pro', monospace;
-            font-size: 2.5rem;
+        .main-header h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: 0.5rem; /* Wide spacing like in the image */
+            letter-spacing: 0.5rem;
             text-transform: uppercase;
-            margin: 0;
+            margin: 0 0 10px 0;
         }
 
-        .project-subtitle {
+        .main-header p {
             font-size: 1rem;
-            color: #888;
-            margin-top: 10px;
+            color: var(--text-secondary);
             letter-spacing: 0.1rem;
+            margin: 0;
         }
         
-        .extractions-section {
-            max-width: 800px;
-            margin: 60px auto 0 auto;
-            background-color: #1f1f1f;
-            border: 1px solid #333;
+        /* --- Content Panels (Shared Style) --- */
+        .content-panel {
+            background-color: var(--bg-dark-2);
+            border: 1px solid var(--bg-dark-3);
             border-radius: 8px;
-            text-align: left;
+            overflow: hidden;
+            margin-bottom: 40px;
         }
         
-        .extractions-header {
-            background-color: #333;
-            padding: 8px 15px;
-            border-top-left-radius: 7px;
-            border-top-right-radius: 7px;
-            font-family: 'Source Code Pro', monospace;
+        .panel-title-bar {
+            background-color: var(--bg-dark-3);
+            padding: 8px 20px;
             font-weight: 600;
             font-size: 0.8rem;
             color: #ccc;
+            text-transform: uppercase;
         }
         
-        .extractions-content {
-            padding: 20px;
-            color: #aaa;
+        .panel-body {
+            padding: 15px 20px 20px 20px;
+            max-height: 350px; /* Consistent height for scrolling */
+            overflow-y: auto;
+        }
+        
+        .panel-body p.comment {
+            color: var(--text-secondary);
             font-size: 0.95rem;
+            margin: 0 0 15px 0;
         }
 
+        /* --- File/Link List Styling --- */
+        .file-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .file-list li {
+            margin: 15px 0;
+        }
+        
+        .file-list a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .file-list a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- "Join This Space" Button --- */
+        .action-button {
+            display: inline-block;
+            background-color: var(--bg-dark-3);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .action-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-dark-1);
+        }
+        
+        /* --- Footer --- */
+        .footer-bar {
+            border-top: 1px solid var(--bg-dark-3);
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .social-links {
+            margin-bottom: 15px;
+        }
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s ease;
+        }
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Custom Scrollbar --- */
+        .panel-body::-webkit-scrollbar {
+            width: 20px;
+        }
+        .panel-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .panel-body::-webkit-scrollbar-thumb {
+            background-color: #4a4a4a;
+            border-radius: 20px;
+            border: 7px solid var(--bg-dark-2);
+        }
+        .panel-body::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+        .panel-body::-webkit-scrollbar-button:single-button {
+            background-color: var(--bg-dark-2);
+            display: block;
+            border-style: solid;
+            height: 13px;
+            width: 16px;
+        }
+        .panel-body::-webkit-scrollbar-button:single-button:vertical:decrement {
+            border-width: 0 5px 5px 5px;
+            border-color: transparent transparent #555 transparent;
+        }
+        .panel-body::-webkit-scrollbar-button:single-button:vertical:increment {
+            border-width: 5px 5px 0 5px;
+            border-color: #555 transparent transparent transparent;
+        }
     </style>
 </head>
 <body>
-
-    <!-- Top-Right Clickable Report Boxes -->
-    <div class="report-links-container">
-        
-        <!-- Box 1: AI Foundations Report -->
-        <a href="Ai Horizons.html" class="report-card">
-            <img src="Ai horizons.png" alt="AI Foundations Report Thumbnail">
-            <span class="card-title">AI Foundations</span>
-        </a>
-
-        <!-- Box 2: Agentic AI Platforms Report -->
-        <a href="agentic ai platforms.html" class="report-card">
-            <img src="Agentic AI Platforms.png" alt="Agentic AI Platforms Report Thumbnail">
-            <span class="card-title">Agentic AI Platforms</span>
-        </a>
-
-    </div>
-
-<!-- END: REBUILT CLICKABLE ICON FOR THE REPORT -->
-
 
     <div class="main-container">
         <header class="main-header">
@@ -264,78 +191,41 @@
         </header>
 
         <main class="content-wrapper">
+
+            <!-- START: ADDED REPORTS PANEL -->
+            <div class="content-panel">
+                <div class="panel-title-bar">REPORTS</div>
+                <div class="panel-body">
+                    <ul class="file-list">
+                        <li><a href="Ai Horizons.html">> AI Foundations</a></li>
+                        <li><a href="agentic ai platforms.html">> Agentic AI Platforms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END: ADDED REPORTS PANEL -->
+
             <div class="content-panel">
                 <div class="panel-title-bar">EXTRACTIONS: FROM THE BOOK ARCHITECTING YOU</div>
                 <div class="panel-body">
                     <p class="comment"> New Articles will be published here as they are created.</p>
                     <ul class="file-list">
-                        <!-- ARTICLE_LINKS_GO_HERE -->  
-                        
-    <li><a href="i-robot-1950.html">> I, Robot (1950) by Isaac Asimov</a></li>
-    <li><a href="the-self-architect’s-crucible.html">> The Self-Architect’s Crucible</a></li>
-    <li><a href="the-caves-of-steel-1954.html">> The Caves of Steel (1954) by Isaac Asimov</a></li>
-    <li><a href="the-self-architect’s-covenant.html">> The Self-Architect’s Covenant</a></li>
-    <li><a href="do-androids-dream-of-electric-sheep-1968.html">> Do Androids Dream of Electric Sheep? (1968) by Philip K. Dick</a></li>
-    <li><a href="the-technoethical-navigator.html">> The Techno-Ethical Navigator</a></li>
-    <li><a href="2001-a-space-odyssey-1968.html">> 2001: A Space Odyssey (1968) by Arthur C. Clarke</a></li>
-    <li><a href="charting-the-construct-the-architecture-of-modern-digital-life.html">> Charting The Construct – The Architecture of Modern Digital Life</a></li>
-    <li><a href="the-moon-is-a-harsh-mistress-1966.html">> The Moon Is a Harsh Mistress (1966) by Robert A. Heinlein</a></li>
-    <li><a href="foundations-of-digital-agency-guiding-principles-for-the-modern-selfarchitect.html">> Foundations of Digital Agency – Guiding Principles for the Modern Self-Architect</a></li>
-    <li><a href="neuromancer-1984.html">> Neuromancer (1984) by William Gibson</a></li>
-    <li><a href="forging-the-selfarchitects-mind-cultivating-inner-resilience-critical-acuity-and-strategic-engagement.html">> Forging the Self-Architect’s Mind</a></li>
-    <li><a href="speaker-for-the-dead-1986.html">> Speaker for the Dead (1986) by Orson Scott Card</a></li>
-    <li><a href="the-selfarchitects-toolkit-embracing-freedom-with-free-and-open-source-software-foss.html">> The Self-Architect’s Toolkit – FOSS</a></li>
-    <li><a href="snow-crash-1992.html">> Snow Crash (1992) by Neal Stephenson</a></li>
-    <li><a href="fortifying-the-digital-self-advanced-privacy-security-and-secure-communication-strategies.html">> Fortifying the Digital Self – Advanced Strategies</a></li>
-    <li><a href="the-diamond-age-1995.html">> The Diamond Age (1995) by Neal Stephenson</a></li>
-    <li><a href="the-engaged-architect-cocreating-a-humane-digital-commons.html">> The Engaged Architect – Co-Creating a Humane Digital Commons</a></li>
-    <li><a href="permutation-city-1994.html">> Permutation City (1994) by Greg Egan</a></li>
-    <li><a href="the-selfarchitects-crucible-navigating-paradoxes-compromises-and-the-ethics-of-imperfect-action.html">> The Self-Architect’s Crucible – Navigating Paradoxes</a></li>
-    <li><a href="accelerando-2005.html">> Accelerando (2005) by Charles Stross</a></li>
-    <li><a href="the-weaver-of-worlds-reshaping-collective-narratives-and-fostering-a-conscious-digital-commons.html">> The Weaver of Worlds – Reshaping Narratives</a></li>
-    <li><a href="daemon-2006.html">> Daemon (2006) by Daniel Suárez</a></li>
-    <li><a href="march-of-technology.html">> March of Technology</a></li>
-    <li><a href="the-lifecycle-of-software-objects-2010.html">> The Lifecycle of Software Objects (2010) by Ted Chiang</a></li>
-    <li><a href="the-digital-guardian-(advanced).html">> The Digital Guardian (Advanced)</a></li>
-    <li><a href="ready-player-one-2011.html">> Ready Player One (2011) by Ernest Cline</a></li>
-    <li><a href="the-unfolding-path,-the-conscious-choice.html">> The Unfolding Path, The Conscious Choice</a></li>
-    <li><a href="ancillary-justice-2013.html">> Ancillary Justice (2013) by Ann Leckie</a></li>
-    <li><a href="forging-an-agile-and-resilient-mind-(continued).html">> Forging an Agile and Resilient Mind (Continued)</a></li>
-    <li><a href="klara-and-the-sun-2021.html">> Klara and the Sun (2021) by Kazuo Ishiguro</a></li>
-    <li><a href="the-unfolding-path.html">> The Unfolding Path</a></li>
-    <li><a href="the-murderbot-diaries-2017.html">> The Murderbot Diaries (2017) by Martha Wells</a></li>
-    <li><a href="the-digital-guardian.html">> The Digital Guardian</a></li>
-    <li><a href="autonomous-2017.html">> Autonomous (2017) by Annalee Newitz</a></li>
-    <li><a href="the-unfolding-covenant.html">> The Unfolding Covenant</a></li>
-    <li><a href="sea-of-rust-2017.html">> Sea of Rust (2017) by C. Robert Cargill</a></li>
-    <li><a href="the-empowered-navigator.html">> The Empowered Navigator</a></li>
-    <li><a href="project-hail-mary-2021.html">> Project Hail Mary (2021) by Andy Weir</a></li>
-    <li><a href="the-forged-mind.html">> The Forged Mind</a></li>
-    <li><a href="the-open-arsenal.html">> The Open Arsenal</a></li>
-    <li><a href="the-vigilant-guardian.html">> The Vigilant Guardian</a></li>
-    <li><a href="the-architect-at-work.html">> The Architect at Work</a></li>
-    <li><a href="embracing-imperfection.html">> Embracing Imperfection</a></li>
-    <li><a href="the-ongoing-weaving.html">> The Ongoing Weaving</a></li>
-    <li><a href="the-digital-citadel-guardian.html">> The Digital Citadel Guardian</a></li>
-    <li><a href="the-synergistic-innovator.html">> The Synergistic Innovator</a></li>
-    <li><a href="the-steward-of-consciousness.html">> The Steward of Consciousness</a></li>                        
-    <li><a href="the-spark-of-human-ingenuity.html">> The Spark of Human Ingenuity</a></li>
-    <li><a href="the-lifelong-learner’s-compass.html">> The Lifelong Learner’s Compass</a></li>
-    <li><a href="the-techno.html">> The Techno</a></li>
-    <li><a href="the-discerning-intellect.html">> The Discerning Intellect</a></li>
-    <li><a href="the-resonant-voice.html">> The Resonant Voice</a></li>
-    <li><a href="the-crucible-of-change.html">> The Crucible of Change </a></li>
-    <li><a href="the-weaver-of-worlds.html">> The Weaver of Worlds </a></li>
-    <li><a href="fortifying-the-digital-self.html">> Fortifying the Digital Self </a></li>
-    <li><a href="the-unfolding-scroll.html">> The Unfolding Scroll </a></li>
-    <li><a href="the-engaged-architect.html">> The Engaged Architect </a></li>
-    <li><a href="the-self.html">> The Self </a></li>
-    <li><a href="the-self-architect’s-toolkit.html">> The Self-Architect’s Toolkit </a></li>
-    <li><a href="charting-the-construct.html">> Charting The Construct </a></li>
-    <li><a href="foundations-of-digital-agency.html">> Foundations of Digital Agency</a></li>
-    <li><a href="forging-the-self.html">> Forging the Self</a></li>
-
-
+                        <li><a href="the-steward-of-consciousness.html">> The Steward of Consciousness</a></li>
+                        <li><a href="the-spark-of-human-ingenuity.html">> The Spark of Human Ingenuity</a></li>
+                        <li><a href="the-lifelong-learner’s-compass.html">> The Lifelong Learner’s Compass</a></li>
+                        <li><a href="the-techno.html">> The Techno</a></li>
+                        <li><a href="the-discerning-intellect.html">> The Discerning Intellect</a></li>
+                        <li><a href="the-resonant-voice.html">> The Resonant Voice</a></li>
+                        <li><a href="the-crucible-of-change.html">> The Crucible of Change </a></li>
+                        <li><a href="the-weaver-of-worlds.html">> The Weaver of Worlds </a></li>
+                        <li><a href="fortifying-the-digital-self.html">> Fortifying the Digital Self </a></li>
+                        <li><a href="the-unfolding-scroll.html">> The Unfolding Scroll </a></li>
+                        <li><a href="the-engaged-architect.html">> The Engaged Architect </a></li>
+                        <li><a href="the-self.html">> The Self </a></li>
+                        <li><a href="the-self-architect’s-toolkit.html">> The Self-Architect’s Toolkit </a></li>
+                        <li><a href="charting-the-construct.html">> Charting The Construct </a></li>
+                        <li><a href="foundations-of-digital-agency.html">> Foundations of Digital Agency</a></li>
+                        <li><a href="forging-the-self.html">> Forging the Self</a></li>
+                        <!-- This list can be extended with the rest of your links -->
                     </ul>
                 </div>
             </div>
@@ -344,7 +234,6 @@
                 <div class="panel-title-bar">JOIN THIS SPACE</div>
                 <div class="panel-body">
                     <p class="comment"> Direct engagement for those committed to the path.</p>
-                  
                     <a href="mailto:minimaxa@gmail.com?subject=Inquiry%20regarding%20The%20Bohemai%20Project&body=I%20am%20interested%20in%20learning%20more..." class="action-button">[ Request Access ]</a>
                 </div>
             </div>
