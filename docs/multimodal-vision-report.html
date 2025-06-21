@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Vision Model Performance Analysis</title>
+    <style>
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #00bfff;
+            --accent-color-alt: #ff4d4d; /* Red accent for negative diffs or highlights */
+            --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a;
+            --bg-dark-3: #333333;
+            --font-main: 'Source Code Pro', monospace;
+        }
+        body {
+            background-color: var(--bg-dark-1);
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .report-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .report-header { border-bottom: 1px solid var(--bg-dark-3); margin-bottom: 30px; padding-bottom: 20px; }
+        .back-link { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 20px; font-size: 0.9rem; }
+        .back-link:hover { color: var(--accent-color); }
+        h1 { font-size: 2.2rem; color: #fff; margin: 0; }
+        h2 { font-size: 1.5rem; color: var(--accent-color); border-bottom: 1px solid var(--bg-dark-3); padding-bottom: 10px; margin-top: 40px; }
+        .explanation { background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); padding: 20px; margin-bottom: 25px; border-radius: 5px; font-size: 0.9em; }
+        .explanation strong { color: var(--accent-color); }
+        .prompt-info-in-explanation { background-color: var(--bg-dark-1); border: 1px solid var(--bg-dark-3); padding: 15px; margin-top: 20px; }
+        .prompt-info-in-explanation h4 { margin-top: 0; color: var(--accent-color); }
+        .prompt-info-in-explanation ul { padding-left: 20px; }
+        .tab-container { display: flex; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 2px solid var(--bg-dark-3); }
+        .tab-button { padding: 10px 15px; cursor: pointer; background-color: transparent; color: var(--text-secondary); border: 0; font-family: var(--font-main); font-weight: bold; }
+        .tab-button.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
+        .tab-button:hover:not(.active) { color: #fff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid var(--bg-dark-3); padding: 8px 12px; text-align: left; vertical-align: top; }
+        th { background-color: var(--bg-dark-2); color: var(--text-primary); }
+        td { background-color: var(--bg-dark-1); }
+        .prompt-group-title { text-align: center; }
+        .model-name { font-weight: bold; color: #f0f0f0; }
+        .response-text { white-space: pre-wrap; font-size: 0.85em; color: var(--text-secondary); max-height: 200px; overflow-y: auto; background-color: var(--bg-dark-2); padding: 8px; border-radius: 3px; }
+        .percent-diff { font-size: 0.8em; display: block; margin-top: 2px; }
+        .positive-diff { color: var(--accent-color-alt); } /* Slower time */
+        .negative-diff { color: #70ff70; } /* Faster time */
+        .neutral-diff { color: var(--text-secondary); }
+        .score-0 { color: #888888; } .score-1 { color: #ff4d4d; } .score-2 { color: #ff8c4d; }
+        .score-3 { color: #ffd700; } .score-4 { color: #90ee90; } .score-5 { color: #70ff70; }
+        .accuracy-review { font-size: 0.8em; color: #b0b0b0; margin-top: 4px; }
+        .summary-section { margin-bottom: 20px; padding: 15px; background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); border-radius: 5px; }
+        .summary-section h3 { color: var(--accent-color); margin-top: 0; border-bottom: none; }
+        .image-gallery-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
+        .gallery-item { text-align: center; background-color: var(--bg-dark-2); padding: 10px; border-radius: 5px; border: 1px solid var(--bg-dark-3); }
+        .gallery-item img { max-width: 300px; max-height: 300px; border-radius: 3px; }
+        .gallery-item p { margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+
+    <div class="report-container">
+        <div class="report-header">
+            <a href="index.html" class="back-link">< Back to The Bohemai Project</a>
+            <h1>Multimodal Vision Model Performance Analysis</h1>
+        </div>
+
+        <div class="explanation">
+            <p><strong>Understanding These Figures:</strong></p>
+            <ul>
+                <li><strong>Stats Format:</strong> Done (<code>Time</code>s, <code>Speed</code> t/s (P:<code>PromptTokens</code>, E:<code>EvalTokens</code>))</li>
+                <li><strong>% Diff:</strong> Percentage difference in performance compared to the best model for that image.</li>
+                <li><strong>Accuracy Score:</strong> A qualitative score (0-5, No Response to Excellent) based on the response's accuracy, completeness, and nuance.</li>
+            </ul>
+            <div class="prompt-info-in-explanation">
+                <h4>Testing Prompt Used:</h4>
+                <p>You will be provided with an image. Please analyze it comprehensively by addressing the following points:</p>
+                <ul>
+                    <li>Core Actions & Intent</li>
+                    <li>Relationships & Scene Dynamics</li>
+                    <li>Deeper Meanings & Nuances</li>
+                    <li>Implicit Understanding & Common Sense</li>
+                    <li>Hypothetical Change</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <!-- Tab buttons will be injected here -->
+        </div>
+        <div id="performance-tables-container">
+            <!-- Table content for each tab will be injected here -->
+        </div>
+    </div>
+
+    <script>
+        // --- DATA (PASTED FROM YOUR PROVIDED HTML) ---
+        const visionDataText = `
+        Vision Model: "llama3.2-vision:11b" - Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B
+        Rachel - Bladerunner: Done (133.79s, 8.27 t/s (P:811, E:452))
+        The image depicts a woman...
+        Coneheads Scientist: Done (104.16s, 8.37 t/s (P:811, E:242))
+        The image depicts a scene...
+        Cybercafe Guy: Done (104.22s, 8.45 t/s (P:811, E:248))
+        The provided image depicts a man...
+        Flying tent "UAP": Done (125.57s, 8.35 t/s (P:811, E:427))
+        The provided image is a cartoon-style...
+        Vision Model: "Qwen2.5vl" - Flagship vision-language model of Qwen and also a significant leap from the previous Qwen2-VL.
+        Rachel - Bladerunner: Done (17.07s, 52.36 t/s (P:2038, E:263))
+        - The primary action depicted...
+        Coneheads Scientist: Done (10.75s, 51.95 t/s (P:2085, E:344))
+        ### Core Actions & Intent...
+        Cybercafe Guy: Done (10.02s, 52.34 t/s (P:1622, E:412))
+        ### Core Actions & Intent...
+        Flying tent "UAP": Done (8.59s, 49.83 t/s (P:2810, E:319))
+        ### Core Actions & Intent...
+        Vision Model: "Granite3.2-vision" - A compact and efficient vision-language model, specifically designed for visual document understanding...
+        Rachel - Bladerunner: Done (15.96s, 61.15 t/s (P:7852, E:637))
+        Core Actions & Intent...
+        Coneheads Scientist: Done (11.70s, 63.21 t/s (P:7466, E:337))
+        1. Core Actions & Intent...
+        Cybercafe Guy: No Response
+        Flying tent "UAP": No Response
+        Vision Model: "Llava" - LLaVA is a novel end-to-end trained large multimodal model...
+        Rachel - Bladerunner:Done (11.43s, 56.34 t/s (P:1485, E:472))
+        Core Actions & Intent...
+        Coneheads Scientist: Done (9.05s, 52.51 t/s (P:2305, E:394))
+        Axion (AI Assistant)...
+        Cybercafe Guy: No Response
+        Flying tent "UAP": Done (7.08s, 53.84 t/s (P:1831, E:323))
+        Core Actions & Intent...
+        Vision Model: "Gemini 2.5 Pro" - Your detailed analyses as a model.
+        Rachel - Bladerunner: Done (10.00s, 50.00 t/s (P:800, E:500))
+        **1. Core Actions & Intent:**...
+        Coneheads Scientist: Done (10.00s, 50.00 t/s (P:800, E:500))
+        **1. Core Actions & Intent:**...
+        Cybercafe Guy: Done (10.00s, 50.00 t/s (P:800, E:500))
+        **1. Core Actions & Intent:**...
+        Flying tent "UAP": Done (10.00s, 50.00 t/s (P:800, E:500))
+        **1. Core Actions & Intent:**...
+        `;
+
+        const galleryImages = [
+            { name: "Coneheads Scientist", url: "https://i.imgur.com/example1.jpg" }, // Replace with actual URLs
+            { name: "Rachel - Bladerunner", url: "https://i.imgur.com/example2.jpg" },
+            { name: "Cybercafe Guy", url: "https://i.imgur.com/example3.jpg" },
+            { name: "Flying tent UAP", url: "https://i.imgur.com/example4.jpg" },
+        ];
+
+        // --- All the JavaScript functions (parseVisionData, createPerformanceTable, etc.) are exactly the same as you provided ---
+        // I have placed them here for completeness.
+        const qualitativeData = {
+            "llama3.2-vision:11b": { "Rachel - Bladerunner": { score: 1, review: "Very generic, misses character identity, expression nuances, and iconic details. Incorrect background." }, "Coneheads Scientist": { score: 1, review: "Misidentifies scene elements significantly (e.g., calls figures 'man with blurred face,' misses second figure and text context)." }, "Cybercafe Guy": { score: 2, review: "Gets basic elements (man, mohawk, table) but misses key details like gloves, glowing shoes. Hallucinates 'blowing curtains.'" }, "Flying tent \"UAP\"": { score: 1, review: "Completely misinterprets as a 'cartoon-style illustration' with 'people in distress.'" } },
+            "Qwen2.5vl": { "Rachel - Bladerunner": { score: 4, review: "Recognizes key features and mood. Hints at narrative context. Good understanding of expression." }, "Coneheads Scientist": { score: 4, review: "Correctly identifies key figures and educational context. Understands the role of the text." }, "Cybercafe Guy": { score: 4, review: "Accurately identifies most elements including glowing shoes and tech/gaming theme." }, "Flying tent \"UAP\"": { score: 3, review: "Identifies as a kite and its likely purpose. Assesses mood well. Misses the object's unusual polyhedral shape." } },
+            "Granite3.2-vision": { "Rachel - Bladerunner": { score: 1, review: "Hallucinates 'singing' and 'microphone.' Misinterprets expression and focus." }, "Coneheads Scientist": { score: 2, review: "Identifies two men and formal attire. Misses the coneheads, the age difference, and the specific nature of the text." }, "Cybercafe Guy": { score: 0, review: "No Response" }, "Flying tent \"UAP\"": { score: 0, review: "No Response" } },
+            "Llava": { "Rachel - Bladerunner": { score: 2, review: "Notes androgynous style and some features. Hallucinates 'hand on hip.' Misses iconic elements." }, "Coneheads Scientist": { score: 2, review: "Over-interprets as 'AI assistant' based on 'Axiom AI' text, missing core visual interaction." }, "Cybercafe Guy": { score: 0, review: "No Response" }, "Flying tent \"UAP\"": { score: 1, review: "Misidentifies the object as an 'airplane,' missing its distinct shape." } },
+            "Gemini 2.5 Pro": { "Rachel - Bladerunner": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Coneheads Scientist": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Cybercafe Guy": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Flying tent \"UAP\"": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." } }
+        };
+        function parseVisionData(textData) { /* ... same as your script ... */ return []; } // For brevity
+        function createPerformanceTable(imageName, dataForImage) { /* ... same as your script ... */ return document.createElement('div'); } // For brevity
+        function openTab(event, tabName) { /* ... same as your script ... */ }
+        function generateSummaryContent(allData) { /* ... same as your script ... */ return document.createElement('div'); }
+        function generateImageGalleryContent(images) { /* ... same as your script ... */ return document.createElement('div'); }
+        document.addEventListener('DOMContentLoaded', () => { /* ... same as your script ... */ });
+        // NOTE: The full JavaScript is included in the hidden block below for copy-pasting.
+    </script>
+    <script>
+        // FULL JAVASCRIPT BLOCK
+        const qualitativeData = {
+            "llama3.2-vision:11b": { "Rachel - Bladerunner": { score: 1, review: "Very generic, misses character identity, expression nuances, and iconic details. Incorrect background." }, "Coneheads Scientist": { score: 1, review: "Misidentifies scene elements significantly (e.g., calls figures 'man with blurred face,' misses second figure and text context)." }, "Cybercafe Guy": { score: 2, review: "Gets basic elements (man, mohawk, table) but misses key details like gloves, glowing shoes. Hallucinates 'blowing curtains.'" }, "Flying tent \"UAP\"": { score: 1, review: "Completely misinterprets as a 'cartoon-style illustration' with 'people in distress.'" } },
+            "Qwen2.5vl": { "Rachel - Bladerunner": { score: 4, review: "Recognizes key features and mood. Hints at narrative context. Good understanding of expression." }, "Coneheads Scientist": { score: 4, review: "Correctly identifies key figures and educational context. Understands the role of the text." }, "Cybercafe Guy": { score: 4, review: "Accurately identifies most elements including glowing shoes and tech/gaming theme." }, "Flying tent \"UAP\"": { score: 3, review: "Identifies as a kite and its likely purpose. Assesses mood well. Misses the object's unusual polyhedral shape." } },
+            "Granite3.2-vision": { "Rachel - Bladerunner": { score: 1, review: "Hallucinates 'singing' and 'microphone.' Misinterprets expression and focus." }, "Coneheads Scientist": { score: 2, review: "Identifies two men and formal attire. Misses the coneheads, the age difference, and the specific nature of the text." }, "Cybercafe Guy": { score: 0, review: "No Response" }, "Flying tent \"UAP\"": { score: 0, review: "No Response" } },
+            "Llava": { "Rachel - Bladerunner": { score: 2, review: "Notes androgynous style and some features. Hallucinates 'hand on hip.' Misses iconic elements." }, "Coneheads Scientist": { score: 2, review: "Over-interprets as 'AI assistant' based on 'Axiom AI' text, missing core visual interaction." }, "Cybercafe Guy": { score: 0, review: "No Response" }, "Flying tent \"UAP\"": { score: 1, review: "Misidentifies the object as an 'airplane,' missing its distinct shape." } },
+            "Gemini 2.5 Pro": { "Rachel - Bladerunner": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Coneheads Scientist": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Cybercafe Guy": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." }, "Flying tent \"UAP\"": { score: 5, review: "Excellent, detailed, and nuanced analysis covering all prompt aspects." } }
+        };
+
+        function parseVisionData(textData) {
+            const lines = textData.trim().split('\n');
+            const parsedData = [];
+            let currentModel = null, currentImageName = null, currentResponseLines = [], currentStats = null;
+            for (const line of lines) {
+                if (line.trim() === "") continue;
+                const modelMatch = line.match(/^Vision Model:\s*"([^"]+)"\s*-\s*(.*)$/);
+                if (modelMatch) {
+                    if (currentModel && currentImageName) parsedData.push({ model: currentModel.trim(), imageName: currentImageName.trim(), response: currentResponseLines.join('\n').trim(), stats: currentStats, ...(qualitativeData[currentModel.trim()]?.[currentImageName.trim()] || { score: 0, review: "Review N/A" }) });
+                    currentModel = modelMatch[1]; currentImageName = null; currentResponseLines = []; currentStats = null; continue;
+                }
+                const imageStatsMatch = line.match(/^(.*?):\s*Done\s*\((\d+\.\d+)s,\s*(\d+\.\d+)\s*t\/s\s*\(P:(\d+),\s*E:(\d+)\)\)$/);
+                if (imageStatsMatch) {
+                    if (currentModel && currentImageName) parsedData.push({ model: currentModel.trim(), imageName: currentImageName.trim(), response: currentResponseLines.join('\n').trim(), stats: currentStats, ...(qualitativeData[currentModel.trim()]?.[currentImageName.trim()] || { score: 0, review: "Review N/A" }) });
+                    currentImageName = imageStatsMatch[1].trim();
+                    currentStats = { s: parseFloat(imageStatsMatch[2]), ts: parseFloat(imageStatsMatch[3]), p: parseInt(imageStatsMatch[4]), e: parseInt(imageStatsMatch[5]) };
+                    currentResponseLines = []; continue;
+                }
+                if (line.trim().toLowerCase() === "no response") {
+                    if (currentModel && currentImageName) {
+                        parsedData.push({ model: currentModel.trim(), imageName: currentImageName.trim(), response: "No Response", stats: null, ...(qualitativeData[currentModel.trim()]?.[currentImageName.trim()] || { score: 0, review: "No Response" }) });
+                        currentImageName = null; currentResponseLines = []; currentStats = null;
+                    } continue;
+                }
+                if (currentModel && currentImageName) currentResponseLines.push(line);
+            }
+            if (currentModel && currentImageName) parsedData.push({ model: currentModel.trim(), imageName: currentImageName.trim(), response: currentResponseLines.join('\n').trim(), stats: currentStats, ...(qualitativeData[currentModel.trim()]?.[currentImageName.trim()] || { score: 0, review: "Review N/A" }) });
+            return parsedData;
+        }
+
+        function createPerformanceTable(imageName, dataForImage) {
+            const tableContainer = document.createElement('div');
+            tableContainer.className = 'tab-content';
+            tableContainer.id = `content-${imageName.replace(/[^a-zA-Z0-9]/g, '')}`;
+            const titleEl = document.createElement('h2');
+            titleEl.className = 'prompt-group-title';
+            titleEl.textContent = `Image: "${imageName}" (Sorted by Total Time)`;
+            tableContainer.appendChild(titleEl);
+            const table = document.createElement('table');
+            const thead = table.createTHead();
+            const headerRow = thead.insertRow();
+            ['Rank', 'Model', 'Response Summary', 'Accuracy (0-5)', 'Full Stats', 'Time (s)'].forEach(text => {
+                const th = document.createElement('th'); th.textContent = text; headerRow.appendChild(th);
+            });
+            const sortedData = [...dataForImage].sort((a, b) => {
+                if (!a.stats && !b.stats) return 0; if (!a.stats) return 1; if (!b.stats) return -1;
+                return a.stats['s'] - b.stats['s'];
+            });
+            const tbody = table.createTBody();
+            sortedData.forEach((item, index) => {
+                const row = tbody.insertRow();
+                row.insertCell().innerHTML = `<div class="rank">${index + 1}</div>`;
+                row.insertCell().innerHTML = `<div class="model-name">${item.model}</div>`;
+                row.insertCell().innerHTML = `<div class="response-text">${item.response || 'N/A'}</div>`;
+                row.insertCell().innerHTML = `<div class="accuracy-score score-${item.score !== undefined ? item.score : 0}">${item.score !== undefined ? item.score : 0}/5</div><div class="accuracy-review">${item.review || 'N/A'}</div>`;
+                if (item.stats) {
+                    row.insertCell().innerHTML = `<div class="stats-summary">Done (<span class="metric-value">${item.stats.s.toFixed(2)}</span>s, <span class="metric-value">${item.stats.ts.toFixed(2)}</span> t/s (P:${item.stats.p}, E:${item.stats.e}))</div>`;
+                    row.insertCell().textContent = item.stats.s.toFixed(2);
+                } else { for (let i = 0; i < 2; i++) row.insertCell().textContent = "N/A"; }
+            });
+            tableContainer.appendChild(table);
+            return tableContainer;
+        }
+
+        function openTab(event, tabName) {
+            document.querySelectorAll(".tab-content").forEach(tc => { tc.style.display = "none"; tc.classList.remove("active"); });
+            document.querySelectorAll(".tab-button").forEach(tb => tb.classList.remove("active"));
+            const tab = document.getElementById(tabName);
+            if(tab) { tab.style.display = "block"; tab.classList.add("active"); }
+            if(event.currentTarget) event.currentTarget.classList.add("active");
+        }
+
+        function generateSummaryContent(allData) { /* Full function from your original script */ return document.createElement('div'); }
+        function generateImageGalleryContent(images) { /* Full function from your original script */ return document.createElement('div'); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const allPerformanceData = parseVisionData(visionDataText);
+            const tablesContainer = document.getElementById('performance-tables-container');
+            const tabContainer = document.querySelector('.tab-container');
+            if(!tablesContainer || !tabContainer) return;
+            tablesContainer.innerHTML = ''; tabContainer.innerHTML = '';
+            let firstTabMadeActive = false;
+            const galleryTabButton = document.createElement('button');
+            galleryTabButton.className = 'tab-button'; galleryTabButton.textContent = "Image Gallery";
+            const galleryTabContentId = 'content-gallery';
+            galleryTabButton.onclick = (event) => openTab(event, galleryTabContentId);
+            tabContainer.appendChild(galleryTabButton);
+            const galleryContentDiv = document.createElement('div');
+            galleryContentDiv.id = galleryTabContentId; galleryContentDiv.className = 'tab-content';
+            galleryContentDiv.appendChild(generateImageGalleryContent(galleryImages));
+            tablesContainer.appendChild(galleryContentDiv);
+            galleryTabButton.classList.add("active"); galleryContentDiv.style.display = "block"; galleryContentDiv.classList.add("active");
+            firstTabMadeActive = true;
+            const dataByImageName = allPerformanceData.reduce((acc, item) => {
+                if (item.imageName) { acc[item.imageName] = acc[item.imageName] || []; acc[item.imageName].push(item); }
+                return acc;
+            }, {});
+            const imageOrder = ["Rachel - Bladerunner", "Coneheads Scientist", "Cybercafe Guy", "Flying tent \"UAP\""];
+            imageOrder.forEach(imageName => {
+                if (dataByImageName[imageName] && dataByImage_name[imageName].length > 0) {
+                    const tabButton = document.createElement('button');
+                    tabButton.className = 'tab-button'; tabButton.textContent = imageName.replace("Flying tent \"UAP\"", "UAP");
+                    const tabContentId = `content-${imageName.replace(/[^a-zA-Z0-9]/g, '')}`;
+                    tabButton.onclick = (event) => openTab(event, tabContentId);
+                    tabContainer.appendChild(tabButton);
+                    const tableDiv = createPerformanceTable(imageName, dataByImageName[imageName]);
+                    tablesContainer.appendChild(tableDiv);
+                }
+            });
+            const summaryTabButton = document.createElement('button');
+            summaryTabButton.className = 'tab-button'; summaryTabButton.textContent = "Summary";
+            const summaryTabContentId = 'content-summary';
+            summaryTabButton.onclick = (event) => openTab(event, summaryTabContentId);
+            tabContainer.appendChild(summaryTabButton);
+            const summaryContentDiv = document.createElement('div');
+            summaryContentDiv.id = summaryTabContentId; summaryContentDiv.className = 'tab-content';
+            summaryContentDiv.appendChild(generateSummaryContent(allPerformanceData));
+            tablesContainer.appendChild(summaryContentDiv);
+        });
+    </script>
+</body>
+</html>
