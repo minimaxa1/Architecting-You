@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOM Inquiry: Master Template</title>
+    <style>
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05); --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0; --accent-color: #00bfff; --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a; --bg-dark-3: #333333; --font-main: 'Source Code Pro', monospace;
+        }
+        body {
+            background-color: var(--bg-dark-1);
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px; color: var(--text-primary); font-family: var(--font-main);
+            line-height: 1.6; margin: 0; padding: 0;
+        }
+        .report-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .report-header { border-bottom: 1px solid var(--bg-dark-3); margin-bottom: 40px; padding-bottom: 20px; }
+        .back-link { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 20px; font-size: 0.9rem; }
+        .back-link:hover { color: var(--accent-color); }
+        h1 { font-size: 2.2rem; color: #fff; margin: 0; }
+        h2 { color: var(--accent-color); border-bottom: 1px solid var(--bg-dark-3); padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--text-secondary); margin-top: 30px; font-style: italic; }
+        h4 { color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 1rem; }
+        ul { list-style: none; padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        blockquote { border-left: 3px solid var(--accent-color); padding-left: 20px; margin: 20px 0; font-style: italic; color: var(--text-secondary); }
+        .prompt-header { background-color: var(--bg-dark-2); padding: 10px; border: 1px solid var(--bg-dark-3); border-radius: 4px; font-family: monospace; }
+        .instruction { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <a href="index.html" class="back-link">< Back to The Bohemai Project</a>
+            <h1>AXIOM Inquiry: Master Template</h1>
+            <p>Advanced X-disciplinary Integrated & Operational Modeling Inquiry</p>
+        </div>
+        <div class="report-content">
+
+            <div class="prompt-header">[PROMPT HEADER START]</div>
+            
+            <p><strong>English only - all sections and sub sections ie 1.1, 1.2, 2.1, 2.2 must be answered completely with max word count:</strong></p>
+
+            <blockquote>
+                <p><strong>Objective:</strong> Provide a comprehensive, multi-disciplinary analysis for "[Project Name/Scenario Title Here]", addressing the core challenges and complexities outlined below.</p>
+                <p><strong>Expected Standard:</strong> Your response should demonstrate graduate-level scientific/technical understanding, critical analysis, and in-depth reasoning for each section and sub-question.</p>
+                <p><strong>Response Structure:</strong> Address each numbered section and sub-section clearly and sequentially, adhering to the provided headings.</p>
+            </blockquote>
+
+            <h4>Key Requirements for Each Answer Component:</h4>
+            <ul>
+                <li><strong>1. Justification:</strong> Support all claims, proposed methods, and conclusions with established principles, relevant theories, and (where applicable) supporting data or models.</li>
+                <li><strong>2. Depth:</strong> Elaborate on underlying mechanisms, complexities, nuances, and interdependencies. Avoid superficial or overly general statements.</li>
+                <li><strong>3. Critical Evaluation:</strong> Discuss trade-offs, limitations, assumptions, potential challenges, and alternative perspectives for all proposed solutions or analyses.</li>
+                <li><strong>4. Precision:</strong> Use accurate and specific terminology appropriate to each discipline. Define key parameters and metrics clearly.</li>
+                <li><strong>METICULOUSLY FOLLOW THE PROMPT STRUCTURE:</strong> This is paramount. All sections must be answered, Do not skip sections or reorder them. Use the exact headings provided.</li>
+                <li><strong>Address EVERY Specific Point:</strong> "Specific Points for In-Depth Discussion/Elaboration" or similar. Treat these as a checklist. Ensure each one is explicitly discussed in your response for that sub-section.</li>
+                <li><strong>Focus on "Why" and "How":</strong> Don't just list techniques; explain why a particular technique is chosen, how it works in this context, and critically evaluate its trade-offs and limitations as requested.</li>
+                <li><strong>Depth over Breadth (if forced to choose):</strong> If time/token limits are a concern, it's better to deeply answer fewer sub-sections fully than to superficially answer all of them while missing critical details or entire sections. (However, the goal is to answer all fully).</li>
+                <li><strong>Self-Correction against Prompt:</strong> Before finalizing, re-read the prompt section by section and compare it against your drafted answer for that section. Have you met all explicit requirements?</li>
+            </ul>
+
+            <h2>SECTION 1: [PRIMARY DISCIPLINE 1 - e.g., FUNDAMENTAL SCIENCE / CORE ENGINEERING CHALLENGE]</h2>
+            <p><strong>Context:</strong> [Briefly describe the overarching challenge or context for this disciplinary section, linking it to the main project goal. E.g., "The core scientific understanding of X phenomenon is incomplete, posing a fundamental barrier to achieving Project Y's objectives." or "Developing a robust and scalable Z technology is critical for the success of Project A."]</p>
+            
+            <h3>1.1. [Specific Challenge/Problem Area 1.1 within Discipline 1]:</h3>
+            <p class="instruction">Instruction: [Clearly state the main task for this sub-question. E.g., "Provide a critical analysis of...", "Detail the fundamental modeling challenges in...", "Propose and justify a novel approach to..."]</p>
+            <h4>Specific Points for In-Depth Discussion and Justification:</h4>
+            <ul>
+                <li>[Specific aspect, theory, or factor to analyze/discuss. Why is it important? What are the complexities?]</li>
+                <li>[Another specific aspect. Ask for comparison, trade-offs, or detailed mechanisms.]</li>
+                <li>[A third specific aspect. Focus on limitations, uncertainties, or scaling issues.]</li>
+                <li>[Optional: A fourth specific aspect, perhaps focusing on integration with other concepts or future research directions.]</li>
+            </ul>
+
+            <h3>1.2. [Specific Challenge/Problem Area 1.2 within Discipline 1]:</h3>
+            <p class="instruction">Instruction: [Clearly state the main task for this sub-question.]</p>
+            <h4>Your Proposal/Strategy/Analysis Must Detail and Justify:</h4>
+            <ul>
+                <li>[Key component or metric 1. Define it quantitatively if possible. Justify its relevance.]</li>
+                <li>[Key component or algorithm 2. Explain its principles and why it's suitable. Discuss alternatives.]</li>
+                <li>[Key component or assessment method 3. How would efficacy be measured? What are the KPIs?]</li>
+            </ul>
+
+            <!-- Repeat for other sections -->
+            <h2>SECTION 2: [PRIMARY DISCIPLINE 2 - e.g., APPLIED SCIENCE / SYSTEMS INTEGRATION CHALLENGE]</h2>
+            <p><strong>Context:</strong> [Briefly describe the overarching challenge or context for this disciplinary section.]</p>
+            <h3>2.1. [Specific Challenge/Problem Area 2.1 within Discipline 2]:</h3>
+            <p class="instruction">Instruction: [Clearly state the main task for this sub-question.]</p>
+            <h4>Your Analysis Must Detail and Justify:</h4>
+            <ul>
+                <li>[Factor/Mechanism 1: Explain its role and impact in the context of the problem.]</li>
+                <li>[Factor/Mechanism 2: Discuss its interaction with other system components or environmental variables.]</li>
+                <li>[Primary Uncertainties or Knowledge Gaps: Identify key unknowns and their implications for solving the challenge.]</li>
+            </ul>
+
+            <h2>SECTION 3: [PRIMARY DISCIPLINE 3 - e.g., DATA, COMPUTATION, OR ADVANCED ANALYTICS CHALLENGE]</h2>
+            <p><strong>Context:</strong> [Briefly describe the overarching challenge or context for this disciplinary section.]</p>
+            <h3>3.1. [Specific Challenge/Problem Area 3.1 within Discipline 3]:</h3>
+            <p class="instruction">Instruction: [Clearly state the main task for this sub-question.]</p>
+            <h4>Address with Specificity and Justification:</h4>
+            <ul>
+                <li>[Algorithmic/Mathematical Challenge 1: Explain its nature and why it's difficult in this context.]</li>
+                <li>[Proposed Solution/Approach 1: Detail the principles of a specific algorithm or mathematical framework. Justify its suitability.]</li>
+                <li>[Trade-offs and Optimization: Discuss how to balance competing objectives.]</li>
+            </ul>
+
+            <h2>SECTION 4: [PRIMARY DISCIPLINE 4 - e.g., IMPLEMENTATION, ETHICS, POLICY, OR SUSTAINABILITY CHALLENGE]</h2>
+            <p><strong>Context:</strong> [Briefly describe the overarching challenge or context for this disciplinary section.]</p>
+            <h3>4.1. [Specific Challenge/Problem Area 4.1 within Discipline 4]:</h3>
+            <p class="instruction">Instruction: [Clearly state the main task for this sub-question.]</p>
+            <h4>Propose and Evaluate Specific Strategies/Frameworks, Justifying Choices and Discussing Challenges:</h4>
+            <ul>
+                <li>[Strategy/Framework Component 1: Detail its purpose and mechanism.]</li>
+                <li>[Implementation Hurdles: Identify key technical, economic, social, or political barriers.]</li>
+            </ul>
+
+            <div class="prompt-header">[PROMPT HEADER END]</div>
+
+            <hr style="border-color: var(--bg-dark-3); margin: 40px 0;">
+
+            <h3>How to Use This Master Template:</h3>
+            <ol>
+                <li><strong>Define Your Project:</strong> Clearly name your project/scenario (e.g., "Project Terra Firma," "Project Neptune Deep Dive").</li>
+                <li><strong>Select Disciplines:</strong> Choose 3-4 core disciplines that are central to your project.</li>
+                <li><strong>Craft Contexts:</strong> For each discipline, write a concise context statement linking it to your project's goals.</li>
+                <li><strong>Develop Challenges (1.1, 1.2, etc.):</strong> For each discipline, create two high-level challenges or problem areas.</li>
+                <li><strong>Flesh out "Specific Points":</strong> This is the most crucial part. For each challenge, list 3-4 specific, guiding bullet points that force the AI to delve into details, justify choices, compare alternatives, and discuss complexities. Tailor these points to the specific knowledge you want to test within that challenge.</li>
+                <li><strong>Review against AXIOM Principles:</strong> Ensure your questions demand justification, depth, critical evaluation, and precision.</li>
+            </ol>
+            <blockquote>This template provides a robust framework. The real art will be in crafting those "Specific Points for In-Depth Discussion" to perfectly target the nuances of the problem you want the AI to solve for each new AXIOM Inquiry.</blockquote>
+
+        </div>
+    </div>
+</body>
+</html>
