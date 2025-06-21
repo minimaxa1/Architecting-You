@@ -197,6 +197,19 @@
                 <div class="panel-title-bar">REPORTS</div>
                 <div class="panel-body">
                     <ul class="file-list">
+                        
+                        {% for post in site.categories.research %}
+                            <li><a href="{{ post.url | relative_url }}">> {{ post.title }}</a></li>
+                        {% else %}
+                            <li><p class="comment">No research reports published yet.</p></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="content-panel">
+                <div class="panel-title-bar">REPORTS</div>
+                <div class="panel-body">
+                    <ul class="file-list">
                         <li><a href="Ai Horizons.html">> AI Foundations</a></li>
                         <li><a href="agentic ai platforms.html">> Agentic AI Platforms</a></li>
                     </ul>
