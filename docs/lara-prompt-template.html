@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LARA: 7-Layered Reasoning Analysis Framework</title>
+    <style>
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05); --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0; --accent-color: #00bfff; --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a; --bg-dark-3: #333333; --font-main: 'Source Code Pro', monospace;
+        }
+        body {
+            background-color: var(--bg-dark-1);
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px; color: var(--text-primary); font-family: var(--font-main);
+            line-height: 1.6; margin: 0; padding: 0;
+        }
+        .report-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .report-header { border-bottom: 1px solid var(--bg-dark-3); margin-bottom: 40px; padding-bottom: 20px; }
+        .back-link { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 20px; font-size: 0.9rem; }
+        .back-link:hover { color: var(--accent-color); }
+        h1 { font-size: 2.2rem; color: #fff; margin: 0; }
+        h2, h3 { color: var(--accent-color); border-bottom: 1px solid var(--bg-dark-3); padding-bottom: 10px; margin-top: 40px; }
+        p { margin-bottom: 1rem; }
+        blockquote { border-left: 3px solid var(--accent-color); padding-left: 20px; margin: 20px 0; font-style: italic; color: var(--text-secondary); }
+        .placeholder { background-color: var(--bg-dark-2); color: var(--accent-color); padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        ol { list-style: none; counter-reset: item; padding-left: 0; }
+        li { counter-increment: item; margin-bottom: 2.5rem; }
+        li::before {
+            content: counter(item);
+            background: var(--accent-color);
+            color: var(--bg-dark-1);
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 1.5em;
+            text-align: center;
+            margin-right: 0.8em;
+            font-weight: bold;
+        }
+        li h4 { display: inline; font-size: 1.2rem; }
+        li p { padding-left: 2.8em; margin-top: 0.5rem; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <a href="index.html" class="back-link">< Back to The Bohemai Project</a>
+            <h1>The LARA Framework</h1>
+            <p>The Refined 7-Layered Reasoning Analysis Framework (Template)</p>
+        </div>
+        <div class="report-content">
+            
+            <blockquote>
+                <h4>Instructions for Use:</h4>
+                <ol style="list-style-type: decimal; padding-left: 20px;">
+                    <li style="margin-bottom: 1rem;"><strong>Define Your Problem/Topic:</strong> Replace <span class="placeholder">[Clearly Define Your Problem...]</span> with a specific and clear statement.</li>
+                    <li style="margin-bottom: 1rem;"><strong>Set the Persona (Optional):</strong> Replace <span class="placeholder">[Optional: Define the Persona...]</span> if desired.</li>
+                    <li style="margin-bottom: 1rem;"><strong>Submit to AI:</strong> Provide the entire filled-in template to the AI model.</li>
+                    <li style="margin-bottom: 1rem;"><strong>Review and Iterate:</strong> Use the output as a foundation for further evaluation and refinement.</li>
+                </ol>
+            </blockquote>
+
+            <p><strong>Topic/Problem:</strong> <span class="placeholder">[Clearly Define Your Problem, Question, or Topic Here. Be as specific as possible.]</span></p>
+            <p><strong>Persona (Optional):</strong> <span class="placeholder">[Optional: Define the Persona or Role the AI should adopt, e.g., "Act as a neutral policy analyst," "Act as a critical sociologist," "Act as a strategic planner."]</span></p>
+            
+            <hr style="border-color: var(--bg-dark-3); margin: 40px 0;">
+
+            <p><strong>Instructions:</strong> Please provide a comprehensive analysis of the specified Topic/Problem by sequentially applying the following 7 types of reasoning. Address each numbered layer distinctly and thoroughly, explicitly identifying significant conflicting evidence, counterarguments, or alternative interpretations where applicable within each layer. Conclude with a final synthesis.</p>
+
+            <ol>
+                <li>
+                    <h4>Deductive Reasoning Layer (From General Principles to Specifics):</h4>
+                    <p>Identify relevant established principles, definitions, accepted truths, laws, or fundamental rules pertaining to <span class="placeholder">[Your Problem/Topic]</span>. Define any key terms central to the topic that may be contested or have multiple interpretations. Based on these general premises and definitions, deduce the logical implications, necessary consequences, or classifications that apply directly to <span class="placeholder">[Your Problem/Topic]</span>. Highlight any inherent logical tensions or conflicts that arise between different relevant principles.</p>
+                </li>
+                <li>
+                    <h4>Inductive Reasoning Layer (From Specific Observations to Generalizations):</h4>
+                    <p>Gather specific examples, data points, case studies, anecdotes, or observed instances related to <span class="placeholder">[Your Problem/Topic]</span>. Reference generally accepted ranges, illustrative findings, or representative examples where possible. Based on these specific observations, identify potential patterns, trends, or correlations. Formulate probable generalizations, likely outcomes, or plausible hypotheses about <span class="placeholder">[Your Problem/Topic]</span>, stating them probabilistically. Explicitly acknowledge the limitations of the available data/examples and note significant conflicting findings or alternative interpretations present in the evidence base.</p>
+                </li>
+                <li>
+                    <h4>Abductive Reasoning Layer (Inferring the Best Explanation):</h4>
+                    <p>Identify multiple surprising observations, anomalies, inconsistencies, puzzles, unexplained variability in relevant phenomena, persistent expert debates, or significant challenges related to <span class="placeholder">[Your Problem/Topic]</span>. Brainstorm potential underlying causes, reasons, contributing factors, or systemic issues (technical, social, cognitive, structural etc.) that could explain these varied phenomena. Evaluate these potential explanations based on plausibility, simplicity, coherence, and explanatory power. Determine the most likely or best composite explanation(s) for the observed complexities related to <span class="placeholder">[Your Problem/Topic]</span>.</p>
+                </li>
+                <li>
+                    <h4>Analogical Reasoning Layer (Understanding Through Comparison):</h4>
+                    <p>Identify relevant situations, systems, concepts, or historical events (Source Analogues) that share significant structural or functional similarities with <span class="placeholder">[Your Problem/Topic]</span>. Clearly map the key points of comparison and similarity. Explicitly consider the perspectives and experiences of different stakeholders within these historical or comparative cases. Transfer insights, potential solutions, strategies, or cautionary lessons from the Source Analogue(s), critically evaluating the strength, limitations, and potential distortions of each analogy, especially concerning the unique aspects of <span class="placeholder">[Your Problem/Topic]</span>.</p>
+                </li>
+                <li>
+                    <h4>Causal Reasoning Layer (Analyzing Cause and Effect):</h4>
+                    <p>Identify key potential cause-and-effect relationships relevant to <span class="placeholder">[Your Problem/Topic]</span>, including both intended and potential unintended causal chains. Analyze the proposed mechanisms: How exactly are factors thought to influence outcomes within the context of <span class="placeholder">[Your Problem/Topic]</span>? Critically evaluate the strength, validity, and current evidence base for these causal links. Distinguish clearly between correlation and potential causation. Discuss any significant scientific or expert debate regarding these causal pathways or their downstream effects, including potential feedback loops or systemic interactions.</p>
+                </li>
+                <li>
+                    <h4>Statistical Reasoning Layer (Quantifying and Assessing Probability - If Applicable):</h4>
+                    <p>Identify key metrics, variables, or aspects of <span class="placeholder">[Your Problem/Topic]</span> that can be measured or quantified. Analyze available data (or reasonably estimated/hypothesized data) using relevant statistical concepts (e.g., frequencies, distributions, trends, risk probabilities, cost-benefit ratios). Where possible, cite generally accepted quantitative estimates or ranges, acknowledging their confidence levels/uncertainty. Quantify potential impacts, likelihoods, costs, or benefits. Explicitly discuss the limitations of current quantification methods and data availability, particularly regarding complex, long-term, or difficult-to-measure aspects of <span class="placeholder">[Your Problem/Topic]</span>. (If not quantifiable, explain why and focus on qualitative assessment of likelihood and impact).</p>
+                </li>
+                <li>
+                    <h4>Moral Reasoning Layer (Evaluating Ethics and Values - If Applicable):</h4>
+                    <p>Identify the key ethical questions, dilemmas, value conflicts, or moral considerations inherent in or arising from <span class="placeholder">[Your Problem/Topic]</span>. Analyze <span class="placeholder">[Your Problem/Topic]</span> from different ethical perspectives or frameworks (e.g., Consequentialism, Deontology, Virtue Ethics, Justice/Fairness, Care Ethics). Explicitly consider the differing values, perspectives, and potential impacts (positive and negative) on various relevant stakeholders. Identify core moral arguments, counterarguments, and key ethical trade-offs. Note areas of significant ethical disagreement or ongoing societal debate related to <span class="placeholder">[Your Problem/Topic]</span>.</p>
+                </li>
+            </ol>
+            
+            <h2>Final Synthesis:</h2>
+            <p>After addressing all 7 layers, synthesize these diverse insights into a concise and balanced concluding assessment of <span class="placeholder">[Your Problem/Topic]</span>. Summarize the key findings, logical implications (including tensions), probable outcomes based on potentially conflicting evidence, likely explanations for complexities, comparative insights (and limitations), causal factors and risks, quantitative aspects (and uncertainties), and ethical dimensions including stakeholder perspectives and disagreements. Highlight the major strengths, weaknesses, opportunities, risks, trade-offs, critical unknowns, and potential future trajectories. Provide an overall evaluation or recommendation justified explicitly by the multi-layered analysis, potentially outlining specific conditions, further research needed, or mitigation strategies.</p>
+
+        </div>
+    </div>
+</body>
+</html>
