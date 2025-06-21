@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - The Bohemai Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #00bfff;
+            --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a;
+            --bg-dark-3: #333333;
+            --font-main: 'Source Code Pro', monospace;
+        }
+        body {
+            background-color: var(--bg-dark-1);
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .report-header {
+            border-bottom: 1px solid var(--bg-dark-3);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin: 0;
+        }
+        .post-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        .report-content {
+            font-size: 1rem;
+        }
+        .report-content h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--bg-dark-3);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .report-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .report-content a:hover {
+            text-decoration: underline;
+        }
+        .report-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .report-content li {
+            margin-bottom: 10px;
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        .report-content li::before {
+            content: "• ";
+            color: var(--accent-color);
+            padding-right: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <a href="{{ site.baseurl }}/" class="back-link">< Back to The Bohemai Project</a>
+            <h1>{{ page.title }}</h1>
+            <p class="post-meta">Published on {{ page.date | date: "%B %d, %Y" }}</p>
+        </div>
+        <div class="report-content">
+            {{ content }}
+        </div>
+    </div>
+</body>
+</html>
