@@ -27,39 +27,37 @@
             margin: 0;
             padding: 0;
         }
-        .report-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .report-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
         .report-header { border-bottom: 1px solid var(--bg-dark-3); margin-bottom: 30px; padding-bottom: 20px; }
         .back-link { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 20px; font-size: 0.9rem; }
         .back-link:hover { color: var(--accent-color); }
         h1 { font-size: 2.2rem; color: #fff; margin: 0; }
-        h2.prompt-group-title { font-size: 1.5rem; color: var(--accent-color); border-bottom: 1px solid var(--bg-dark-3); padding-bottom: 10px; margin-top: 40px; text-align: center; }
-        .explanation { background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); padding: 20px; margin-bottom: 25px; border-radius: 5px; font-size: 0.9em; }
+        .explanation { background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); padding: 20px; margin-bottom: 40px; border-radius: 5px; font-size: 0.9em; }
         .explanation strong { color: var(--accent-color); }
         .explanation ul { list-style: none; padding-left: 1rem; }
         .explanation li::before { content: "• "; color: var(--accent-color); }
-        .prompt-info-in-explanation { background-color: var(--bg-dark-1); border: 1px solid var(--bg-dark-3); padding: 15px; margin-top: 20px; }
+        .prompt-info-in-explanation { background-color: var(--bg-dark-1); border: 1px solid var(--bg-dark-3); padding: 15px; margin-top: 20px; border-radius: 4px; }
         .prompt-info-in-explanation h4 { margin-top: 0; color: var(--accent-color); }
-        .tab-container { display: flex; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 2px solid var(--bg-dark-3); }
-        .tab-button { padding: 10px 15px; cursor: pointer; background-color: transparent; color: var(--text-secondary); border: 0; font-family: var(--font-main); font-weight: bold; outline: none; }
-        .tab-button.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
-        .tab-button:hover:not(.active) { color: #fff; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid var(--bg-dark-3); padding: 8px 12px; text-align: left; vertical-align: top; font-size: 0.9em; }
-        th { background-color: var(--bg-dark-2); color: var(--text-primary); }
-        .model-name { font-weight: bold; color: #f0f0f0; }
-        .response-text { white-space: pre-wrap; font-size: 0.85em; color: var(--text-secondary); max-height: 200px; overflow-y: auto; background-color: var(--bg-dark-2); padding: 8px; border-radius: 3px; }
-        .score-0 { color: #888888; } .score-1 { color: #ff4d4d; } .score-2 { color: #ff8c4d; }
-        .score-3 { color: #ffd700; } .score-4 { color: #90ee90; } .score-5 { color: #70ff70; }
-        .accuracy-review { font-size: 0.8em; color: #b0b0b0; margin-top: 4px; }
-        .summary-section { margin-bottom: 20px; padding: 15px; background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); border-radius: 5px; }
+        .summary-section { margin-bottom: 40px; padding: 20px; background-color: var(--bg-dark-2); border: 1px solid var(--bg-dark-3); border-radius: 5px; }
         .summary-section h3 { color: var(--accent-color); margin-top: 0; border-bottom: none; font-size: 1.2rem; }
-        .image-gallery-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
-        .gallery-item { text-align: center; background-color: var(--bg-dark-2); padding: 10px; border-radius: 5px; border: 1px solid var(--bg-dark-3); }
-        .gallery-item img { max-width: 300px; max-height: 300px; border-radius: 3px; }
-        .gallery-item p { margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); }
+        .image-gallery-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start; padding-top: 15px; }
+        .gallery-item { text-align: center; background-color: var(--bg-dark-1); padding: 10px 15px; border-radius: 5px; border: 1px solid var(--bg-dark-3); font-size: 0.9em; color: var(--text-secondary); }
+        .tab-container { display: flex; flex-wrap: wrap; margin-bottom: -1px; /* Overlap border */ }
+        .tab-button { padding: 12px 20px; cursor: pointer; background-color: var(--bg-dark-2); color: var(--text-secondary); border: 1px solid var(--bg-dark-3); border-bottom: none; font-family: var(--font-main); font-weight: bold; outline: none; border-radius: 5px 5px 0 0; margin-right: 5px; }
+        .tab-button.active { color: var(--accent-color); background-color: var(--bg-dark-1); border-color: var(--bg-dark-3); border-bottom: 1px solid var(--bg-dark-1); position: relative; z-index: 2; }
+        .tab-button:hover:not(.active) { color: #fff; background-color: #2a2a2a; }
+        .tab-content { display: none; padding: 20px; border: 1px solid var(--bg-dark-3); border-radius: 0 5px 5px 5px; position: relative; z-index: 1; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; table-layout: fixed; }
+        th, td { border: 1px solid var(--bg-dark-3); padding: 12px; text-align: left; vertical-align: top; font-size: 0.9em; }
+        th { background-color: var(--bg-dark-2); color: var(--text-primary); }
+        td:first-child { width: 15%; } /* Image Name column */
+        td:nth-child(2) { width: 20%; } /* Performance Stats column */
+        td:nth-child(3) { width: 65%; } /* Model Response column */
+        .model-name { font-weight: bold; color: #f0f0f0; }
+        .response-text { white-space: pre-wrap; font-size: 0.9em; color: var(--text-secondary); max-height: 250px; overflow-y: auto; background-color: var(--bg-dark-1); padding: 10px; border-radius: 3px; border: 1px solid var(--bg-dark-3); }
+        .no-response { color: var(--accent-color-alt); font-style: italic; }
     </style>
 </head>
 <body>
@@ -90,7 +88,15 @@
             </div>
         </div>
 
-        <div class="tab-container">
+        <!-- This new section will be dynamically populated -->
+        <div id="summary-gallery" class="summary-section">
+            <h3>Images Tested in this Analysis</h3>
+            <div class="image-gallery-container" id="image-gallery">
+                <!-- Gallery items will be injected here -->
+            </div>
+        </div>
+
+        <div class="tab-container" id="tab-buttons-container">
             <!-- Tab buttons will be injected here -->
         </div>
         <div id="performance-tables-container">
@@ -99,7 +105,6 @@
     </div>
 
     <script>
-        // --- DATA (PASTED FROM YOUR ORIGINAL SCRIPT) ---
         const visionDataText = `
         Vision Model: "llama3.2-vision:11b" - Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B
         Rachel - Bladerunner: Done (133.79s, 8.27 t/s (P:811, E:452))
@@ -140,8 +145,135 @@
         Coneheads Scientist: Done (10.00s, 50.00 t/s (P:800, E:500))
         **1. Core Actions & Intent:** *   **Primary Action(s):** The primary action depicted is a confrontation or intense dialogue/exchange between two figures. The figure on the left, an older man, is actively speaking or pontificating, with his mouth open and a focused, somewhat stern expression. The figure on the right, a younger individual (possibly a child or youth), is listening or observing, with a more neutral, perhaps slightly curious or apprehensive expression. Superimposed over and between them is a large amount of text related to a complex scientific or theoretical concept called "Axiom: Advanced X-disciplinary Integrated & Operational Modeling Inquiry (Ai Big Brain Prompts)" and further details about "Migdal's duality" and physics. *   **Underlying Reasons/Intentions/Goal:** *   **Older Figure:** His intention seems to be to explain, teach, or assert a complex idea. His goal is likely to impart knowledge, convince, or perhaps test the understanding of the younger figure. The text suggests he's discussing a profound and counter-intuitive scientific theory. *   **Younger Figure:** Their intention is likely to listen, learn, or comprehend. Their goal might be to understand the complex information being presented or simply to endure the lecture. *   **Likely Immediate Outcome:** The likely immediate outcome is either the younger figure responding with a question, a statement of understanding (or lack thereof), or simply continued listening. The older figure might pause for a response or continue his explanation. The dense text suggests the exchange is ongoing and intellectually demanding. **2. Relationships & Scene Dynamics:** *   **Relationship to Each Other & Environment:** *   **To Each Other:** The figures are positioned facing each other in profile, a classic setup for dialogue or confrontation. Their physical proximity, despite the overlay of text, suggests a direct interaction. The age difference implies a potential teacher-student, mentor-mentee, or elder-youth dynamic. Their unusual conical head shapes are a shared, striking feature, suggesting they belong to the same group, species, or are part of a specific symbolic representation. *   **To Environment (Text):** The text acts as both a backdrop and an active element of their interaction. It's not just environmental; it *is* the subject of their exchange. The black background isolates the figures and text, focusing all attention on this intellectual confrontation. *   **Observable Dynamic:** *   There's a clear **dynamic of intellectual authority and reception**. The older figure is in a position of power or knowledge, actively transmitting information. The younger figure is in a more passive, receptive role. *   There's also an element of **seriousness and intensity** due to the complex nature of the text and the focused expressions. *   The bizarre, "conehead" appearance introduces an element of the **surreal or allegorical**, suggesting this isn't a literal, everyday interaction but perhaps a representation of higher intellect, advanced beings, or a satirical take on intellectualism (referencing the "Coneheads" from Saturday Night Live, if the model has that cultural context). **3. Deeper Meanings & Nuances:** *   **Subtle Visual Cues:** *   **Older Figure's Expression:** His slightly furrowed brow, open mouth, and direct gaze convey intensity, conviction, and perhaps a touch of impatience or didacticism. *   **Younger Figure's Expression:** Their smoother features and more neutral gaze could indicate curiosity, deep thought, or even a subtle bewilderment or resignation in the face of complex information. *   **Cone Heads:** This is the most striking "nuance." It immediately signals that this is not a realistic depiction. It could symbolize "big brains," advanced intelligence, alien origin, or a satirical take on intellectualism (referencing the "Coneheads" from Saturday Night Live, if the model has that cultural context). *   **Text Overlay:** The density and complexity of the scientific text, including mathematical notation, directly reinforces the theme of advanced, difficult-to-grasp knowledge. *   **Symbolic Meaning/Abstract Concept/Emotion:** *   **Symbolic Meaning:** The scene can symbolize the transmission of complex knowledge, the challenge of understanding profound ideas, intergenerational learning, or even the burden of high intellect. The cone heads are a powerful symbol of "otherness" or specialized intelligence. *   **Abstract Concept:** The image represents concepts like "advanced inquiry," "X-disciplinary thought," "paradigm shifts" (as mentioned in the text), and the nature of scientific discovery. *   **Emotion/Mood:** The mood is intellectually intense, serious, and slightly surreal or uncanny due to the figures' appearance. There's a sense of profound intellectual endeavor. **4. Implicit Understanding & Common Sense:** *   **Common-Sense Knowledge/Implicit Information:** *   We assume that even with their appearance, they are engaged in a form of communication typical of intelligent beings (speech, listening). *   The presence of complex text and mathematical formulas implies a setting related to academia, research, or advanced learning. *   The term "Axiom" and "Inquiry" in the title suggests a foundational or investigative context. "Ai Big Brain Prompts" hints at a connection to artificial intelligence or advanced cognitive tasks. *   **Missing Elements:** *   **The Broader Setting:** We don't know where this interaction is taking place (a lab, a classroom, another dimension?). *   **The Origin/Purpose of "Axiom":** While the text describes *what* it is, the ultimate "why" or application isn't fully depicted visually beyond this interaction. *   **The Younger Figure's Voice/Input:** We only see the older figure actively speaking. **5. Hypothetical Change:** *   **Change:** If the complex scientific text overlay were replaced with simple children's building blocks or a playful, colorful cartoon. *   **Impact:** *   **Story/Meaning:** This would drastically alter the meaning. The figures' intense expressions and unusual appearance would suddenly seem comical or absurd in contrast to a trivial subject matter. The theme of profound intellectual endeavor would be replaced by irony or satire. It might suggest that these "big-brained" individuals are focused on something unexpectedly mundane or that their advanced appearance is a facade. *   **Outcome/Dynamic:** The dynamic of intellectual authority would likely dissolve or become humorous. The older figure's pontification would seem out of place. The scene would shift from serious inquiry to something potentially mocking the appearance of intellectualism without substance, or perhaps highlighting a playful, childlike aspect of these beings despite their appearance. The overall mood would become lighthearted, confusing, or satirical.
         Cybercafe Guy: Done (10.00s, 50.00 t/s (P:800, E:500))
-        **1. Core Actions & Intent:** *   **Primary Action(s):** The primary action depicted is a person sitting at a small round table, using a laptop computer. They appear to be typing or interacting with the trackpad. *   **Underlying Reasons/Intentions/Goal:** *   **Reason/Intention:** The person is likely engaged in some form of digital work, communication, gaming, or online activity. Their focused posture and use of the laptop suggest concentration. The elaborate, themed attire (mohawk, sunglasses indoors, gloves, glowing accessories) indicates a deliberate self-expression or adherence to a particular subculture or aesthetic (e.g., cyberpunk, gamer, tech enthusiast). *   **Immediate Goal:** Their immediate goal is to complete whatever task they are performing on the laptop, or to enjoy their digital activity. It might also be to present a certain image or to be noticed. *   **Likely Immediate Outcome:** The person will likely continue to use their laptop until their task is finished, they decide to take a break, or are interrupted. The glow from their accessories will continue to illuminate the area around them. **2. Relationships & Scene Dynamics:** *   **Relationship to Each Other & Environment:** *   **To Environment:** The person is in what appears to be a public or semi-public indoor space, possibly a cafe, library, or waiting area, given the simple table, chair, and tiled floor. Their striking appearance and glowing accessories create a stark contrast with the otherwise mundane and neutrally lit environment. They are the focal point, drawing attention. *   **To Laptop/Accessories:** Their laptop (with a glowing green logo, possibly Razer) and glowing green shoes and wristband are integral to their presentation and activity. These items are extensions of their chosen persona and are actively in use or on display. *   **Observable Dynamic:** *   There's a dynamic of **individuality and self-expression juxtaposed with a public space.** The person is creating their own distinct, illuminated "zone" within a common environment. *   There's an element of **performance or display**, whether intentional or not, due to the highly noticeable attire and lighting. This could be interpreted as an assertion of identity. *   The scene has a somewhat **humorous or quirky** dynamic for an outside observer, given the intensity of the "look" in an everyday setting. **3. Deeper Meanings & Nuances:** *   **Subtle Visual Cues:** *   **Sunglasses Indoors:** Often signifies a desire for anonymity, a cool persona, or to hide one's eyes/expression. *   **Gloves:** Could be for warmth, style, or to enhance a "hacker" or "cyberpunk" image. *   **Mohawk Hairstyle:** A strong statement of non-conformity or adherence to punk/cyberpunk aesthetics. *   **Matching Green Glow:** The coordination of the green glow on the laptop, shoes, and wristband shows deliberateness and attention to their themed appearance. *   **Patterned Backpack:** Adds to the overall unique and personalized style. *   **Symbolic Meaning/Abstract Concept/Emotion:** *   **Symbolic Meaning:** The image can symbolize individuality, immersion in digital culture, a personal "cyberpunk" aesthetic, or the act of creating a personal bubble in a public space. The glowing green often evokes technology, gaming, or a futuristic vibe. *   **Abstract Concept:** It touches on themes of identity expression, the intersection of physical and digital worlds, and subcultures. *   **Emotion/Mood:** The mood conveyed is one of focused concentration from the subject, but for the viewer, it might be intriguing, amusing, or even slightly intimidating depending on interpretation. The green glow adds an element of the artificial or a "tech-noir" feel. **4. Implicit Understanding & Common Sense:** *   **Common-Sense Knowledge/Implicit Information:** *   We assume the laptop is powered on and connected to the internet or running software. *   We assume the glowing elements are battery-powered or otherwise electronically illuminated. *   The setting (cafe-like) implies others might be around, though not visible, making the subject's appearance potentially more conspicuous. *   We understand that such a distinctive personal style is a conscious choice. *   **Missing Elements:** *   **The Laptop Screen Content:** We cannot see what the person is actually doing on their laptop, which would provide significant context to their activity. *   **Other People:** The reaction or presence of other people in the establishment is missing, which would clarify the social context of the scene. *   **Sound:** The ambient noise of the location or any sounds from the laptop are absent. **5. Hypothetical Change:** *   **Change:** If all the glowing green accessories (shoes, wristband, laptop logo) were turned off or were a dull, non-glowing color. *   **Impact:** *   **Story/Meaning:** The "cyberpunk" or "high-tech gamer" aesthetic would be significantly diminished. While the mohawk, sunglasses, and gloves would still make the person stand out, the most eye-catching and unifying element of their theme would be gone. The image would lose much of its futuristic or tech-centric vibe and might appear more simply "punk" or "alternative." The visual link between the person and their technology would be less pronounced. *   **Outcome/Dynamic:** The person would be less visually striking and might not draw as much attention. The sense of them creating their own illuminated "zone" would be lost. The overall impression would be less about a specific tech-related subculture and more about a general non-conformist style. The humor or quirkiness might also be lessened, as the glowing elements contribute significantly to that.
+        **1. Core Actions & Intent:** *   **Primary Action(s):** The primary action depicted is a person sitting at a small round table, using a laptop computer. They appear to be typing or interacting with the trackpad. *   **Underlying Reasons/Intentions/Goal:** *   **Reason/Intention:** The person is likely engaged in some form of digital work, communication, gaming, or online activity. Their focused posture and use of the laptop suggest concentration. The elaborate, themed attire (mohawk, sunglasses indoors, gloves, glowing accessories) indicates a deliberate self-expression or adherence to a particular subculture or aesthetic (e.g., cyberpunk, gamer, tech enthusiast). *   **Immediate Goal:** Their immediate goal is to complete whatever task they are performing on the laptop, or to enjoy their digital activity. It might also be to present a certain image or to be noticed. *   **Likely Immediate Outcome:** The person will likely continue to use their laptop until their task is finished, they decide to take a break, or are interrupted. The glow from their accessories will continue to illuminate the area around them. **2. Relationships & Scene Dynamics:** *   **Relationship to Each Other & Environment:** *   **To Environment:** The person is in what appears to be a public or semi-public indoor space, possibly a cafe, library, or waiting area, given the simple table, chair, and tiled floor. Their striking appearance and glowing accessories create a stark contrast with the otherwise mundane and neutrally lit environment. They are the focal point, drawing attention. *   **To Laptop/Accessories:** Their laptop (with a glowing green logo, possibly Razer) and glowing green shoes and wristband are integral to their presentation and activity. These items are extensions of their chosen persona and are actively in use or on display. *   **Observable Dynamic:** *   There's a dynamic of **individuality and self-expression juxtaposed with a public space.** The person is creating their own distinct, illuminated "zone" within a common environment. *   There's an element of **performance or display**, whether intentional or not, due to the highly noticeable attire and lighting. This could be interpreted as an assertion of identity. *   The scene has a somewhat **humorous or quirky** dynamic for an outside observer, given the intensity of the "look" in an everyday setting. **3. Deeper Meanings & Nuances:** *   **Subtle Visual Cues:** *   **Sunglasses Indoors:** Often signifies a desire for anonymity, a cool persona, or to hide one's eyes/expression. *   **Gloves:** Could be for warmth, style, or to enhance a "hacker" or "cyberpunk" image. *   **Mohawk Hairstyle:** A strong statement of non-conformity or adherence to punk/cyberpunk aesthetics. *   **Matching Green Glow:** The coordination of the green glow on the laptop, shoes, and wristband shows deliberateness and attention to their themed appearance. *   **Patterned Backpack:** Adds to the overall unique and personalized style. *   **Symbolic Meaning/Abstract Concept/Emotion:** *   **Symbolic Meaning:** The image can symbolize individuality, immersion in digital culture, a personal "cyberpunk" aesthetic, or the act of creating a personal bubble in a public space. The glowing green often evokes technology, gaming, or a futuristic vibe. *   **Abstract Concept:** It touches on themes of identity expression, the intersection of physical and digital worlds, and subcultures. *   **Emotion/Mood:** The mood conveyed is one of in-depth analysis and synthesis of information. The green glow adds an element of the artificial or a "tech-noir" feel. **4. Implicit Understanding & Common Sense:** *   **Common-Sense Knowledge/Implicit Information:** *   We assume the laptop is powered on and connected to the internet or running software. *   We assume the glowing elements are battery-powered or otherwise electronically illuminated. *   The setting (cafe-like) implies others might be around, though not visible, making the subject's appearance potentially more conspicuous. *   We understand that such a distinctive personal style is a conscious choice. *   **Missing Elements:** *   **The Laptop Screen Content:** We cannot see what the person is actually doing on their laptop, which would provide significant context to their activity. *   **Other People:** The reaction or presence of other people in the establishment is missing, which would clarify the social context of the scene. *   **Sound:** The ambient noise of the location or any sounds from the laptop are absent. **5. Hypothetical Change:** *   **Change:** If all the glowing green accessories (shoes, wristband, laptop logo) were turned off or were a dull, non-glowing color. *   **Impact:** *   **Story/Meaning:** The "cyberpunk" or "high-tech gamer" aesthetic would be significantly diminished. While the mohawk, sunglasses, and gloves would still make the person stand out, the most eye-catching and unifying element of their theme would be gone. The image would lose much of its futuristic or tech-centric vibe and might appear more simply "punk" or "alternative." The visual link between the person and their technology would be less pronounced. *   **Outcome/Dynamic:** The person would be less visually striking and might not draw as much attention. The sense of them creating their own illuminated "zone" would be lost. The overall impression would be less about a specific tech-related subculture and more about a general non-conformist style. The humor or quirkiness might also be lessened, as the glowing elements contribute significantly to that.
         Flying tent "UAP": Done (10.00s, 50.00 t/s (P:800, E:500))
-        **1. Core Actions & Intent:** *   **Primary Action(s):** The primary action depicted is an object floating or flying in a clear blue sky. It appears to be relatively stationary or moving slowly at the moment the image was captured. *   **Underlying Reasons/Intentions/Goal (of the object/its controller, if any):** *   **Reason/Intention:** If it's a man-made object like a kite or a specialized drone, its intention is determined by its operator: recreation (kite), surveillance (drone), atmospheric measurement, or a form of aerial display. Its current state is "being airborne." If it's an unknown object, its intention is indeterminate. *   **Immediate Goal:** To remain aloft, to travel to a destination, or to perform a specific function related to its design (e.g., gather data, be seen). *   **Likely Immediate Outcome:** The object will likely continue its current trajectory or state of being airborne. Depending on its nature, it might eventually descend, change direction, or continue on its path. If it's a kite, it will stay up as long as there's wind and tension on the string. If it's a drone, it will fly until its battery depletes or its mission is complete. **2. Relationships & Scene Dynamics:** *   **Relationship to Environment:** *   The object is isolated against a vast, clear blue sky. This creates a sense of solitude, freedom, or exposure. The sky provides no immediate context other than "outdoors, daytime." *   Its relationship is one of an object suspended within a much larger medium (the atmosphere). *   **Observable Dynamic:** *   The primary dynamic is one of **suspension and isolation**. The object is the sole focus against an undifferentiated background. *   There's an inherent dynamic of **potential movement** – even if it appears still, its position in the sky implies it is subject to aerodynamic forces or has a propulsion system. *   The low-resolution and unusual shape of the object can create a dynamic of **mystery or curiosity** for the viewer. **3. Deeper Meanings & Nuances:** *   **Subtle Visual Cues:** *   **Shape:** The object is roughly cubic or polyhedral, with distinct facets. Some facets are dark, possibly black or dark gray, with lighter gray or white geometric markings. One or two facets appear to have a reddish-orange or copper hue, possibly reflecting sunlight or being intrinsically colored. *   **Texture/Material:** It appears somewhat soft or slightly deflated in places, with some creasing visible, suggesting it might be made of fabric or a flexible material, like a complex kite or an inflatable structure. However, the angularity also hints at a more rigid frame. *   **Apparent Lack of Propulsion:** No visible means of propulsion (jets, propellers) are apparent, though this could be due to the image resolution or the object's design. *   **Symbolic Meaning/Abstract Concept/Emotion:** *   **Symbolic Meaning:** Depending on interpretation, it could symbolize the unknown, exploration, surveillance, or something out of place. If perceived as a kite, it could symbolize playfulness or freedom. If perceived as something more technological or alien, it evokes mystery. *   **Abstract Concept:** It could represent concepts of "the unexplained," "observation," or "the foreign." *   **Emotion/Mood:** The mood is somewhat ambiguous and depends heavily on the viewer's interpretation of the object. It could be neutral curiosity, slight unease (if it's an Unidentified Aerial Phenomenon - UAP), or wonder. The clear blue sky provides a calm, open backdrop. **4. Implicit Understanding & Common Sense:** *   **Common-Sense Knowledge/Implicit Information:** *   Objects in the sky are subject to gravity and require lift (aerodynamic, buoyant, or powered) to remain airborne. *   The clear blue sky suggests daytime and likely fair weather conditions. *   The object is at some altitude, implying it's not on the ground. *   Given its appearance, it's unlikely to be a conventional aircraft (plane, helicopter) or a natural phenomenon (bird, cloud). *   **Missing Elements:** *   **Scale:** Without any reference points, it's impossible to determine the actual size of the object. Is it small like a kite, or large like a vehicle? *   **Altitude:** Similarly, its height above the ground is unknown. *   **Origin/Control:** There's no indication of where it came from, who (if anyone) is controlling it, or its ultimate purpose. *   **Sound:** Any sound it might be making is absent. *   **Context of Observation:** We don't know where the observer is or what prompted them to photograph this object. **5. Hypothetical Change:** *   **Change:** If the clear blue sky were replaced with a dark, stormy, or overcast sky with lightning. *   **Impact:** *   **Story/Meaning:** The entire context and perceived nature of the object would shift dramatically. An object against a calm blue sky might be intriguing or recreational. The same object against a stormy sky would instantly evoke a sense of danger, foreboding, or a more sinister or urgent purpose. It might appear as if the object is braving the storm, is part of the storm, or is an ominous portent. *   **Outcome/Dynamic:** The dynamic would change from isolation/curiosity to one of **imminent threat or heightened drama**. The object's stability or safety would be questioned. If it were a kite, it would likely be seen as being in peril or irresponsibly flown. If it were a more robust craft, its presence in a storm would suggest a specific, possibly urgent, mission. The viewer's emotional response would likely shift from curiosity to apprehension or concern.
+        **1. Core Actions & Intent:** *   **Primary Action(s):** The primary action depicted is an object floating or flying in a clear blue sky. It appears to be relatively stationary or moving slowly at the moment the image was captured. *   **Underlying Reasons/Intentions/Goal (of the object/its controller, if any):** *   **Reason/Intention:** If it's a man-made object like a kite or a specialized drone, its intention is determined by its operator: recreation (kite), surveillance (drone), atmospheric measurement, or a form of aerial display. Its current state is "being airborne." If it's an unknown object, its intention is indeterminate. *   **Immediate Goal:** To remain aloft, to travel to a destination, or to perform a specific function related to its design (e.g., gather data, be seen). *   **Likely Immediate Outcome:** The object will likely continue its current trajectory or state of being airborne. Depending on its nature, it might eventually descend, change direction, or continue on its path. If it's a kite, it will stay up as long as there's wind and tension on the string. If it's a drone, it will fly until its battery depletes or its mission is complete. **2. Relationships & Scene Dynamics:** *   **Relationship to Environment:** *   The object is isolated against a vast, clear blue sky. This creates a sense of solitude, freedom, or exposure. The sky provides no immediate context other than "outdoors, daytime." *   Its relationship is one of an object suspended within a much larger medium (the atmosphere). *   **Observable Dynamic:** *   The primary dynamic is one of **suspension and isolation**. The object is the sole focus against an undifferentiated background. *   There's an inherent dynamic of **potential movement** – even if it appears still, its position in the sky implies it is subject to aerodynamic forces or has a propulsion system. *   The low-resolution and unusual shape of the object can create a dynamic of **mystery or curiosity** for the viewer. **3. Deeper Meanings & Nuances:** *   **Subtle Visual Cues:** *   **Shape:** The object is roughly cubic or polyhedral, with distinct facets. Some facets are dark, possibly black or dark gray, with lighter gray or white geometric markings. One or two facets appear to have a reddish-orange or copper hue, possibly reflecting sunlight or being intrinsically colored. *   **Texture/Material:** It appears somewhat soft or slightly deflated in places, with some creasing visible, suggesting it might be made of fabric or a flexible material, like a complex kite or an inflatable structure. However, the angularity also hints at a more rigid frame. *   **Apparent Lack of Propulsion:** No visible means of propulsion (jets, propellers) are apparent, though this could be due to the image resolution or the object's design. *   **Symbolic Meaning/Abstract Concept/Emotion:** *   **Symbolic Meaning:** Depending on interpretation, it could symbolize the unknown, exploration, surveillance, or something out of place. If perceived as a kite, it could symbolize playfulness or freedom. If perceived as something more technological or alien, it evokes mystery. *   **Abstract Concept:** It could represent concepts of "the unexplained," "observation," or "the foreign." *   **Emotion/Mood:** The mood is somewhat ambiguous and depends heavily on the viewer's interpretation of the object. It could be neutral curiosity, slight unease (if it's an Unidentified Aerial Phenomenon - UAP), or wonder. The clear blue sky provides a calm, open backdrop. **4. Implicit Understanding & Common Sense:** *   **Common-Sense Knowledge/Implicit Information:** *   Objects in the sky are subject to gravity and require lift (aerodynamic, buoyant, or powered) to remain airborne. *   The clear blue sky suggests daytime and likely fair weather conditions. *   The object is at some altitude, implying it's not on the ground. *   Given its appearance, it's unlikely to be a conventional aircraft (plane, helicopter) or a natural phenomenon (bird, cloud). *   **Missing Elements:** *   **Scale:** Without any reference points, it's impossible to determine the actual size of the object. Is it small like a kite, or large like a vehicle? *   **Altitude:** Similarly, its height above the ground is unknown. *   **Origin/Control:** There's no indication of where it came from, who (if anyone) is controlling it, or its ultimate purpose. *   **Sound:** Any sound it might be making is absent. *   **Context of Observation:** We don't know where the observer is or what prompted them to photograph this object. **5. Hypothetical Change:** *   **Change:** If the clear blue sky were replaced with a dark, stormy, or overcast sky with lightning. *   **Impact:** *   **Story/Meaning:** The entire context and perceived nature of the object would shift dramatically. An object against a calm blue sky might be intriguing or recreational. The same object against a stormy sky would instantly evoke a sense of danger, foreboding, or a more sinister or urgent purpose. It might appear as if the object is braving the storm, is part of the storm, or is an ominous portent. *   **Outcome/Dynamic:** The dynamic would change from isolation/curiosity to one of **imminent threat or heightened drama**. The object's stability or safety would be questioned. If it were a kite, it would likely be seen as in peril or irresponsibly flown. If it were a more robust craft, its presence in a storm would suggest a specific, possibly urgent, mission. The viewer's emotional response would likely shift from curiosity to apprehension or concern.
         `;
+        
+        // --- JAVASCRIPT LOGIC TO BUILD THE PAGE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const parsedData = parseVisionData(visionDataText);
+            renderReport(parsedData);
+        });
+
+        function parseVisionData(text) {
+            const models = [];
+            const modelBlocks = text.trim().split('Vision Model:').filter(Boolean);
+            
+            modelBlocks.forEach(block => {
+                const lines = block.trim().split('\n');
+                const [modelName, modelDescription] = lines.shift().split(' - ');
+                const modelData = {
+                    name: modelName.trim().replace(/"/g, ''),
+                    description: modelDescription ? modelDescription.trim() : '',
+                    results: []
+                };
+
+                let currentResult = null;
+                for (const line of lines) {
+                    const trimmedLine = line.trim();
+                    const resultMatch = trimmedLine.match(/^([^:]+):\s*(Done\s*\(.*\)|No Response)/);
+
+                    if (resultMatch) {
+                        if (currentResult) {
+                            modelData.results.push(currentResult);
+                        }
+                        currentResult = {
+                            imageName: resultMatch[1].trim(),
+                            stats: resultMatch[2].trim(),
+                            analysis: ''
+                        };
+                    } else if (currentResult && trimmedLine) {
+                        currentResult.analysis += trimmedLine + '\n';
+                    }
+                }
+                if (currentResult) {
+                    modelData.results.push(currentResult);
+                }
+                models.push(modelData);
+            });
+            return models;
+        }
+
+        function renderReport(data) {
+            const tabsContainer = document.getElementById('tab-buttons-container');
+            const tablesContainer = document.getElementById('performance-tables-container');
+            const galleryContainer = document.getElementById('image-gallery');
+            
+            // Collect all unique image names for the summary gallery
+            const allImageNames = new Set();
+            data.forEach(model => model.results.forEach(result => allImageNames.add(result.imageName)));
+            
+            allImageNames.forEach(name => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.textContent = name;
+                galleryContainer.appendChild(galleryItem);
+            });
+
+            data.forEach((model, index) => {
+                // Create Tab Button
+                const button = document.createElement('button');
+                button.className = 'tab-button';
+                button.textContent = model.name;
+                button.dataset.tab = `model-${index}`;
+                if (index === 0) button.classList.add('active');
+                tabsContainer.appendChild(button);
+
+                // Create Tab Content
+                const content = document.createElement('div');
+                content.id = `model-${index}`;
+                content.className = 'tab-content';
+                if (index === 0) content.classList.add('active');
+                
+                let tableHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Performance Stats</th>
+                                <th>Model Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                allImageNames.forEach(imageName => {
+                    const result = model.results.find(r => r.imageName === imageName);
+                    tableHTML += '<tr>';
+                    tableHTML += `<td>${imageName}</td>`;
+                    if (result) {
+                        if (result.stats.includes('No Response')) {
+                            tableHTML += `<td class="no-response">${result.stats}</td>`;
+                            tableHTML += `<td class="no-response">---</td>`;
+                        } else {
+                            tableHTML += `<td>${result.stats}</td>`;
+                            tableHTML += `<td><div class="response-text">${result.analysis.trim()}</div></td>`;
+                        }
+                    } else {
+                        tableHTML += `<td class="no-response">Not Tested</td>`;
+                        tableHTML += `<td class="no-response">---</td>`;
+                    }
+                    tableHTML += '</tr>';
+                });
+
+                tableHTML += '</tbody></table>';
+                content.innerHTML = tableHTML;
+                tablesContainer.appendChild(content);
+});
+
+            // Add event listeners to tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    document.getElementById(button.dataset.tab).classList.add('active');
+                });
+            });
+        }
     </script>
+
+</body>
+</html>
