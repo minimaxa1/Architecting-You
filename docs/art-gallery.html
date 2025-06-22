@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Gallery - The Bohemai Project</title>
+    <title>Bohemai Art Gallery</title>
     <style>
-        /* Re-using your site's dark, tech aesthetic */
         :root {
             --grid-color: rgba(255, 255, 255, 0.05); --text-primary: #e0e0e0;
             --text-secondary: #b0b0b0; --accent-color: #00bfff; --bg-dark-1: #121212;
@@ -18,59 +18,34 @@
             background-size: 30px 30px; color: var(--text-primary); font-family: var(--font-main);
             line-height: 1.6; margin: 0; padding: 0;
         }
-        .gallery-container {
-            max-width: 1400px; /* Wider container for a gallery */
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .gallery-header {
-            text-align: center;
-            border-bottom: 1px solid var(--bg-dark-3);
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-        }
-        .back-link {
-            color: var(--text-secondary); text-decoration: none;
-            display: block; margin-bottom: 20px; font-size: 0.9rem;
-        }
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .gallery-header { text-align: center; border-bottom: 1px solid var(--bg-dark-3); margin-bottom: 40px; padding-bottom: 20px; }
+        .back-link { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 20px; font-size: 0.9rem; }
         .back-link:hover { color: var(--accent-color); }
-        h1 { font-size: 2.5rem; color: #fff; margin: 0; text-transform: uppercase; }
-
-        /* The Art Grid - This creates the 4-column layout */
+        h1 { font-size: 2.5rem; color: #fff; margin: 0; text-transform: uppercase; letter-spacing: 0.1em; }
         .art-grid {
             display: grid;
-            /* Creates 4 equal-width columns. Change '4' to '5' for a 5-column layout */
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px; /* The space between images */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         .art-item a {
             display: block;
             border: 2px solid var(--bg-dark-3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden; /* Ensures the image stays within the border on zoom */
-            background-color: var(--bg-dark-2); /* A fallback background */
+            overflow: hidden;
+            background-color: var(--bg-dark-2);
+            aspect-ratio: 16 / 9;
         }
         .art-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures images fill the box without distortion */
-            display: block; /* Removes any extra space below the image */
+            object-fit: cover;
+            display: block;
         }
         .art-item a:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 0 25px rgba(0, 191, 255, 0.5);
             border-color: var(--accent-color);
-        }
-
-        /* Responsive design for smaller screens */
-        @media (max-width: 1200px) {
-            .art-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .art-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .art-grid { grid-template-columns: repeat(1, 1fr); }
         }
     </style>
 </head>
@@ -82,90 +57,312 @@
         </div>
 
         <div class="art-grid">
-            <!-- The gallery items below are automatically generated from your provided links -->
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdw7zk-96c5f3f2-bee4-4a3c-87ec-5cd5a1023641.png/v1/fill/w_627,h_350,q_70,strp/lady_on_fire_by_bohemai_dgdw7zk-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdw7zk-96c5f3f2-bee4-4a3c-87ec-5cd5a1023641.png/v1/fill/w_627,h_350,q_70,strp/lady_on_fire_by_bohemai_dgdw7zk-350t.jpg" alt="Lady On Fire" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgeod4o-3eb4c100-8a37-4611-ae7b-4bdf71f017c4.png/v1/fill/w_627,h_350,q_70,strp/the_girl_with_green_eyes_by_bohemai_dgeod4o-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgeod4o-3eb4c100-8a37-4611-ae7b-4bdf71f017c4.png/v1/fill/w_627,h_350,q_70,strp/the_girl_with_green_eyes_by_bohemai_dgeod4o-350t.jpg" alt="The Girl With Green Eyes" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpu6ct-9dc3aab1-d367-4497-bd40-e4b5f56d1f9d.png/v1/fill/w_627,h_350,q_70,strp/red_modal_by_bohemai_dgpu6ct-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpu6ct-9dc3aab1-d367-4497-bd40-e4b5f56d1f9d.png/v1/fill/w_627,h_350,q_70,strp/red_modal_by_bohemai_dgpu6ct-350t.jpg" alt="Red Modal" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgq2cgh-4c04b55e-ee7c-4ca5-953e-32802e62c5bd.png/v1/fill/w_627,h_350,q_70,strp/unique_josei_by_bohemai_dgq2cgh-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgq2cgh-4c04b55e-ee7c-4ca5-953e-32802e62c5bd.png/v1/fill/w_627,h_350,q_70,strp/unique_josei_by_bohemai_dgq2cgh-350t.jpg" alt="Unique Josei" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj9jts-939a3e3b-159e-4afe-aeac-70fcb95d8af6.png/v1/fill/w_627,h_350,q_70,strp/mandarin_moon_by_bohemai_dgj9jts-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj9jts-939a3e3b-159e-4afe-aeac-70fcb95d8af6.png/v1/fill/w_627,h_350,q_70,strp/mandarin_moon_by_bohemai_dgj9jts-350t.jpg" alt="Mandarin Moon" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9z89b-3361519d-bb5a-4c3d-b440-f08814c9bf9d.png/v1/fill/w_627,h_350,q_70,strp/boutique_shopper_by_bohemai_dg9z89b-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9z89b-3361519d-bb5a-4c3d-b440-f08814c9bf9d.png/v1/fill/w_627,h_350,q_70,strp/boutique_shopper_by_bohemai_dg9z89b-350t.jpg" alt="Boutique Shopper" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgfyjfu-a05c6132-cd28-4605-8144-b8829f82906f.png/v1/fill/w_627,h_350,q_70,strp/london_calling_by_bohemai_dgfyjfu-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgfyjfu-a05c6132-cd28-4605-8144-b8829f82906f.png/v1/fill/w_627,h_350,q_70,strp/london_calling_by_bohemai_dgfyjfu-350t.jpg" alt="London Calling" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgz1ird-a0cb5666-f3c0-4482-b08b-26d5a191d746.png/v1/fill/w_627,h_350,q_70,strp/noir_waves_by_bohemai_dgz1ird-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgz1ird-a0cb5666-f3c0-4482-b08b-26d5a191d746.png/v1/fill/w_627,h_350,q_70,strp/noir_waves_by_bohemai_dgz1ird-350t.jpg" alt="Noir Waves" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkhqyo-4ebe1db4-363e-454f-81e9-e83473ca47d5.png/v1/fill/w_627,h_350,q_70,strp/virescent_vamp_by_bohemai_dgkhqyo-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkhqyo-4ebe1db4-363e-454f-81e9-e83473ca47d5.png/v1/fill/w_627,h_350,q_70,strp/virescent_vamp_by_bohemai_dgkhqyo-350t.jpg" alt="Virescent Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgwoxaz-f136c137-c3de-4863-8b8a-15c27f6f5e00.png/v1/fill/w_630,h_350,q_70,strp/flashback_by_bohemai_dgwoxaz-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgwoxaz-f136c137-c3de-4863-8b8a-15c27f6f5e00.png/v1/fill/w_630,h_350,q_70,strp/flashback_by_bohemai_dgwoxaz-350t.jpg" alt="Flashback" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di993bw-12afb460-e82f-42d4-9633-56dcbca2a6c6.png/v1/fill/w_627,h_350,q_70,strp/green_girl_by_bohemai_di993bw-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di993bw-12afb460-e82f-42d4-9633-56dcbca2a6c6.png/v1/fill/w_627,h_350,q_70,strp/green_girl_by_bohemai_di993bw-350t.jpg" alt="Green Girl" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcxcm0-fc16fa54-0173-4e11-b8b4-6b0253fe92fc.png/v1/fill/w_627,h_350,q_70,strp/disco_vamp_by_bohemai_dgcxcm0-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcxcm0-fc16fa54-0173-4e11-b8b4-6b0253fe92fc.png/v1/fill/w_627,h_350,q_70,strp/disco_vamp_by_bohemai_dgcxcm0-350t.jpg" alt="Disco Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dh3lbog-4ec2b234-5a4c-4e9b-93b8-fd0b430f079c.png/v1/fit/w_414,h_235,q_70,strp/pretty_in_punk_by_bohemai_dh3lbog-414w.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dh3lbog-4ec2b234-5a4c-4e9b-93b8-fd0b430f079c.png/v1/fit/w_414,h_235,q_70,strp/pretty_in_punk_by_bohemai_dh3lbog-414w.jpg" alt="Pretty In Punk" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dghhkgn-227b97c3-2c0c-4ad0-b21d-bf767911c198.png/v1/fill/w_627,h_350,q_70,strp/jaded_by_bohemai_dghhkgn-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dghhkgn-227b97c3-2c0c-4ad0-b21d-bf767911c198.png/v1/fill/w_627,h_350,q_70,strp/jaded_by_bohemai_dghhkgn-350t.jpg" alt="Jaded" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgqxiqf-6419edd2-e2bf-4368-a86f-c5db403c2ac2.png/v1/fill/w_627,h_350,q_70,strp/dystopian_warrior_by_bohemai_dgqxiqf-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgqxiqf-6419edd2-e2bf-4368-a86f-c5db403c2ac2.png/v1/fill/w_627,h_350,q_70,strp/dystopian_warrior_by_bohemai_dgqxiqf-350t.jpg" alt="Dystopian Warrior" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dglkg5k-8305f289-e585-4989-9f82-157672aa155b.png/v1/fill/w_627,h_350,q_70,strp/saffron_sun_by_bohemai_dglkg5k-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dglkg5k-8305f289-e585-4989-9f82-157672aa155b.png/v1/fill/w_627,h_350,q_70,strp/saffron_sun_by_bohemai_dglkg5k-350t.jpg" alt="Saffron Sun" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgrzwkb-4197727d-78a2-4fac-9e70-42789e2c1910.png/v1/fit/w_414,h_231,q_70,strp/op_vamp_by_bohemai_dgrzwkb-414w.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgrzwkb-4197727d-78a2-4fac-9e70-42789e2c1910.png/v1/fit/w_414,h_231,q_70,strp/op_vamp_by_bohemai_dgrzwkb-414w.jpg" alt="Op Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcy99s-96121262-9afb-4344-9658-ca3298d674ee.png/v1/fill/w_627,h_350,q_70,strp/abstract_bauhaus_by_bohemai_dgcy99s-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcy99s-96121262-9afb-4344-9658-ca3298d674ee.png/v1/fill/w_627,h_350,q_70,strp/abstract_bauhaus_by_bohemai_dgcy99s-350t.jpg" alt="Abstract Bauhaus" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg90qsi-43d6dd86-d182-4e12-8bef-fe38a8e1a23f.png/v1/fill/w_627,h_350,q_70,strp/vapor_horns_by_bohemai_dg90qsi-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg90qsi-43d6dd86-d182-4e12-8bef-fe38a8e1a23f.png/v1/fill/w_627,h_350,q_70,strp/vapor_horns_by_bohemai_dg90qsi-350t.jpg" alt="Vapor Horns" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgi9az5-0177d0b3-a124-4144-84e6-2b0fa538494f.png/v1/fill/w_448,h_250,q_70,strp/humain_spirit_by_bohemai_dgi9az5-250t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgi9az5-0177d0b3-a124-4144-84e6-2b0fa538494f.png/v1/fill/w_448,h_250,q_70,strp/humain_spirit_by_bohemai_dgi9az5-250t.jpg" alt="Humain Spirit" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg1v5ou-f8a64f29-167c-4903-857c-5142c4e4367c.jpg/v1/fill/w_627,h_350,q_70,strp/retro_cyber_by_bohemai_dg1v5ou-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg1v5ou-f8a64f29-167c-4903-857c-5142c4e4367c.jpg/v1/fill/w_627,h_350,q_70,strp/retro_cyber_by_bohemai_dg1v5ou-350t.jpg" alt="Retro Cyber" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgqfil4-933a2419-05bf-4ec1-943e-3ad3864019b8.png/v1/fill/w_627,h_350,q_70,strp/circle_spirit_by_bohemai_dgqfil4-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgqfil4-933a2419-05bf-4ec1-943e-3ad3864019b8.png/v1/fill/w_627,h_350,q_70,strp/circle_spirit_by_bohemai_dgqfil4-350t.jpg" alt="Circle Spirit" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgci8r0-98b44b91-85b3-45cf-82a4-e9043a2ae260.png/v1/fill/w_627,h_350,q_70,strp/jetset_by_bohemai_dgci8r0-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgci8r0-98b44b91-85b3-45cf-82a4-e9043a2ae260.png/v1/fill/w_627,h_350,q_70,strp/jetset_by_bohemai_dgci8r0-350t.jpg" alt="Jetset" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djij6su-d3e6817c-6530-49bb-8094-329bef51386f.jpg/v1/crop/w_194,h_250,x_0,y_0,scl_0.027204241071429,q_70,strp/mondo_bauhaus_by_bohemai_djij6su-250t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djij6su-d3e6817c-6530-49bb-8094-329bef51386f.jpg/v1/crop/w_194,h_250,x_0,y_0,scl_0.027204241071429,q_70,strp/mondo_bauhaus_by_bohemai_djij6su-250t.jpg" alt="Mondo Bauhaus" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhke58m-787eb920-be0a-4b72-b66c-2a2112e98c08.png/v1/fill/w_179,h_250/pink_nymph__by_bohemai_dhke58m-250t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhke58m-787eb920-be0a-4b72-b66c-2a2112e98c08.png/v1/fill/w_179,h_250/pink_nymph__by_bohemai_dhke58m-250t.png" alt="Pink Nymph" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg1o99m-d5751f9d-3353-41c7-b3ac-22cd18a90f36.png/v1/fill/w_627,h_350,q_70,strp/bohemian_stranger_by_bohemai_dg1o99m-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg1o99m-d5751f9d-3353-41c7-b3ac-22cd18a90f36.png/v1/fill/w_627,h_350,q_70,strp/bohemian_stranger_by_bohemai_dg1o99m-350t.jpg" alt="Bohemian Stranger" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgevojs-3620fb3c-1509-44d6-bbcc-da30e45857f5.png/v1/fill/w_627,h_350,q_70,strp/bauhaus_spring_by_bohemai_dgevojs-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgevojs-3620fb3c-1509-44d6-bbcc-da30e45857f5.png/v1/fill/w_627,h_350,q_70,strp/bauhaus_spring_by_bohemai_dgevojs-350t.jpg" alt="Bauhaus Spring" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgfa63w-cc46ea85-026a-4c78-bf15-3dfff69c9834.png/v1/fill/w_627,h_350,q_70,strp/inside_the_box_by_bohemai_dgfa63w-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgfa63w-cc46ea85-026a-4c78-bf15-3dfff69c9834.png/v1/fill/w_627,h_350,q_70,strp/inside_the_box_by_bohemai_dgfa63w-350t.jpg" alt="Inside The Box" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcky02-a117b905-9a2d-4296-99f7-73e2faeac7d9.png/v1/fill/w_627,h_350,q_70,strp/bright_city_by_bohemai_dgcky02-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgcky02-a117b905-9a2d-4296-99f7-73e2faeac7d9.png/v1/fill/w_627,h_350,q_70,strp/bright_city_by_bohemai_dgcky02-350t.jpg" alt="Bright City" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbjz0h-ac162981-b9a5-4f24-9f38-16cc56abf348.png/v1/fill/w_627,h_350,q_70,strp/geodivine_by_bohemai_dgbjz0h-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbjz0h-ac162981-b9a5-4f24-9f38-16cc56abf348.png/v1/fill/w_627,h_350,q_70,strp/geodivine_by_bohemai_dgbjz0h-350t.jpg" alt="Geodivine" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpdohp-61b638f5-d95f-47b2-aeff-07400f19689e.png/v1/fill/w_627,h_350,q_70,strp/sit_tight_by_bohemai_dgpdohp-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpdohp-61b638f5-d95f-47b2-aeff-07400f19689e.png/v1/fill/w_627,h_350,q_70,strp/sit_tight_by_bohemai_dgpdohp-350t.jpg" alt="Sit Tight" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgg6l66-65c2dcc6-aee2-40cd-bb0b-8b8fe606c604.png/v1/fill/w_627,h_350,q_70,strp/venice_beach_by_bohemai_dgg6l66-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgg6l66-65c2dcc6-aee2-40cd-bb0b-8b8fe606c604.png/v1/fill/w_627,h_350,q_70,strp/venice_beach_by_bohemai_dgg6l66-350t.jpg" alt="Venice Beach" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgnx4jn-a2231190-d868-4ee5-84bf-7a14b1741272.png/v1/fill/w_627,h_350,q_70,strp/mod_vamp_by_bohemai_dgnx4jn-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgnx4jn-a2231190-d868-4ee5-84bf-7a14b1741272.png/v1/fill/w_627,h_350,q_70,strp/mod_vamp_by_bohemai_dgnx4jn-350t.jpg" alt="Mod Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbkm96-369a09cb-45cc-403e-baab-dd7b065491a9.png/v1/fill/w_627,h_350,q_70,strp/i_want_more_life____by_bohemai_dgbkm96-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbkm96-369a09cb-45cc-403e-baab-dd7b065491a9.png/v1/fill/w_627,h_350,q_70,strp/i_want_more_life____by_bohemai_dgbkm96-350t.jpg" alt="I Want More Life" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9z8a2-6d2359c9-2dab-44ce-96d6-a8a6454fe1cf.png/v1/fill/w_627,h_350,q_70,strp/retro_candy_by_bohemai_dg9z8a2-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9z8a2-6d2359c9-2dab-44ce-96d6-a8a6454fe1cf.png/v1/fill/w_627,h_350,q_70,strp/retro_candy_by_bohemai_dg9z8a2-350t.jpg" alt="Retro Candy" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj4cbj-12190eb9-c0cc-482e-a9ea-16b770bdf62b.png/v1/fill/w_627,h_350,q_70,strp/artemisia_essence_by_bohemai_dgj4cbj-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj4cbj-12190eb9-c0cc-482e-a9ea-16b770bdf62b.png/v1/fill/w_627,h_350,q_70,strp/artemisia_essence_by_bohemai_dgj4cbj-350t.jpg" alt="Artemisia Essence" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkngkl-cb590af9-ebdc-4e7e-a388-d5c1015321b2.png/v1/fill/w_627,h_350,q_70,strp/solar_eclipse_by_bohemai_dgkngkl-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkngkl-cb590af9-ebdc-4e7e-a388-d5c1015321b2.png/v1/fill/w_627,h_350,q_70,strp/solar_eclipse_by_bohemai_dgkngkl-350t.jpg" alt="Solar Eclipse" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgldev9-04f8bc7d-6254-484e-9fff-f3fbf84fec03.png/v1/fill/w_627,h_350,q_70,strp/strange_girl_by_bohemai_dgldev9-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgldev9-04f8bc7d-6254-484e-9fff-f3fbf84fec03.png/v1/fill/w_627,h_350,q_70,strp/strange_girl_by_bohemai_dgldev9-350t.jpg" alt="Strange Girl" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dggxl1s-3df9e90d-a188-44c0-b639-c161ab328ff6.png/v1/fill/w_627,h_350,q_70,strp/genevieve_by_bohemai_dggxl1s-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dggxl1s-3df9e90d-a188-44c0-b639-c161ab328ff6.png/v1/fill/w_627,h_350,q_70,strp/genevieve_by_bohemai_dggxl1s-350t.jpg" alt="Genevieve" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhw5ci8-a31d55e8-c19b-4161-aca2-e40921baab8e.png/v1/fill/w_350,h_350,q_70,strp/geode_rock_by_bohemai_dhw5ci8-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhw5ci8-a31d55e8-c19b-4161-aca2-e40921baab8e.png/v1/fill/w_350,h_350,q_70,strp/geode_rock_by_bohemai_dhw5ci8-350t.jpg" alt="Geode Rock" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhdpyrz-0c0af1e1-740c-4e05-a01c-5f03e3547a48.png/v1/fit/w_414,h_207/the_metropole_vampire_by_bohemai_dhdpyrz-414w.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhdpyrz-0c0af1e1-740c-4e05-a01c-5f03e3547a48.png/v1/fit/w_414,h_207/the_metropole_vampire_by_bohemai_dhdpyrz-414w.png" alt="The Metropole Vampire" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj41qr-140e1d26-07f7-4aa4-b3d7-ab03d72b498f.png/v1/fill/w_627,h_350,q_70,strp/midnight_enigma_by_bohemai_dgj41qr-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgj41qr-140e1d26-07f7-4aa4-b3d7-ab03d72b498f.png/v1/fill/w_627,h_350,q_70,strp/midnight_enigma_by_bohemai_dgj41qr-350t.jpg" alt="Midnight Enigma" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di991om-0840d0a0-e4ea-40e4-9669-04436cdb9a94.png/v1/fit/w_375,h_209,q_70,strp/bohemai_art__by_bohemai_di991om-375w.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di991om-0840d0a0-e4ea-40e4-9669-04436cdb9a94.png/v1/fit/w_375,h_209,q_70,strp/bohemai_art__by_bohemai_di991om-375w.jpg" alt="Bohemai Art" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbvl95-8bb16108-520b-4090-bdcb-e128b50741aa.png/v1/fill/w_627,h_350,q_70,strp/we_are_strong__no_one_can_tell_us_we_re_wrong____by_bohemai_dgbvl95-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbvl95-8bb16108-520b-4090-bdcb-e128b50741aa.png/v1/fill/w_627,h_350,q_70,strp/we_are_strong__no_one_can_tell_us_we_re_wrong____by_bohemai_dgbvl95-350t.jpg" alt="We Are Strong No One Can Tell Us We Re Wrong" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dggxei8-bb684478-e7e6-4370-9f74-90bf01c15e00.png/v1/fill/w_627,h_350,q_70,strp/japan_noir_by_bohemai_dggxei8-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dggxei8-bb684478-e7e6-4370-9f74-90bf01c15e00.png/v1/fill/w_627,h_350,q_70,strp/japan_noir_by_bohemai_dggxei8-350t.jpg" alt="Japan Noir" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9stcc-a25879a1-5a10-42dd-819d-92fbfa450c55.png/v1/fill/w_627,h_350,q_70,strp/the_dancer_by_bohemai_dg9stcc-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg9stcc-a25879a1-5a10-42dd-819d-92fbfa450c55.png/v1/fill/w_627,h_350,q_70,strp/the_dancer_by_bohemai_dg9stcc-350t.jpg" alt="The Dancer" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgu2ulg-b013fa1a-4bba-4e90-914f-4bcf0626dd8d.png/v1/fill/w_627,h_350,q_70,strp/dark_mage_by_bohemai_dgu2ulg-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgu2ulg-b013fa1a-4bba-4e90-914f-4bcf0626dd8d.png/v1/fill/w_627,h_350,q_70,strp/dark_mage_by_bohemai_dgu2ulg-350t.jpg" alt="Dark Mage" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dguzd0v-769fb329-7fe9-4661-a040-981611dc2adf.png/v1/fit/w_414,h_231,q_70,strp/gold_dipped_by_bohemai_dguzd0v-414w.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dguzd0v-769fb329-7fe9-4661-a040-981611dc2adf.png/v1/fit/w_414,h_231,q_70,strp/gold_dipped_by_bohemai_dguzd0v-414w.jpg" alt="Gold Dipped" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgesms3-a89556b9-ab4c-4062-82a8-7b87611c649a.png/v1/fill/w_627,h_350,q_70,strp/pastel_waves_by_bohemai_dgesms3-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgesms3-a89556b9-ab4c-4062-82a8-7b87611c649a.png/v1/fill/w_627,h_350,q_70,strp/pastel_waves_by_bohemai_dgesms3-350t.jpg" alt="Pastel Waves" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djtvvvj-53edd2c1-54b2-4789-94c7-8d5f13c81414.jpg/v1/fill/w_613,h_350,q_70,strp/blind_leading_by_bohemai_djtvvvj-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djtvvvj-53edd2c1-54b2-4789-94c7-8d5f13c81414.jpg/v1/fill/w_613,h_350,q_70,strp/blind_leading_by_bohemai_djtvvvj-350t.jpg" alt="Blind Leading" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgld96y-945b422c-7452-4319-876f-72fe2eb23192.png/v1/fill/w_627,h_350,q_70,strp/purple_passion_by_bohemai_dgld96y-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgld96y-945b422c-7452-4319-876f-72fe2eb23192.png/v1/fill/w_627,h_350,q_70,strp/purple_passion_by_bohemai_dgld96y-350t.jpg" alt="Purple Passion" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgf65qc-0a5242d1-7605-4d02-8592-caaffce9f595.png/v1/fill/w_627,h_350,q_70,strp/crimson_vamp_by_bohemai_dgf65qc-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgf65qc-0a5242d1-7605-4d02-8592-caaffce9f595.png/v1/fill/w_627,h_350,q_70,strp/crimson_vamp_by_bohemai_dgf65qc-350t.jpg" alt="Crimson Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhodp5d-da086d5e-3f2b-436e-b1c5-07b2f0741b21.png/v1/fill/w_350,h_350,q_70,strp/dissolving_spirit__by_bohemai_dhodp5d-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhodp5d-da086d5e-3f2b-436e-b1c5-07b2f0741b21.png/v1/fill/w_350,h_350,q_70,strp/dissolving_spirit__by_bohemai_dhodp5d-350t.jpg" alt="Dissolving Spirit" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgw2y5j-616396e8-dce3-47ab-a6b5-5f227deefb32.png/v1/fill/w_630,h_350,q_70,strp/aquatica_by_bohemai_dgw2y5j-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgw2y5j-616396e8-dce3-47ab-a6b5-5f227deefb32.png/v1/fill/w_630,h_350,q_70,strp/aquatica_by_bohemai_dgw2y5j-350t.jpg" alt="Aquatica" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgd2z5l-4523d643-cde3-4b6a-95f2-94528e786972.png/v1/fill/w_627,h_350/aqua_marine_by_bohemai_dgd2z5l-350t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgd2z5l-4523d643-cde3-4b6a-95f2-94528e786972.png/v1/fill/w_627,h_350/aqua_marine_by_bohemai_dgd2z5l-350t.png" alt="Aqua Marine" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgv7w0d-1f48f7bb-6aea-461f-8933-08355781adf3.png/v1/fill/w_627,h_350,q_70,strp/nice_slice_by_bohemai_dgv7w0d-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgv7w0d-1f48f7bb-6aea-461f-8933-08355781adf3.png/v1/fill/w_627,h_350,q_70,strp/nice_slice_by_bohemai_dgv7w0d-350t.jpg" alt="Nice Slice" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgnqapz-603e7304-1adf-4f47-8aee-90f5b9a7456f.png/v1/fill/w_627,h_350,q_70,strp/vapor_vamp_by_bohemai_dgnqapz-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgnqapz-603e7304-1adf-4f47-8aee-90f5b9a7456f.png/v1/fill/w_627,h_350,q_70,strp/vapor_vamp_by_bohemai_dgnqapz-350t.jpg" alt="Vapor Vamp" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djtvany-bb4f882d-2389-42f3-bb4d-02556654c09f.png/v1/fill/w_613,h_350,q_70,strp/perception_door_by_bohemai_djtvany-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/djtvany-bb4f882d-2389-42f3-bb4d-02556654c09f.png/v1/fill/w_613,h_350,q_70,strp/perception_door_by_bohemai_djtvany-350t.jpg" alt="Perception Door" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgc4kd0-0366d95e-601f-42e2-9267-da2b6ed329b1.png/v1/fill/w_627,h_350,q_70,strp/havana_strut_by_bohemai_dgc4kd0-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgc4kd0-0366d95e-601f-42e2-9267-da2b6ed329b1.png/v1/fill/w_627,h_350,q_70,strp/havana_strut_by_bohemai_dgc4kd0-350t.jpg" alt="Havana Strut" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhyxyun-f8ee8d27-bfec-41cd-9965-5e097bd02ae0.png/v1/fill/w_350,h_350/brain_fog_by_bohemai_dhyxyun-350t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhyxyun-f8ee8d27-bfec-41cd-9965-5e097bd02ae0.png/v1/fill/w_350,h_350/brain_fog_by_bohemai_dhyxyun-350t.png" alt="Brain Fog" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpiqz3-fe17fe08-549a-4d3d-91d3-637224f1ec80.png/v1/fill/w_627,h_350,q_70,strp/purple_vapor_by_bohemai_dgpiqz3-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgpiqz3-fe17fe08-549a-4d3d-91d3-637224f1ec80.png/v1/fill/w_627,h_350,q_70,strp/purple_vapor_by_bohemai_dgpiqz3-350t.jpg" alt="Purple Vapor" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbrwya-6ac2bc24-7f0e-416d-aacf-dd39780163f2.png/v1/fill/w_627,h_350,q_70,strp/take_my_card_darling__celebrity_estate_agency_by_bohemai_dgbrwya-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgbrwya-6ac2bc24-7f0e-416d-aacf-dd39780163f2.png/v1/fill/w_627,h_350,q_70,strp/take_my_card_darling__celebrity_estate_agency_by_bohemai_dgbrwya-350t.jpg" alt="Take My Card Darling  Celebrity Estate Agency" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg90qss-aef76521-6981-4fec-9827-973baa96a2bf.png/v1/fill/w_627,h_350,q_70,strp/geonymph_by_bohemai_dg90qss-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg90qss-aef76521-6981-4fec-9827-973baa96a2bf.png/v1/fill/w_627,h_350,q_70,strp/geonymph_by_bohemai_dg90qss-350t.jpg" alt="Geonymph" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg12p2z-8057590a-fe84-4dbb-b158-eade022f9191.jpg/v1/fill/w_627,h_350,q_70,strp/blood_thirsty_by_bohemai_dg12p2z-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg12p2z-8057590a-fe84-4dbb-b158-eade022f9191.jpg/v1/fill/w_627,h_350,q_70,strp/blood_thirsty_by_bohemai_dg12p2z-350t.jpg" alt="Blood Thirsty" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgklm17-59959841-feed-421e-a579-465b4022a312.png/v1/fill/w_627,h_350,q_70,strp/dark_siren_by_bohemai_dgklm17-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgklm17-59959841-feed-421e-a579-465b4022a312.png/v1/fill/w_627,h_350,q_70,strp/dark_siren_by_bohemai_dgklm17-350t.jpg" alt="Dark Siren" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di99140-696a046b-a09d-43f7-80b1-cebfcfcd064a.png/v1/fill/w_627,h_350,q_70,strp/pastel_look__by_bohemai_di99140-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di99140-696a046b-a09d-43f7-80b1-cebfcfcd064a.png/v1/fill/w_627,h_350,q_70,strp/pastel_look__by_bohemai_di99140-350t.jpg" alt="Pastel Look" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg7mg3h-faafbc1a-5035-461c-bb25-0f2e4ad70b6e.png/v1/fill/w_627,h_350,q_70,strp/the_nymph_by_bohemai_dg7mg3h-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg7mg3h-faafbc1a-5035-461c-bb25-0f2e4ad70b6e.png/v1/fill/w_627,h_350,q_70,strp/the_nymph_by_bohemai_dg7mg3h-350t.jpg" alt="The Nymph" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgjtog5-27638cc7-1742-40cd-b009-97b14283b887.png/v1/fill/w_627,h_350,q_70,strp/astral_gaze_by_bohemai_dgjtog5-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgjtog5-27638cc7-1742-40cd-b009-97b14283b887.png/v1/fill/w_627,h_350,q_70,strp/astral_gaze_by_bohemai_dgjtog5-350t.jpg" alt="Astral Gaze" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhrntja-9664c223-c7fc-4a3e-a953-38cd779cfaa6.png/v1/fill/w_622,h_350/conscious_dissonance_by_bohemai_dhrntja-350t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhrntja-9664c223-c7fc-4a3e-a953-38cd779cfaa6.png/v1/fill/w_622,h_350/conscious_dissonance_by_bohemai_dhrntja-350t.png" alt="Conscious Dissonance" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdc74d-b859374b-bebe-4c3a-8a1d-4520d833017a.png/v1/fill/w_627,h_350,q_70,strp/pastel_beach_by_bohemai_dgdc74d-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdc74d-b859374b-bebe-4c3a-8a1d-4520d833017a.png/v1/fill/w_627,h_350,q_70,strp/pastel_beach_by_bohemai_dgdc74d-350t.jpg" alt="Pastel Beach" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgefmu9-b9e11440-8ff2-4bdb-a34b-7abe2cb0dda9.png/v1/fill/w_627,h_350,q_70,strp/noir_city_by_bohemai_dgefmu9-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgefmu9-b9e11440-8ff2-4bdb-a34b-7abe2cb0dda9.png/v1/fill/w_627,h_350,q_70,strp/noir_city_by_bohemai_dgefmu9-350t.jpg" alt="Noir City" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgz1wn1-5a78e0d1-e693-4b5a-9a7e-b991cdf9f84a.png/v1/fill/w_627,h_350,q_70,strp/night_fall_by_bohemai_dgz1wn1-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgz1wn1-5a78e0d1-e693-4b5a-9a7e-b991cdf9f84a.png/v1/fill/w_627,h_350,q_70,strp/night_fall_by_bohemai_dgz1wn1-350t.jpg" alt="Night Fall" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg6xjf1-b5c69e6a-1c53-46b8-a841-dfa9f2576a77.png/v1/fill/w_627,h_350,q_70,strp/cold_as_ice_by_bohemai_dg6xjf1-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg6xjf1-b5c69e6a-1c53-46b8-a841-dfa9f2576a77.png/v1/fill/w_627,h_350,q_70,strp/cold_as_ice_by_bohemai_dg6xjf1-350t.jpg" alt="Cold As Ice" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg3ha84-e5e7f754-ee81-491f-8987-6518eb0e265e.png/v1/fill/w_627,h_350/azure_czarina_by_bohemai_dg3ha84-350t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dg3ha84-e5e7f754-ee81-491f-8987-6518eb0e265e.png/v1/fill/w_627,h_350/azure_czarina_by_bohemai_dg3ha84-350t.png" alt="Azure Czarina" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgroph1-455f613f-b3b3-43a6-a1ee-fb19289d051e.png/v1/fit/w_414,h_231,q_70,strp/texture_bloc_by_bohemai_dgroph1-414w.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgroph1-455f613f-b3b3-43a6-a1ee-fb19289d051e.png/v1/fit/w_414,h_231,q_70,strp/texture_bloc_by_bohemai_dgroph1-414w.jpg" alt="Texture Bloc" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgi44tc-e372c0d9-11fc-4472-9443-6dedb8ec6d3d.png/v1/fill/w_627,h_350,q_70,strp/vamp_circ_by_bohemai_dgi44tc-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgi44tc-e372c0d9-11fc-4472-9443-6dedb8ec6d3d.png/v1/fill/w_627,h_350,q_70,strp/vamp_circ_by_bohemai_dgi44tc-350t.jpg" alt="Vamp Circ" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhjraze-4b86f6f6-f0d2-47e4-ad68-f891c490f577.png/v1/fill/w_179,h_250,q_70,strp/star_flame__by_bohemai_dhjraze-250t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhjraze-4b86f6f6-f0d2-47e4-ad68-f891c490f577.png/v1/fill/w_179,h_250,q_70,strp/star_flame__by_bohemai_dhjraze-250t.jpg" alt="Star Flame" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgu9yfk-8577188b-bca0-45cb-b81e-222439430b60.png/v1/fill/w_627,h_350,q_70,strp/egg_dissolve_by_bohemai_dgu9yfk-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgu9yfk-8577188b-bca0-45cb-b81e-222439430b60.png/v1/fill/w_627,h_350,q_70,strp/egg_dissolve_by_bohemai_dgu9yfk-350t.jpg" alt="Egg Dissolve" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di990j3-8d05c4f1-0f08-4dae-8f00-26e44ad35ccf.png/v1/fill/w_627,h_350,q_70,strp/bohemai_art__by_bohemai_di990j3-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/di990j3-8d05c4f1-0f08-4dae-8f00-26e44ad35ccf.png/v1/fill/w_627,h_350,q_70,strp/bohemai_art__by_bohemai_di990j3-350t.jpg" alt="Bohemai Art" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkgd89-ef10b8e1-f539-4cea-8882-b53892503cdc.png/v1/fill/w_627,h_350,q_70,strp/echo_ember__by_bohemai_dgkgd89-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgkgd89-ef10b8e1-f539-4cea-8882-b53892503cdc.png/v1/fill/w_627,h_350,q_70,strp/echo_ember__by_bohemai_dgkgd89-350t.jpg" alt="Echo Ember" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgeqylq-4c048c2e-8493-4145-8cd4-9fda8369dbd4.png/v1/fill/w_627,h_350,q_70,strp/vamp_stadt_by_bohemai_dgeqylq-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgeqylq-4c048c2e-8493-4145-8cd4-9fda8369dbd4.png/v1/fill/w_627,h_350,q_70,strp/vamp_stadt_by_bohemai_dgeqylq-350t.jpg" alt="Vamp Stadt" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhmyvpz-7ba01745-e135-41d9-9663-0c23124eb97f.png/v1/fill/w_500,h_250/encounter_by_bohemai_dhmyvpz-250t.png" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dhmyvpz-7ba01745-e135-41d9-9663-0c23124eb97f.png/v1/fill/w_500,h_250/encounter_by_bohemai_dhmyvpz-250t.png" alt="Encounter" loading="lazy"></a></div>
-            <div class="art-item"><a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdwdjd-cf819841-53d5-4a67-af2d-60739fcaffb2.png/v1/fill/w_627,h_350,q_70,strp/ice_cold_by_bohemai_dgdwdjd-350t.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/121fc4cd-dbbb-44bb-8892-818aa1e6eecd/dgdwdjd-cf819841-53d5-4a67-af2d-60739fcaffb2.png/v1/fill/w_627,h_350,q_70,strp/ice_cold_by_bohemai_dgdwdjd-350t.jpg" alt="Ice Cold" loading="lazy"></a></div>
+
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/aethereal-allure.webp" alt="Aethereal Allure" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/blackhole-craft-by-minimaxa-djkrt05-375w.webp" alt="Blackhole Craft By Minimaxa Djkrt05 375W" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/blind-leading.webp" alt="Blind Leading" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/blood-thirsty.webp" alt="Blood Thirsty" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/blue-mode.webp" alt="Blue Mode" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/brahma-and-the-lotus-by-minimaxa-dfpgvit-250t.webp" alt="Brahma And The Lotus By Minimaxa Dfpgvit 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/castle-on-the-hill.webp" alt="Castle On The Hill" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/cliffside-party.webp" alt="Cliffside Party" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/computer-neon.webp" alt="Computer Neon" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/countess-korda-by-minimaxa-dfpt6v7-250t.webp" alt="Countess Korda By Minimaxa Dfpt6V7 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/crimson-punk.webp" alt="Crimson Punk" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/cube-club-by-minimaxa-dfoz7bi-250t.webp" alt="Cube Club By Minimaxa Dfoz7Bi 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/cyan-vitesse-graphical-story-book.webp" alt="Cyan Vitesse Graphical Story Book" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/departure.webp" alt="Departure" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/desert-domes-by-minimaxa-dfe1lds-200h.webp" alt="Desert Domes By Minimaxa Dfe1Lds 200H" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/echo-ember.webp" alt="Echo Ember" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/egg-dissolve.webp" alt="Egg Dissolve" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/electric-waves.webp" alt="Electric Waves" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/fluid-singularity-by-minimaxa-dfo5x54-350t.webp" alt="Fluid Singularity By Minimaxa Dfo5X54 350T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/future-shock.webp" alt="Future Shock" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/galaxy-door.webp" alt="Galaxy Door" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/geogami-girl-by-minimaxa-dfkje3x-250t.webp" alt="Geogami Girl By Minimaxa Dfkje3X 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/ghost-series.webp" alt="Ghost Series" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/golden-mage.webp" alt="Golden Mage" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/golden-skull.webp" alt="Golden Skull" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/goth-pop.webp" alt="Goth Pop" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/grad-girl.webp" alt="Grad Girl" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/hill-rescue-by-minimaxa-djkrtvt-200h.webp" alt="Hill Rescue By Minimaxa Djkrtvt 200H" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/hill-rescue-by-minimaxa-djkrtvt-350t.webp" alt="Hill Rescue By Minimaxa Djkrtvt 350T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/jaguar-woman.webp" alt="Jaguar Woman" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/jetset.webp" alt="Jetset" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/neo-yamato-spacecraft-by-minimaxa-djkrsku-375w.webp" alt="Neo Yamato Spacecraft By Minimaxa Djkrsku 375W" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/one-day-it-will-all-be-yours.webp" alt="One Day It Will All Be Yours" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/overpass.webp" alt="Overpass" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/pastel-look.webp" alt="Pastel Look" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/pavilion-house.webp" alt="Pavilion House" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/perception-door.webp" alt="Perception Door" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/porcelain.webp" alt="Porcelain" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/purple-noir.webp" alt="Purple Noir" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/retro-concept.webp" alt="Retro Concept" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/retro-noir.webp" alt="Retro Noir" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/risky-moves.webp" alt="Risky Moves" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/skull-mecha-by-minimaxa-djkrthc-250t.webp" alt="Skull Mecha By Minimaxa Djkrthc 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/slayer.webp" alt="Slayer" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/spacescape-prime.webp" alt="Spacescape Prime" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-courtyard.webp" alt="The Courtyard" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-improbable-archivist-graphical-story-book.webp" alt="The Improbable Archivist Graphical Story Book" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-last-nomad-series-by-minimaxa-dfoj106-250t.webp" alt="The Last Nomad Series By Minimaxa Dfoj106 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-nagging.webp" alt="The Nagging" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-path.webp" alt="The Path" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-station.webp" alt="The Station" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/the-terrace-by-minimaxa-dh8y4nm-350t.webp" alt="The Terrace By Minimaxa Dh8Y4Nm 350T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/tokyo-vtol.webp" alt="Tokyo Vtol" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/tori-geisha-by-minimaxa-dfnbvt4-250t.webp" alt="Tori Geisha By Minimaxa Dfnbvt4 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/transcendental-tv.webp" alt="Transcendental Tv" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/transit-centre.webp" alt="Transit Centre" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/vamp-circ.webp" alt="Vamp Circ" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/venice-beach.webp" alt="Venice Beach" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/veyna-keeper-of-worms.webp" alt="Veyna Keeper Of Worms" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/waves-by-minimaxa-dfg7t96-250t.webp" alt="Waves By Minimaxa Dfg7T96 250T" loading="lazy">
+                </a>
+            </div>
+            <div class="art-item">
+                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                    <img src="../art_gallery/zaphod-beeblebrox-hitchhikers-guide.webp" alt="Zaphod Beeblebrox Hitchhikers Guide" loading="lazy">
+                </a>
+            </div>
         </div>
     </div>
 </body>
