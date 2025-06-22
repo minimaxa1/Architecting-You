@@ -1,12 +1,12 @@
-# build_gallery.py v1.1 - Corrected Paths
+# build_gallery.py v1.2 - Final Path Correction
 import os
 import re
 
 # --- CONFIGURATION (CORRECTED) ---
-# The folder in the root directory where your final, compressed images are stored.
-IMAGE_SOURCE_FOLDER = "art_gallery"
+# The folder INSIDE 'docs' where your images are now stored.
+IMAGE_SOURCE_FOLDER = "docs/art_gallery"
 
-# The final HTML file that will be created or overwritten inside the 'docs' folder.
+# The final HTML file that will be created or overwritten.
 HTML_OUTPUT_FILE = "docs/art-gallery.html"
 
 # --- HTML TEMPLATES ---
@@ -76,11 +76,12 @@ PAGE_TEMPLATE = """
 </html>
 """
 
-# IMPORTANT: The image path now needs to go up one level from 'docs' to find the 'art_gallery' folder.
+# IMPORTANT: The image path is now simple because the HTML file and the image folder
+# are SIBLINGS inside the 'docs' folder.
 ART_ITEM_TEMPLATE = """
             <div class="art-item">
                 <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
-                    <img src="../art_gallery/{filename}" alt="{alt_text}" loading="lazy">
+                    <img src="art_gallery/{filename}" alt="{alt_text}" loading="lazy">
                 </a>
             </div>"""
 
@@ -90,7 +91,7 @@ def create_alt_text(filename):
 
 def main():
     """Scans the art folder and generates the complete HTML file for the gallery."""
-    print(f"--- HTML Gallery Builder v1.1 ---")
+    print(f"--- HTML Gallery Builder v1.2 ---")
     
     if not os.path.exists(IMAGE_SOURCE_FOLDER):
         print(f"🔴 ERROR: The source folder '{IMAGE_SOURCE_FOLDER}' was not found.")
