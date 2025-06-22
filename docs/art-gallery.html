@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery - The Bohemai Project</title>
+    <style>
+        /* Re-using your site's dark, tech aesthetic */
+        :root {
+            --grid-color: rgba(255, 255, 255, 0.05); --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0; --accent-color: #00bfff; --bg-dark-1: #121212;
+            --bg-dark-2: #1a1a1a; --bg-dark-3: #333333; --font-main: 'Source Code Pro', monospace;
+        }
+        body {
+            background-color: var(--bg-dark-1);
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px; color: var(--text-primary); font-family: var(--font-main);
+            line-height: 1.6; margin: 0; padding: 0;
+        }
+        .gallery-container {
+            max-width: 1200px; /* Wider container for a gallery */
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .gallery-header {
+            text-align: center;
+            border-bottom: 1px solid var(--bg-dark-3);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+        .back-link {
+            color: var(--text-secondary); text-decoration: none;
+            display: block; margin-bottom: 20px; font-size: 0.9rem;
+        }
+        .back-link:hover { color: var(--accent-color); }
+        h1 { font-size: 2.5rem; color: #fff; margin: 0; text-transform: uppercase; }
+
+        /* The Art Grid - This creates the 4-column layout */
+        .art-grid {
+            display: grid;
+            /* Creates 4 equal-width columns. Change '4' to '5' for a 5-column layout */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px; /* The space between images */
+        }
+        .art-item a {
+            display: block;
+            border: 2px solid var(--bg-dark-3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Ensures the image stays within the border on zoom */
+        }
+        .art-item img {
+            width: 100%;
+            height: auto;
+            display: block; /* Removes any extra space below the image */
+        }
+        .art-item a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.5);
+            border-color: var(--accent-color);
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 1024px) {
+            .art-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .art-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .art-grid { grid-template-columns: repeat(1, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <a href="index.html" class="back-link">< Back to The Bohemai Project</a>
+            <h1>Curated Art Gallery</h1>
+        </div>
+
+        <div class="art-grid">
+
+            <!-- Art Piece Template: Copy and paste this whole block for each piece of art -->
+            <div class="art-item">
+                <a href="[LINK_TO_DEVIANTART_PAGE]" target="_blank" rel="noopener noreferrer">
+                    <img src="[DIRECT_LINK_TO_IMAGE_FILE.jpg]" alt="[Art Title]" loading="lazy">
+                </a>
+            </div>
+            <!-- End of Template -->
+
+            <!-- EXAMPLE 1 -->
+            <div class="art-item">
+                <a href="https://www.deviantart.com/bohemai/art/The-Architect-of-Worlds-1051512404" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e819b982-c431-498b-a7e8-3c359207e9d7/dgr9lro-83eb9d59-2503-4f93-b605-7f5edb15c92c.jpg/v1/fill/w_1192,h_670,q_70,strp/the_architect_of_worlds_by_bohemai_dgr9lro-pre.jpg" alt="The Architect of Worlds" loading="lazy">
+                </a>
+            </div>
+
+            <!-- EXAMPLE 2 -->
+            <div class="art-item">
+                <a href="https://www.deviantart.com/bohemai/art/The-Weaver-of-Worlds-1051512431" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e819b982-c431-498b-a7e8-3c359207e9d7/dgr9ls7-a37a77b8-a15d-4f10-91de-5080c5e7b2ac.jpg/v1/fill/w_1192,h_670,q_70,strp/the_weaver_of_worlds_by_bohemai_dgr9ls7-pre.jpg" alt="The Weaver of Worlds" loading="lazy">
+                </a>
+            </div>
+
+            <!-- Add more art items here by copying the template... -->
+
+        </div>
+    </div>
+</body>
+</html>
