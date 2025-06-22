@@ -24,12 +24,31 @@
         h1 { font-size: 1.5em; text-align: center; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
         h1 span { font-size: 0.8em; color: var(--text-grey); display: block; margin-top: 5px; letter-spacing: 1px; text-transform: none; }
         h2 { font-size: 1.6em; margin-top: 3rem; border-bottom: 1px solid var(--border-grey); padding-bottom: 10px; color: var(--accent-blue); text-align: center;}
-        h3 { font-size: 1.5em; color: var(--text-white); margin-top: 2.5rem; }
+        
+        /* --- CORRECTED ALIGNMENT RULES --- */
+        h3 {
+            font-size: 1.5em;
+            color: var(--text-white);
+            margin-top: 2.5rem;
+            text-align: center; /* Center headings */
+        }
+        p {
+            max-width: 800px;
+            margin: 1em auto; /* Center the block on the page */
+            text-align: left;  /* Left-align text for readability */
+        }
+        .file-list {
+            list-style: none;
+            padding-left: 0;
+            max-width: 800px;
+            margin: 1em auto; /* Center the block on the page */
+            text-align: left;  /* Left-align text for readability */
+        }
+        .file-list li { margin-bottom: 0.5em; }
+        
         a { color: var(--accent-blue); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        p { max-width: 800px; margin: 1em auto; text-align: left; }
-        .file-list { list-style: none; padding-left: 0; max-width: 800px; margin: 1em auto; }
-        .file-list li { margin-bottom: 0.5em; }
+        
         header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-grey); }
         .header-placeholder, .nav-buttons { flex: 1 1 0; min-width: 220px; }
         .title-block { text-align: center; flex-grow: 1; }
@@ -48,7 +67,7 @@
             </div>
             <div class="nav-buttons">
                 <!-- NOTE: Replace '#' with the actual link to your homepage, e.g., 'index.html' -->
-                <a href="#">← Back to Main Research Engine</a>
+                <a href="index.html">← Back to Main Research Engine</a>
             </div>
         </header>
 
@@ -66,9 +85,9 @@
                 The name "Architecting You" is a declaration of intent. It signifies the process of actively building your own understanding, skills, and perspective in the age of AI. We do this by focusing on three pillars:
             </p>
             <ul class="file-list">
-                <li><strong>1. Demystification through Demonstration:</strong> We cut through the noise by showing, not just telling. Whether it's a speed run to <a href="#">build a full webpage in under 90 seconds</a> or a head-to-head <a href="#">LLM math shootout</a>, we provide tangible proof of what these systems can—and cannot—do.</li>
-                <li><strong>2. Hands-On, Practical Application:</strong> Theory is important, but code is truth. We believe in getting our hands dirty. We chronicle our journey as we learn to <a href="#">build perpetual ASCII art agents</a> and explore various methods for creating <a href="#">functional Agentic AI systems with n8n and GitHub</a>.</li>
-                <li><strong>3. Philosophical & Creative Inquiry:</strong> Technology is not a neutral force. We embrace the "Bohemian" spirit by exploring the creative and existential frontiers of AI. From creating <a href="#">retro cyberpunk synthwave story books</a> to contemplating the very nature of AI consciousness, we believe the "why" is as important as the "how."</li>
+                <li><strong>1. Demystification through Demonstration:</strong> We cut through the noise by showing, not just telling. Whether it's a speed run to <a href="https://www.youtube.com/watch?v=NBblc6qBiAk">build a full webpage in under 90 seconds</a> or a head-to-head <a href="https://www.youtube.com/watch?v=IPPS6mgwzkM">LLM math shootout</a>, we provide tangible proof of what these systems can—and cannot—do.</li>
+                <li><strong>2. Hands-On, Practical Application:</strong> Theory is important, but code is truth. We believe in getting our hands dirty. We chronicle our journey as we learn to <a href="https://www.youtube.com/watch?v=YqOTThGWqCU">build perpetual ASCII art agents</a> and explore various methods for creating <a href="https://www.youtube.com/watch?v=9ubr_ozODc8">functional Agentic AI systems with n8n and GitHub</a>.</li>
+                <li><strong>3. Philosophical & Creative Inquiry:</strong> Technology is not a neutral force. We embrace the "Bohemian" spirit by exploring the creative and existential frontiers of AI. From creating <a href="https://www.youtube.com/watch?v=QMuP49Rgm6o">retro cyberpunk synthwave story books</a> to contemplating the very nature of AI consciousness, we believe the "why" is as important as the "how."</li>
             </ul>
 
             <h2>A Look Inside The Construct: Our Core Research Areas</h2>
@@ -81,9 +100,8 @@
                 The quality of your output is determined by the quality of your input. We are obsessed with the art of the prompt, treating it as a new form of programming. We document our findings as we master new frameworks and push the boundaries of model reasoning.
             </p>
             <ul class="file-list">
-                <!-- NOTE: Replace these '#' with the actual file paths for these pages -->
-                <li><a href="#">> A Deep Dive into AXIOM: The Only Prompting Methodology You Need</a></li>
-                <li><a href="#">> Unlocking Big Brain Prompting: Mastering 7 Types of Reasoning</a></li>
+                <li><a href="https://www.youtube.com/watch?v=50njuggQUwY">> A Deep Dive into AXIOM: The Only Prompting Methodology You Need</a></li>
+                <li><a href="https://www.youtube.com/watch?v=gPB6tOhGeOE">> Unlocking Big Brain Prompting: Mastering 7 Types of Reasoning</a></li>
             </ul>
             
             <h3>Agentic AI & Autonomous Systems</h3>
@@ -91,9 +109,8 @@
                 The next frontier is AI that can act. We are actively building and testing autonomous agents to understand their capabilities, limitations, and the architectural patterns required to make them effective.
             </p>
             <ul class="file-list">
-                <!-- NOTE: Replace these '#' with the actual file paths for these pages -->
-                <li><a href="#">> Our Guide: Building Agentic AI with n8n and GitHub</a></li>
-                <li><a href="#">> Project Log: Creating a Perpetual ASCII Art Coding Agent</a></li>
+                <li><a href="https://www.youtube.com/watch?v=9ubr_ozODc8">> Our Guide: Building Agentic AI with n8n and GitHub</a></li>
+                <li><a href="https://www.youtube.com/watch?v=YqOTThGWqCU">> Project Log: Creating a Perpetual ASCII Art Coding Agent</a></li>
             </ul>
 
             <h3>Model Benchmarking & Practical Tests</h3>
@@ -101,10 +118,9 @@
                 With a new model released every week, it's impossible to know which tool is right for the job without rigorous testing. We put models through their paces in real-world scenarios.
             </p>
             <ul class="file-list">
-                <!-- NOTE: Replace these '#' with the actual file paths for these pages -->
-                <li><a href="#">> The Ultimate LLM Math Shootout: DeepSeek vs. Grok vs. Claude</a></li>
-                <li><a href="#">> Vision Model Test: Which Tiny Model Sees Best?</a></li>
-                <li><a href="#">> Model Comparison: A Look at QWEN vs. Cogito</a></li>
+                <li><a href="https://www.youtube.com/watch?v=IPPS6mgwzkM">> The Ultimate LLM Math Shootout: DeepSeek vs. Grok vs. Claude</a></li>
+                <li><a href="https://www.youtube.com/watch?v=pOjgk44aZNE">> Vision Model Test: Which Tiny Model Sees Best?</a></li>
+                <li><a href="https://www.youtube.com/watch?v=T9HfHCdu5Hk">> Model Comparison: A Look at QWEN vs. Cogito</a></li>
             </ul>
 
             <h3>Creative AI & Digital Art</h3>
@@ -112,15 +128,14 @@
                 We believe AI is a new canvas. This part of the project is dedicated to exploring the intersection of code and creativity, generating unique art, music, and narrative experiences.
             </p>
             <ul class="file-list">
-                <!-- NOTE: Replace these '#' with the actual file paths for these pages -->
-                <li><a href="#">> Free Story Book: Cyan Vitesse - A Cyberpunk Narrative</a></li>
-                <li><a href="#">> Music & Vibe: Mars Genesis, A Retro Space Journey</a></li>
-                <li><a href="#">> Project: Building a Cyberpunk Webpage with AI-Generated STT/TTS</a></li>
+                <li><a href="https://www.youtube.com/watch?v=QMuP49Rgm6o">> Free Story Book: Cyan Vitesse - A Cyberpunk Narrative</a></li>
+                <li><a href="https://www.youtube.com/watch?v=rn4U3UtwvvE">> Music & Vibe: Mars Genesis, A Retro Space Journey</a></li>
+                <li><a href="https://www.youtube.com/watch?v=T4Hf_xEO2EE">> Project: Building a Cyberpunk Webpage with AI-Generated STT/TTS</a></li>
             </ul>
             
             <h2>The Architect Behind the Curtain</h2>
             <p>
-                The Bohemai Project is the work of a solo architect—a technologist, artist, and perpetual student with a background in software engineering and a deep-seated passion for emergent systems. My journey is not one of a credentialed academic, but of a practitioner in the trenches. The "expertise" demonstrated here is earned through thousands of hours of experimentation, coding, and a relentless drive to understand these complex systems from the inside out. This project is my open-source notebook, a public commitment to learning in the open and sharing the unvarnished process of discovery—failures, breakthroughs, and all.
+                The Bohemai Project is the work of a technologist, artist, and perpetual student with a background in open software creation and a deep-seated passion for emergent systems. My journey is not one of a credentialed academic, but of a practitioner in the trenches. The "expertise" demonstrated here is earned through thousands of hours of experimentation, coding, and a relentless drive to understand these complex systems from the inside out. This project is my open-source notebook, a public commitment to learning in the open and sharing the unvarnished process of discovery—failures, breakthroughs, and all.
             </p>
             
             <h2>Join the Expedition</h2>
