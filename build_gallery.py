@@ -80,7 +80,7 @@ PAGE_TEMPLATE = """
 # are SIBLINGS inside the 'docs' folder.
 ART_ITEM_TEMPLATE = """
             <div class="art-item">
-                <a href="LINK_TO_DEVIANTART_PAGE_HERE" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.deviantart.com/bohemai" target="" rel="noopener noreferrer">
                     <img src="art_gallery/{filename}" alt="{alt_text}" loading="lazy">
                 </a>
             </div>"""
