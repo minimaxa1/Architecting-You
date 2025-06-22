@@ -36,11 +36,7 @@
         .nav-buttons a { background: none; border: 1px solid var(--border-grey); color: var(--text-grey); font-weight: normal; padding: 8px 16px; cursor: pointer; border-radius: 6px; font-size: 0.9em; }
         .nav-buttons a:hover { background-color: var(--border-grey); color: var(--text-white); text-decoration: none; }
         
-        .intelligence-feed { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-        @media (max-width: 1400px) { .intelligence-feed { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 1024px) { .intelligence-feed { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { .intelligence-feed { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 500px) { .intelligence-feed { grid-template-columns: 1fr; } }
+        .intelligence-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
         
         .source-item { background-color: var(--container-bg); border: 1px solid var(--border-grey); border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; }
         .source-tag { display: inline-block; color: black; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; font-weight: bold; margin-bottom: 0.5rem; align-self: flex-start; }
@@ -63,7 +59,6 @@
                 <span>Comprehensive AI News Feed</span>
             </div>
             <div class="nav-buttons">
-                <!-- This link assumes your main page is index.html. Change if needed. -->
                 <a href="https://minimaxa1.github.io/Architecting-You/index.html">← Back to Main Research Engine</a>
             </div>
         </header>
@@ -72,66 +67,96 @@
             <h2>All Intelligence Sources</h2>
             <div class="intelligence-feed">
                 
-                <!-- START FEED ITEMS -->
+                <!-- START FEED ITEMS (DE-DUPLICATED AND MERGED) -->
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/Orange-OpenSource/hurl" target="_blank" title="A top-voted story on Hacker News.">Hurl: Run and test HTTP requests with plain text</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A top-voted story on Hacker News.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/Orange-OpenSource/hurl" target="_blank" title="A command-line tool that runs HTTP requests defined in a simple plain text format.">Hurl: Run and test HTTP requests with plain text</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A CLI tool for running HTTP requests from plain text files.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://fly.io/blog/phoenix-new-the-remote-ai-runtime/" target="_blank" title="A top-voted story on Hacker News.">Phoenix.new – Remote AI Runtime for Phoenix</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A top-voted story on Hacker News.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://fly.io/blog/phoenix-new-the-remote-ai-runtime/" target="_blank" title="Phoenix.new allows developers to run fine-tuned AI models that can call Elixir functions within the same runtime.">Phoenix.new – Remote AI Runtime for Phoenix</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A remote AI runtime for the Phoenix web framework.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://mastodon.gamedev.place/@pikuma/114711138512697712" target="_blank" title="A top-voted story on Hacker News.">Sunsonic 986-II – A Thai Famicom clone</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A Thai Famicom clone with keyboard and mini CRT built-in.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://mastodon.gamedev.place/@pikuma/114711138512697712" target="_blank" title="A fascinating look at a Thai Famicom clone with a built-in keyboard and mini CRT screen.">Sunsonic 986-II – A Thai Famicom clone</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A Thai Famicom clone with an integrated keyboard and CRT.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://public.resource.org/ntis.gov/index.html" target="_blank" title="A top-voted story on Hacker News.">FedFlix — Public Domain Stock Footage Library</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A top-voted story on Hacker News.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://public.resource.org/ntis.gov/index.html" target="_blank" title="A large collection of public domain videos from US government agencies, digitized from the National Technical Information Service.">FedFlix — Public Domain Stock Footage Library</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A massive library of public domain videos from US government sources.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/NickTikhonov/snap-ql" target="_blank" title="A top-voted story on Hacker News.">Show HN: SnapQL – Desktop app to query Postgres with AI</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A top-voted story on Hacker News.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/NickTikhonov/snap-ql" target="_blank" title="Show HN: SnapQL is a privacy-first desktop app that allows querying a Postgres database using natural language.">Show HN: SnapQL – Desktop app to query Postgres with AI</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A privacy-focused desktop app for querying Postgres with natural language.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-hackernews">Hacker News</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://ironicsans.ghost.io/how-the-jaws-shark-became-public-domain/" target="_blank" title="A top-voted story on Hacker News.">The JAWS shark is public domain</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A top-voted story on Hacker News.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://ironicsans.ghost.io/how-the-jaws-shark-became-public-domain/" target="_blank" title="An interesting dive into how the iconic shark from JAWS became public domain due to a copyright notice issue.">The JAWS shark is public domain</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">How a failure to renew copyright led to the iconic shark becoming public domain.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-hackernews">Hacker News</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://airpass.tiagoalves.me/" target="_blank" title="A tool that spoofs your MAC address to overcome time-limited WiFi networks at airports and hotels.">Airpass – Easily overcome WiFi time limits</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A tool that spoofs MAC addresses to bypass WiFi time restrictions.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-hackernews">Hacker News</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.bloomberg.com/news/articles/2025-06-20/ai-is-ushering-in-the-tiny-team-era-in-silicon-valley" target="_blank" title="AI is enabling very small teams to build ambitious products, changing the venture capital and startup landscape.">AI is ushering in a “tiny team” era</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">How AI is enabling small, hyper-productive teams in Silicon Valley.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-youtube">YouTube</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=mfneU1FXhEs" target="_blank" title="Can machines ever achieve true awareness? Dive into the debate on AI consciousness and challenge your own beliefs.">Can AI Truly Become Conscious?</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Can machines ever achieve true awareness? A debate on AI consciousness.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A debate on AI consciousness, ethics, and technology.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-youtube">YouTube</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=NUtVcI8YR80" target="_blank" title="Explore one of philosophy's most intriguing debates: Can artificial intelligence truly understand, or is it just simulating intelligence?">The Chinese Room Argument</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Can AI ever achieve true understanding, or is it just a simulation?</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Can AI achieve true understanding, or is it just a simulation?</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-youtube">YouTube</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=7k1HiWpl8fk" target="_blank" title="Jobst Landgrebe argues AI will never achieve true intelligence. Human consciousness, emotion, and creativity can't be replicated.">AI will Never Rule the Cape</a></div>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=7k1HiWpl8fk" target="_blank" title="Jobst Landgrebe argues AI will never achieve true intelligence. Human consciousness, emotion, and creativity can't be replicated.">AI will Never Rule the World</a></div>
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Jobst Landgrebe argues AI can't replicate human consciousness.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-youtube">YouTube</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=Cy3HcHip1-I" target="_blank" title="AI Robot Just Achieved TRUE Consciousness? (Mind-Blowing Breakthrough!) Scientists have cracked the code of machine ...">AI Robot Reasoning & Awareness Explained</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">AI Robot Just Achieved TRUE Consciousness? A mind-blowing breakthrough.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A deep dive into machine awareness and consciousness breakthroughs.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-youtube">YouTube</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=IFMbAWuSdME" target="_blank" title="Podcast discussion of the paper 'The Open Source Advantage in Large Language Models (LLMs]'">The Open Source Advantage in LLMs [Podcast]</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A podcast discussing the advantages of open-source LLMs.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-youtube">YouTube</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=w6jY2AAi7xc" target="_blank" title="Miniax Just Dropped a 1M Token AI Model—Faster, Smarter & FREE! (M1 Explained)">Miniax Just Dropped a 1M Token AI Model</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">The AI game just changed—forever. M1 Explained.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-youtube">YouTube</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=AM71dTNFOpg" target="_blank" title="Finalize and optimize your AI Knowledge Worker using RAG.">Final RAG System: Build Your Personal AI Assistant</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Fix bugs, optimize retrieval, and build an AI Knowledge Worker using RAG.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-youtube">YouTube</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=I23B1fCxyEw" target="_blank" title="DeepSeek Coder V2 Explained | Best AI Model for Coding & Math? (Pros & Cons)">DeepSeek Coder V2 Explained</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Is this the best AI model for coding and math? Pros & Cons.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/vllm-project/vllm" target="_blank" title="A high-throughput and memory-efficient inference and serving engine for LLMs">vllm-project/vllm</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A high-throughput and memory-efficient inference and serving engine for LLMs.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A high-throughput and memory-efficient inference engine for LLMs.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/ManimCommunity/manim" target="_blank" title="A community-maintained Python framework for creating mathematical animations.">ManimCommunity/manim</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A community-maintained Python framework for creating mathematical animations.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A Python framework for creating mathematical animations.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
@@ -140,8 +165,8 @@
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/ultralytics/ultralytics" target="_blank" title="Ultralytics YOLO11 🚀">ultralytics/ultralytics</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Ultralytics YOLO11 🚀</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/ultralytics/ultralytics" target="_blank" title="Ultralytics YOLOv11 🚀">ultralytics/ultralytics</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Ultralytics YOLOv11 🚀</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
@@ -151,27 +176,42 @@
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/wger-project/wger" target="_blank" title="Self hosted FLOSS fitness/workout, nutrition and weight tracker">wger-project/wger</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Self hosted FLOSS fitness/workout, nutrition and weight tracker.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A self-hosted, FLOSS fitness, nutrition, and weight tracker.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/dottxt-ai/outlines" target="_blank" title="Structured Text Generation">dottxt-ai/outlines</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Structured Text Generation.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A library for structured text generation with large language models.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/pathwaycom/pathway" target="_blank" title="Python ETL framework for stream processing, real-time analytics, LLM pipelines, and RAG.">pathwaycom/pathway</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Python ETL framework for stream processing, real-time analytics, LLM pipelines, and RAG.</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Python ETL framework for stream processing, RAG, and LLM pipelines.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
                     <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/All-Hands-AI/OpenHands" target="_blank" title="🙌 OpenHands: Code Less, Make More">All-Hands-AI/OpenHands</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">🙌 OpenHands: Code Less, Make More</p>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">An agentic framework designed to be a workbench for AI agents.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-github">GitHub</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/tadata-org/fastapi_mcp" target="_blank" title="Expose your FastAPI endpoints as Model Context Protocol (MCP) tools, with Auth!">tadata-org/fastapi_mcp</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Expose FastAPI endpoints as Model Context Protocol (MCP) tools.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/cyclotruc/gitingest" target="_blank" title="Replace 'hub' with 'ingest' in any github url to get a prompt-friendly extract of a codebase">cyclotruc/gitingest</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Get a prompt-friendly extract of a codebase from a GitHub URL.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-github">GitHub</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/mindsdb/mindsdb" target="_blank" title="AI's query engine - Platform for building AI that can answer questions over large scale federated data. - The only MCP Server you'll ever need">mindsdb/mindsdb</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">An AI query engine for large-scale federated data.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-github">GitHub</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/commaai/opendbc" target="_blank" title="a Python API for your car">commaai/opendbc</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">An open source Python library to parse CAN bus traffic for cars.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-github">GitHub</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://github.com/trycua/cua" target="_blank" title="c/ua is the Docker Container for Computer-Use AI Agents.">trycua/cua</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A Docker Container for Computer-Use AI Agents.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-news">News (Wired)</span>
@@ -184,19 +224,9 @@
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">AI is now in everything Google touches, from Android XR to search.</p>
                 </div>
                 <div class="source-item">
-                    <span class="source-tag tag-news">News (Business Insider)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.businessinsider.com/corpus-christi-port-ai-ship-tracking-emergency-training-2025-5" target="_blank" title="The Port of Corpus Christi is using artificial intelligence to power ship tracking and help with emergency response training.">Seaport in Texas uses AI-powered digital replica</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A massive seaport is using AI to track ships and prepare for emergencies.</p>
-                </div>
-                <div class="source-item">
-                    <span class="source-tag tag-news">News (Gizmodo.com)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://gizmodo.com/all-in-one-ai-platform-1minai-is-now-almost-free-get-lifetime-access-for-up-to-87-off-2000609011" target="_blank" title="Dive into the world of Artificial Intelligence with this easy to learn all-in-one tool and watch your creativity explode.">All-in-One AI Platform 1minAI Is Now Almost Free</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Dive into the world of AI with this easy-to-learn all-in-one tool.</p>
-                </div>
-                <div class="source-item">
                     <span class="source-tag tag-news">News (The Verge)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.theverge.com/ai-artificial-intelligence/679768/reddit-sues-anthropic-alleging-its-bots-accessed-reddit-more-than-100000-times-since-last-july" target="_blank" title="Reddit sued Anthropic on Wednesday in San Francisco superior court, claiming that the OpenAI rival had accessed its platform more than 100,000 times...">Reddit sues Anthropic over bot access</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Reddit alleges Anthropic's bots accessed Reddit more than 100,000 times.</p>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.theverge.com/ai-artificial-intelligence/679768/reddit-sues-anthropic-alleging-its-bots-accessed-reddit-more-than-100000-times-since-last-july" target="_blank" title="Reddit sued Anthropic on Wednesday, claiming that the OpenAI rival had accessed its platform more than 100,000 times...">Reddit sues Anthropic over bot access</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Reddit alleges Anthropic's bots accessed its platform over 100,000 times.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-news">News (The Verge)</span>
@@ -209,36 +239,52 @@
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">OpenAI is officially on the Pentagon’s payroll.</p>
                 </div>
                 <div class="source-item">
-                    <span class="source-tag tag-news">News (Gizmodo.com)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://gizmodo.com/things-humans-still-do-better-than-ai-understanding-flowers-2000611412" target="_blank" title="Unlike humans, large language models can't learn via physical senses such as sight, smell, and touch (yet).">Things Humans Still Do Better Than AI</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Unlike humans, LLMs can't learn via physical senses like sight or smell.</p>
+                    <span class="source-tag tag-news">News (Business Insider)</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.businessinsider.com/klarna-ceo-chatbot-answers-questions-about-ai-2025-6" target="_blank" title="I called Klarna's new AI doppelganger of its CEO. Here's what it said about why humans are necessary at work.">I called Klarna's AI doppelganger of its CEO</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Asking an AI chatbot based on Klarna's CEO its views on AI.</p>
                 </div>
                 <div class="source-item">
-                    <span class="source-tag tag-youtube">YouTube</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.youtube.com/watch?v=A4gI86t-D8U" target="_blank" title="Ready to become a certified GenAI engineer? Register now and use code IBMTechYT20 for 20% off of your exam ...">What is Retrieval-Augmented Generation (RAG)?</a></div>
-                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Ready to become a certified GenAI engineer? IBM explains RAG.</p>
+                    <span class="source-tag tag-news">News (Slashdot.org)</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://science.slashdot.org/story/25/06/11/015216/fda-to-use-ai-in-drug-approvals-to-radically-increase-efficiency" target="_blank" title="FDA To Use AI In Drug Approvals To 'Radically Increase Efficiency'">FDA To Use AI In Drug Approvals</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">The FDA plans to use AI to "radically increase efficiency" in drug approvals.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-news">News (The Independent)</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="https://www.independent.co.uk/news/science/captain-cook-missing-ship-found-hms-endeavour-b2771322.html" target="_blank" title="A top-voted story on Hacker News.">Captain Cook's missing ship found after 250 years</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">The wreck of HMS Endeavour has been identified in Newport Harbor.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-arxiv">arXiv (Recent)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.05929" target="_blank" title="The emerging Internet of AI Agents challenges existing web infrastructure designed for human-scale, reactive interactions. This paper proposes a new registry architecture for the Internet of AI Agents.">Upgrade or Switch: A New Registry for AI Agents?</a></div>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.05929" target="_blank" title="Proposing a new registry architecture for the Internet of AI Agents.">Upgrade or Switch: A New Registry for AI Agents?</a></div>
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Proposing a new registry architecture for the Internet of AI Agents.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-arxiv">arXiv (Recent)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.05921" target="_blank" title="Recent advances in reinforcement learning (RL) with verifiable outcome rewards have significantly improved the reasoning capabilities of large language models (LLMs), especially when combined with multi-turn tool interactions.">ReVeal: Self-Evolving Code Agents</a></div>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.05921" target="_blank" title="Self-Evolving Code Agents via Iterative Generation-Verification.">ReVeal: Self-Evolving Code Agents</a></div>
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Self-Evolving Code Agents via Iterative Generation-Verification.</p>
                 </div>
-                 <div class="source-item">
+                <div class="source-item">
                     <span class="source-tag tag-arxiv">arXiv (Popular)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.03844" target="_blank" title="Large Language Models (LLMs) are indispensable in today's applications, but their inference procedure -- generating responses by processing text in segments and using a memory-heavy Key-Value (KV) cache -- demands significant computational resources.">Optimizing LLM Inference</a></div>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.03844" target="_blank" title="Fluid-Guided Online Scheduling with Memory Constraints.">Optimizing LLM Inference</a></div>
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Fluid-Guided Online Scheduling with Memory Constraints.</p>
                 </div>
                 <div class="source-item">
                     <span class="source-tag tag-arxiv">arXiv (Recent)</span>
-                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.04135" target="_blank" title="This study examines information suppression mechanisms in DeepSeek, an open-source large language model (LLM) developed in China.">Information Suppression in LLMs (DeepSeek)</a></div>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2405.04135" target="_blank" title="Auditing, Quantifying, and Characterizing Censorship in DeepSeek.">Information Suppression in LLMs (DeepSeek)</a></div>
                     <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Auditing, Quantifying, and Characterizing Censorship in DeepSeek.</p>
                 </div>
-                <!-- Add more items by copying and pasting the block above -->
+                <div class="source-item">
+                    <span class="source-tag tag-arxiv">arXiv (Popular)</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2502.04756v2" target="_blank" title="Concept Navigation and Classification via Open-Source Large Language Model Processing">Concept Navigation via Open-Source LLMs</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">A framework for detecting and classifying latent constructs with LLMs.</p>
+                </div>
+                <div class="source-item">
+                    <span class="source-tag tag-arxiv">arXiv (Popular)</span>
+                    <div class="source-title" style="font-weight:bold; flex-grow:1;"><a href="http://arxiv.org/abs/2409.03031v1" target="_blank" title="Debugging with Open-Source Large Language Models: An Evaluation">Debugging with Open-Source LLMs: An Evaluation</a></div>
+                    <p class="source-desc" style="font-size:0.9em; color:var(--text-grey); margin-top:0.5rem;">Evaluating the potential of LLMs to support software development tasks.</p>
+                </div>
+
+                <!-- END FEED ITEMS -->
                 
             </div>
         </section>
