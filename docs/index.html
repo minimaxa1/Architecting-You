@@ -190,8 +190,9 @@
 
     <div class="main-container">
         <header class="main-header">
-            <h1>THE BOHEMAI PROJECT</h1>
-            <p>An Initiative from the creators of "Architecting You"</p>
+            <!-- ADDED IDs HERE -->
+            <h1 id="main-title">THE BOHEMAI PROJECT</h1>
+            <p id="sub-title">An Initiative from the creators of "Architecting You"</p>
         </header>
 
         <main class="content-wrapper">
@@ -422,5 +423,102 @@
             <div class="copyright">© 2025 // VER 3.0 // STATUS: LIVE</div>
         </footer>
     </div>
+
+  <script>
+    class TextDecryptor {
+        constructor(element, originalText, options = {}) {
+            this.element = element;
+            this.originalText = originalText;
+            // Define a comprehensive set of characters for scrambling
+            this.chars = options.chars || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~"; 
+            this.frameRate = options.frameRate || 30; // How many times per second individual character states update
+            this.scrambleIterations = options.scrambleIterations || 10; // How many random characters to show before revealing the actual one
+            this.characterRevealDelay = options.characterRevealDelay || 70; // Delay (in ms) before the next character starts its decryption process
+
+            this.revealedText = Array(this.originalText.length).fill(''); // Stores the current state of the text (revealed chars + scrambled chars)
+            this.activeIntervals = []; // To keep track of all individual character animation intervals
+        }
+
+        getRandomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+
+        start() {
+            // First, immediately fill the element with scrambled characters
+            this.element.textContent = this.originalText.split('').map(() => this.getRandomChar()).join('');
+
+            // Iterate over each character of the original text
+            this.originalText.split('').forEach((targetChar, charIndex) => {
+                // Schedule the start of the decryption for this specific character
+                // Each character's decryption starts after a staggered delay
+                setTimeout(() => {
+                    let currentIteration = 0; // Counter for scramble iterations for *this* character
+
+                    const charInterval = setInterval(() => {
+                        if (currentIteration < this.scrambleIterations) {
+                            // During the scramble phase, display a random character
+                            this.revealedText[charIndex] = this.getRandomChar();
+                        } else {
+                            // Once scramble iterations are done, lock the character to its original value
+                            this.revealedText[charIndex] = targetChar;
+                            clearInterval(charInterval); // Stop this character's animation
+                            // Remove this interval from the active list
+                            this.activeIntervals = this.activeIntervals.filter(i => i !== charInterval);
+                            // If all characters have finished their decryption, ensure the final text is perfectly rendered
+                            if (this.activeIntervals.length === 0) {
+                                this.element.textContent = this.originalText;
+                            }
+                        }
+                        // Update the entire displayed text with the current state of all characters
+                        this.element.textContent = this.revealedText.join('');
+                        currentIteration++;
+                    }, 1000 / this.frameRate); // Update interval based on the desired frame rate (e.g., 1000ms / 30fps = 33.3ms)
+                    this.activeIntervals.push(charInterval); // Add this character's interval to the active list
+                }, charIndex * this.characterRevealDelay); // Stagger the start time for each character
+            });
+        }
+
+        // Optional: Method to stop all animations and reset the text
+        stop() {
+            this.activeIntervals.forEach(clearInterval);
+            this.activeIntervals = [];
+            this.element.textContent = this.originalText;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTitleElement = document.getElementById('main-title');
+        const subTitleElement = document.getElementById('sub-title');
+
+        if (mainTitleElement) {
+            const originalMainTitle = mainTitleElement.textContent;
+            // Clear the text immediately to prevent flicker before scramble starts
+            mainTitleElement.textContent = ''; 
+            const titleDecryptor = new TextDecryptor(mainTitleElement, originalMainTitle, {
+                scrambleIterations: 20,     // More iterations for a longer scramble on the main title
+                characterRevealDelay: 120, // Slower stagger, more dramatic reveal
+                frameRate: 45              // Faster individual character changes during scramble
+            });
+            titleDecryptor.start();
+        }
+
+        if (subTitleElement) {
+            const originalSubTitle = subTitleElement.textContent;
+            // Clear the text immediately
+            subTitleElement.textContent = ''; 
+            const subTitleDecryptor = new TextDecryptor(subTitleElement, originalSubTitle, {
+                scrambleIterations: 12,    // Fewer iterations, quicker scramble
+                characterRevealDelay: 70, // Faster stagger
+                frameRate: 35             // Normal individual character changes
+            });
+            // Start the sub-title decryption after the main title has begun to reveal,
+            // creating a nice sequential effect. Adjust this delay as needed.
+            setTimeout(() => {
+                subTitleDecryptor.start();
+            }, 1000); // Start subtitle after 1 second
+        }
+    });
+</script>
+
 </body>
 </html>
