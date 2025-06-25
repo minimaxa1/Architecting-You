@@ -9,43 +9,52 @@
     <meta name="google-site-verification" content="yfSVdqqFLgXFrRRuo-7qPThcqEpnkqwg4s4cvYc5R5U" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Combined font imports for Inter and Source Code Pro -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* --- Root Variables & Global Setup --- */
         :root {
-            --grid-color: rgba(255, 255, 255, 0.05);
-            --text-primary: #e0e0e0;
-            --text-secondary: #888;
-            --accent-color: #00bfff;
-            --bg-dark-1: #121212;
-            --bg-dark-2: #1a1a1a;
-            --bg-dark-3: #333333;
-            --font-main: 'Source Code Pro', monospace;
+            --bg-color: #0A0A0A; /* A very dark, near-black */
+            --text-color: #F0F0F0; /* A soft white for readability */
+            --accent-color: #00BFFF; /* DeepSkyBlue for a sharp, modern feel */
+            --border-color: #333333;
+            --panel-bg-color: rgba(20, 20, 20, 0.75); /* Slightly less transparent */
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Source Code Pro', monospace;
 
-            /* Variables for Dot Grid */
+            /* Variables for Dot Grid (integrated with accent color) */
             --dot-color: rgba(0, 191, 255, 0.15); /* Using accent color with low opacity for subtle glow */
             --dot-fade-color: rgba(0, 191, 255, 0.05); /* Even lower opacity for fade effect */
 
-            /* Variables for Metaballs */
+            /* Variables for Metaballs (integrated with accent color) */
             --metaball-color-1: rgba(0, 191, 255, 0.5); /* Semi-transparent accent */
             --metaball-color-2: rgba(255, 255, 255, 0.2); /* Subtle white glow */
             --metaball-threshold: 0.5; /* Adjust for more or less "blobbiness" (0.1 - 1.0) */
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         /* --- Core Body & Layout --- */
         body {
-            background-color: var(--bg-dark-1);
-            /* Existing line grid background */
-            background-image:
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            
+            /* This creates the perspective grid background */
+            background-image: 
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px; /* Match this size to the dot grid for alignment */
+            background-size: 3rem 3rem; /* Updated to 3rem */
             background-repeat: repeat; /* Ensure both grids repeat */
 
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            margin: 0;
-            padding: 0;
             min-height: 100vh; /* Ensure body covers full viewport for background */
             position: relative; /* Needed for pseudo-element and main-container positioning */
             overflow: hidden; /* Prevents scrollbars if pseudo-element slightly exceeds body */
@@ -64,7 +73,7 @@
 
             /* Dot grid background using radial-gradient for dots */
             background-image: radial-gradient(circle at center, var(--dot-color) 0px, var(--dot-fade-color) 1px, transparent 2px);
-            background-size: 30px 30px; /* Size of each repeating dot grid cell */
+            background-size: 3rem 3rem; /* Updated to 3rem to match body's line grid */
             background-repeat: repeat;
 
             /* Animation for subtle flow */
@@ -73,7 +82,7 @@
 
         @keyframes dotGridFlow {
             from { background-position: 0 0; }
-            to { background-position: 30px 30px; } /* Moves by one grid cell to loop seamlessly */
+            to { background-position: 3rem 3rem; } /* Updated to 3rem to loop seamlessly with body's background-size */
         }
 
         /* --- Metaballs Canvas (Deepest Background Layer) --- */
@@ -89,11 +98,12 @@
             pointer-events: none; /* Crucial: Allows mouse events to pass through to elements below */
         }
 
-        /* --- Main Content Container --- */
+        /* --- Main Layout Container --- */
         .main-container {
-            max-width: 800px;
+            max-width: 900px; /* Updated max-width */
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 2rem; /* Updated padding */
+            width: 100%;
             position: relative; /* Ensure content is above the z-indexed pseudo-elements */
             z-index: 1; /* Bring content above all backgrounds */
         }
@@ -101,144 +111,178 @@
         /* --- Header --- */
         .main-header {
             text-align: center;
-            margin-bottom: 50px;
+            padding: 2rem 0 4rem 0; /* Updated padding */
         }
-        
+
         .main-header h1 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: 0.5rem;
-            text-transform: uppercase;
-            margin: 0 0 10px 0;
+            font-family: var(--font-mono);
+            font-size: 2.5rem; /* Updated font size */
+            letter-spacing: 4px; /* Updated letter spacing */
+            color: var(--text-color);
+            margin: 0;
+            text-shadow: 0 0 5px rgba(0, 191, 255, 0.5); /* Added text shadow */
         }
 
         .main-header p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.1rem;
-            margin: 0;
-        }
-        
-        /* --- Content Panels (Shared Style) --- */
-        .content-panel {
-            background-color: var(--bg-dark-2);
-            border: 1px solid var(--bg-dark-3);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-        
-        .panel-title-bar {
-            background-color: var(--bg-dark-3);
-            padding: 8px 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #ccc;
-            text-transform: uppercase;
-        }
-        
-        .panel-body {
-            padding: 15px 20px 20px 20px;
-            max-height: 350px; /* Consistent height for scrolling */
-            overflow-y: auto;
-        }
-        
-        .panel-body p.comment {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 0 0 15px 0;
+            font-family: var(--font-mono);
+            opacity: 0.7; /* Updated opacity */
         }
 
-        /* --- File/Link List Styling --- */
+        /* --- Content Panels (The "Windows") --- */
+        .content-panel {
+            border: 1px solid var(--border-color); /* Updated border color */
+            background-color: var(--panel-bg-color); /* Updated background color and transparency */
+            margin-bottom: 2.5rem; /* Updated margin */
+            /* Modern glassmorphism effect for flair */
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Updated box shadow */
+            border-radius: 4px; /* Updated border radius */
+            overflow: hidden; /* Important for rounded corners on the title bar */
+        }
+
+        .panel-title-bar {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            background-color: var(--border-color); /* Updated background color */
+            color: var(--text-color);
+            padding: 0.5rem 1rem; /* Updated padding */
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color); /* Updated border color */
+        }
+
+        .panel-body {
+            padding: 1.5rem 2rem; /* Updated padding */
+        }
+
+        .comment {
+            font-family: var(--font-mono);
+            opacity: 0.6; /* Updated opacity */
+        }
+
         .file-list {
-            list-style: none;
+            list-style-type: none;
             padding-left: 0;
             margin: 0;
+            max-height: 200px; /* Or any height you prefer */
+            overflow-y: auto;  /* Adds a scrollbar only when needed */
+            scrollbar-width: thin; /* For a cleaner scrollbar */
         }
 
-        .file-list li {
-            margin: 15px 0;
+        /* Custom Scrollbar (re-added from your original file) */
+        .file-list::-webkit-scrollbar {
+            width: 10px; /* Slightly thinner for lists */
         }
-        
-        .file-list a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.2s ease;
-        }
-
-        .file-list a:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- "Join This Space" Button --- */
-        .action-button {
-            display: inline-block;
-            background-color: var(--bg-dark-3);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background-color 0.2s, color 0.2s;
-        }
-        .action-button:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-dark-1);
-        }
-        
-        /* --- Footer --- */
-        .footer-bar {
-            border-top: 1px solid var(--bg-dark-3);
-            padding-top: 20px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .social-links {
-            margin-bottom: 15px;
-        }
-        .social-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s ease;
-        }
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- Custom Scrollbar --- */
-        .panel-body::-webkit-scrollbar {
-            width: 20px;
-        }
-        .panel-body::-webkit-scrollbar-track {
+        .file-list::-webkit-scrollbar-track {
             background: transparent;
         }
-        .panel-body::-webkit-scrollbar-thumb {
+        .file-list::-webkit-scrollbar-thumb {
             background-color: #4a4a4a;
-            border-radius: 20px;
-            border: 7px solid var(--bg-dark-2);
+            border-radius: 10px;
+            border: 3px solid var(--panel-bg-color); /* Matches panel background */
         }
-        .panel-body::-webkit-scrollbar-thumb:hover {
+        .file-list::-webkit-scrollbar-thumb:hover {
             background-color: #555;
         }
-        .panel-body::-webkit-scrollbar-button:single-button {
-            background-color: var(--bg-dark-2);
-            display: block;
-            border-style: solid;
-            height: 13px;
-            width: 16px;
+
+
+        .file-list li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            display: inline-block;
+            padding: 0.2rem 0;
+            transition: all 0.2s ease-in-out;
         }
-        .panel-body::-webkit-scrollbar-button:single-button:vertical:decrement {
-            border-width: 0 5px 5px 5px;
-            border-color: transparent transparent #555 transparent;
+
+        .file-list li a:hover {
+            color: var(--accent-color);
+            transform: translateX(10px); /* Added transform effect */
         }
-        .panel-body::-webkit-scrollbar-button:single-button:vertical:increment {
-            border-width: 5px 5px 0 5px;
-            border-color: #555 transparent transparent transparent;
+
+        .action-button {
+            display: inline-block;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 0.8rem 1.5rem; /* Updated padding */
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .action-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color); /* Updated text color on hover */
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.6); /* Added box shadow on hover */
+        }
+
+        /* --- Footer Bar --- */
+        .footer-bar {
+            border-top: 1px solid var(--border-color); /* Updated border color */
+            padding-top: 2rem; /* Updated padding */
+            margin-top: 4rem; /* Updated margin */
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 1.5rem;
+            display: flex; /* Changed to flex for better control */
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            justify-content: center; /* Centers links */
+            gap: 1rem 1.5rem; /* Gap between links */
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            opacity: 0.7;
+            transition: color 0.2s, opacity 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        .copyright {
+            font-family: var(--font-mono);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        /* --- New Item Indicator (if used) --- */
+        .new-item {
+            color: var(--accent-color); /* Uses accent color */
+            font-weight: 700;
+            font-size: 0.8em;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        /* --- Index Page Section Headers --- */
+        .index-section-title {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .index-subsection-title {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
     </style>
 </head>
