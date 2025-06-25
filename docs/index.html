@@ -21,25 +21,81 @@
             --bg-dark-2: #1a1a1a;
             --bg-dark-3: #333333;
             --font-main: 'Source Code Pro', monospace;
+
+            /* Variables for Dot Grid */
+            --dot-color: rgba(0, 191, 255, 0.15); /* Using accent color with low opacity for subtle glow */
+            --dot-fade-color: rgba(0, 191, 255, 0.05); /* Even lower opacity for fade effect */
+
+            /* Variables for Metaballs */
+            --metaball-color-1: rgba(0, 191, 255, 0.5); /* Semi-transparent accent */
+            --metaball-color-2: rgba(255, 255, 255, 0.2); /* Subtle white glow */
+            --metaball-threshold: 0.5; /* Adjust for more or less "blobbiness" (0.1 - 1.0) */
         }
 
         /* --- Core Body & Layout --- */
         body {
             background-color: var(--bg-dark-1);
+            /* Existing line grid background */
             background-image:
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-size: 30px 30px; /* Match this size to the dot grid for alignment */
+            background-repeat: repeat; /* Ensure both grids repeat */
+
             color: var(--text-primary);
             font-family: var(--font-main);
             margin: 0;
             padding: 0;
+            min-height: 100vh; /* Ensure body covers full viewport for background */
+            position: relative; /* Needed for pseudo-element and main-container positioning */
+            overflow: hidden; /* Prevents scrollbars if pseudo-element slightly exceeds body */
         }
 
+        /* --- Dot Grid Pseudo-element (Layer 2 of Background) --- */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow interaction with content underneath */
+            z-index: -1; /* Place it behind all content, but above metaballs */
+
+            /* Dot grid background using radial-gradient for dots */
+            background-image: radial-gradient(circle at center, var(--dot-color) 0px, var(--dot-fade-color) 1px, transparent 2px);
+            background-size: 30px 30px; /* Size of each repeating dot grid cell */
+            background-repeat: repeat;
+
+            /* Animation for subtle flow */
+            animation: dotGridFlow 60s linear infinite; /* Adjust time for faster/slower flow */
+        }
+
+        @keyframes dotGridFlow {
+            from { background-position: 0 0; }
+            to { background-position: 30px 30px; } /* Moves by one grid cell to loop seamlessly */
+        }
+
+        /* --- Metaballs Canvas (Deepest Background Layer) --- */
+        #metaballs-canvas {
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Cover full viewport width */
+            height: 100vh; /* Cover full viewport height */
+            z-index: -2; /* Place behind everything else (line grid & dot grid) */
+            display: block; /* Remove any default canvas margins */
+            background-color: transparent; /* Ensure it doesn't block body background */
+            pointer-events: none; /* Crucial: Allows mouse events to pass through to elements below */
+        }
+
+        /* --- Main Content Container --- */
         .main-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative; /* Ensure content is above the z-indexed pseudo-elements */
+            z-index: 1; /* Bring content above all backgrounds */
         }
 
         /* --- Header --- */
@@ -187,10 +243,12 @@
     </style>
 </head>
 <body>
+    <!-- Metaballs Canvas - Placed first in body to be lowest layer -->
+    <canvas id="metaballs-canvas"></canvas>
 
     <div class="main-container">
         <header class="main-header">
-            <!-- ADDED IDs HERE -->
+            <!-- ADDED IDs for Text Decryption -->
             <h1 id="main-title">THE BOHEMAI PROJECT</h1>
             <p id="sub-title">An Initiative from the creators of "Architecting You"</p>
         </header>
@@ -424,101 +482,252 @@
         </footer>
     </div>
 
-  <script>
-    class TextDecryptor {
-        constructor(element, originalText, options = {}) {
-            this.element = element;
-            this.originalText = originalText;
-            // Define a comprehensive set of characters for scrambling
-            this.chars = options.chars || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~"; 
-            this.frameRate = options.frameRate || 30; // How many times per second individual character states update
-            this.scrambleIterations = options.scrambleIterations || 10; // How many random characters to show before revealing the actual one
-            this.characterRevealDelay = options.characterRevealDelay || 70; // Delay (in ms) before the next character starts its decryption process
+    <!-- SCRIPT FOR HEADER TEXT DECRYPTION EFFECT -->
+    <script>
+        class TextDecryptor {
+            constructor(element, originalText, options = {}) {
+                this.element = element;
+                this.originalText = originalText;
+                this.chars = options.chars || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~"; 
+                this.frameRate = options.frameRate || 30;
+                this.scrambleIterations = options.scrambleIterations || 10;
+                this.characterRevealDelay = options.characterRevealDelay || 70;
 
-            this.revealedText = Array(this.originalText.length).fill(''); // Stores the current state of the text (revealed chars + scrambled chars)
-            this.activeIntervals = []; // To keep track of all individual character animation intervals
-        }
+                this.revealedText = Array(this.originalText.length).fill('');
+                this.activeIntervals = [];
+            }
 
-        getRandomChar() {
-            return this.chars[Math.floor(Math.random() * this.chars.length)];
-        }
+            getRandomChar() {
+                return this.chars[Math.floor(Math.random() * this.chars.length)];
+            }
 
-        start() {
-            // First, immediately fill the element with scrambled characters
-            this.element.textContent = this.originalText.split('').map(() => this.getRandomChar()).join('');
+            start() {
+                this.element.textContent = this.originalText.split('').map(() => this.getRandomChar()).join('');
 
-            // Iterate over each character of the original text
-            this.originalText.split('').forEach((targetChar, charIndex) => {
-                // Schedule the start of the decryption for this specific character
-                // Each character's decryption starts after a staggered delay
-                setTimeout(() => {
-                    let currentIteration = 0; // Counter for scramble iterations for *this* character
+                this.originalText.split('').forEach((targetChar, charIndex) => {
+                    setTimeout(() => {
+                        let currentIteration = 0;
 
-                    const charInterval = setInterval(() => {
-                        if (currentIteration < this.scrambleIterations) {
-                            // During the scramble phase, display a random character
-                            this.revealedText[charIndex] = this.getRandomChar();
-                        } else {
-                            // Once scramble iterations are done, lock the character to its original value
-                            this.revealedText[charIndex] = targetChar;
-                            clearInterval(charInterval); // Stop this character's animation
-                            // Remove this interval from the active list
-                            this.activeIntervals = this.activeIntervals.filter(i => i !== charInterval);
-                            // If all characters have finished their decryption, ensure the final text is perfectly rendered
-                            if (this.activeIntervals.length === 0) {
-                                this.element.textContent = this.originalText;
+                        const charInterval = setInterval(() => {
+                            if (currentIteration < this.scrambleIterations) {
+                                this.revealedText[charIndex] = this.getRandomChar();
+                            } else {
+                                this.revealedText[charIndex] = targetChar;
+                                clearInterval(charInterval);
+                                this.activeIntervals = this.activeIntervals.filter(i => i !== charInterval);
+                                if (this.activeIntervals.length === 0) {
+                                    this.element.textContent = this.originalText;
+                                }
                             }
-                        }
-                        // Update the entire displayed text with the current state of all characters
-                        this.element.textContent = this.revealedText.join('');
-                        currentIteration++;
-                    }, 1000 / this.frameRate); // Update interval based on the desired frame rate (e.g., 1000ms / 30fps = 33.3ms)
-                    this.activeIntervals.push(charInterval); // Add this character's interval to the active list
-                }, charIndex * this.characterRevealDelay); // Stagger the start time for each character
+                            this.element.textContent = this.revealedText.join('');
+                            currentIteration++;
+                        }, 1000 / this.frameRate);
+                        this.activeIntervals.push(charInterval);
+                    }, charIndex * this.characterRevealDelay);
+                });
+            }
+
+            stop() {
+                this.activeIntervals.forEach(clearInterval);
+                this.activeIntervals = [];
+                this.element.textContent = this.originalText;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainTitleElement = document.getElementById('main-title');
+            const subTitleElement = document.getElementById('sub-title');
+
+            if (mainTitleElement) {
+                const originalMainTitle = mainTitleElement.textContent;
+                mainTitleElement.textContent = ''; 
+                const titleDecryptor = new TextDecryptor(mainTitleElement, originalMainTitle, {
+                    scrambleIterations: 20,
+                    characterRevealDelay: 120,
+                    frameRate: 45
+                });
+                titleDecryptor.start();
+            }
+
+            if (subTitleElement) {
+                const originalSubTitle = subTitleElement.textContent;
+                subTitleElement.textContent = ''; 
+                const subTitleDecryptor = new TextDecryptor(subTitleElement, originalSubTitle, {
+                    scrambleIterations: 12,
+                    characterRevealDelay: 70,
+                    frameRate: 35
+                });
+                setTimeout(() => {
+                    subTitleDecryptor.start();
+                }, 1000);
+            }
+        });
+    </script>
+
+    <!-- Three.js CDN for Metaballs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.165.0/three.min.js"></script>
+
+    <!-- SCRIPT FOR FLOATING METABALLS BACKGROUND -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('metaballs-canvas');
+            if (!canvas) {
+                console.error('Metaballs canvas not found!');
+                return;
+            }
+
+            // Optional: Check for reduced motion preference for accessibility
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                canvas.style.display = 'none'; // Hide canvas if user prefers reduced motion
+                return;
+            }
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            // Reduce pixel ratio for better performance, especially on high-DPI screens
+            renderer.setPixelRatio(window.devicePixelRatio * 0.75 || 1); 
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const scene = new THREE.Scene();
+            // OrthographicCamera for 2D full-screen rendering
+            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1); 
+
+            // Get CSS variable values for colors and threshold
+            const rootStyles = getComputedStyle(document.documentElement);
+            const metaballColor1 = new THREE.Color(rootStyles.getPropertyValue('--metaball-color-1'));
+            const metaballColor2 = new THREE.Color(rootStyles.getPropertyValue('--metaball-color-2'));
+            const metaballThreshold = parseFloat(rootStyles.getPropertyValue('--metaball-threshold'));
+
+            // Shader uniforms (data passed from JS to GLSL)
+            const metaballUniforms = {
+                u_resolution: { value: new THREE.Vector2() },
+                u_time: { value: 0.0 },
+                u_balls: { value: [] }, // Array of ball positions and radii (x,y,z,r)
+                u_num_balls: { value: 0 },
+                u_threshold: { value: metaballThreshold || 0.5 },
+                u_color_1: { value: metaballColor1 },
+                u_color_2: { value: metaballColor2 }
+            };
+
+            // GLSL Vertex Shader - renders a simple full-screen quad
+            const vertexShader = `
+                void main() {
+                    gl_Position = vec4(position, 1.0);
+                }
+            `;
+
+            // GLSL Fragment Shader - calculates the metaball effect
+            // Max number of balls in the shader must match or exceed the JS numBalls
+            const fragmentShader = `
+                precision highp float;
+
+                uniform vec2 u_resolution;
+                uniform float u_time;
+                uniform vec4 u_balls[5]; // Max number of balls (match in JS)
+                uniform int u_num_balls;
+                uniform float u_threshold;
+                uniform vec3 u_color_1;
+                uniform vec3 u_color_2;
+
+                void main() {
+                    // Normalize fragment coordinates to -1 to 1 range
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    vec2 p = uv * 2.0 - 1.0;
+                    p.x *= u_resolution.x / u_resolution.y; // Correct aspect ratio for screen
+
+                    float sum = 0.0;
+                    for (int i = 0; i < u_num_balls; ++i) {
+                        // Ball positions are 0-1, convert to -1 to 1 and correct aspect ratio
+                        vec2 ball_pos = u_balls[i].xy * 2.0 - 1.0; 
+                        ball_pos.x *= u_resolution.x / u_resolution.y; 
+                        float r = u_balls[i].w * 0.2; // Radius, scaled down for visual appeal
+                        
+                        // Calculate distance from current fragment to ball center
+                        float dist_sq = distance(p, ball_pos);
+                        
+                        // Metaball influence calculation (inverse square falloff)
+                        sum += (r * r) / (dist_sq * dist_sq + 0.0001); // Add small epsilon to prevent division by zero
+                    }
+
+                    vec3 finalColor = vec3(0.0);
+
+                    // If sum exceeds threshold, it's inside a metaball's influence
+                    if (sum > u_threshold) {
+                        // Smoothly blend between two colors based on how far above threshold
+                        // The '0.5' here controls the sharpness of the blend from threshold
+                        float blend = smoothstep(u_threshold, u_threshold + 0.5, sum); 
+                        finalColor = mix(u_color_1, u_color_2, blend);
+                    }
+
+                    gl_FragColor = vec4(finalColor, 1.0); // Output the color with full opacity
+                }
+            `;
+
+            const geometry = new THREE.PlaneGeometry(2, 2); // Full-screen quad
+            const material = new THREE.ShaderMaterial({
+                uniforms: metaballUniforms,
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true // Allow background to show through fully transparent areas
             });
-        }
+            const plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
 
-        // Optional: Method to stop all animations and reset the text
-        stop() {
-            this.activeIntervals.forEach(clearInterval);
-            this.activeIntervals = [];
-            this.element.textContent = this.originalText;
-        }
-    }
+            // Ball data (x, y, z, radius) - x,y are normalized 0-1
+            const balls = [];
+            const numBalls = 5; // You can adjust the number of balls (ensure fragment shader's u_balls array size is large enough)
+            for (let i = 0; i < numBalls; i++) {
+                balls.push({
+                    position: new THREE.Vector3(Math.random(), Math.random(), 0), // x, y (0-1 range)
+                    radius: 0.1 + Math.random() * 0.1, // Radius
+                    velocity: new THREE.Vector2(
+                        (Math.random() - 0.5) * 0.0005, // Small random velocity
+                        (Math.random() - 0.5) * 0.0005
+                    )
+                });
+            }
+            metaballUniforms.u_num_balls.value = numBalls;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const mainTitleElement = document.getElementById('main-title');
-        const subTitleElement = document.getElementById('sub-title');
+            // Animation loop
+            function animate(time) {
+                requestAnimationFrame(animate);
 
-        if (mainTitleElement) {
-            const originalMainTitle = mainTitleElement.textContent;
-            // Clear the text immediately to prevent flicker before scramble starts
-            mainTitleElement.textContent = ''; 
-            const titleDecryptor = new TextDecryptor(mainTitleElement, originalMainTitle, {
-                scrambleIterations: 20,     // More iterations for a longer scramble on the main title
-                characterRevealDelay: 120, // Slower stagger, more dramatic reveal
-                frameRate: 45              // Faster individual character changes during scramble
-            });
-            titleDecryptor.start();
-        }
+                metaballUniforms.u_time.value = time * 0.001; // Convert to seconds
 
-        if (subTitleElement) {
-            const originalSubTitle = subTitleElement.textContent;
-            // Clear the text immediately
-            subTitleElement.textContent = ''; 
-            const subTitleDecryptor = new TextDecryptor(subTitleElement, originalSubTitle, {
-                scrambleIterations: 12,    // Fewer iterations, quicker scramble
-                characterRevealDelay: 70, // Faster stagger
-                frameRate: 35             // Normal individual character changes
-            });
-            // Start the sub-title decryption after the main title has begun to reveal,
-            // creating a nice sequential effect. Adjust this delay as needed.
-            setTimeout(() => {
-                subTitleDecryptor.start();
-            }, 1000); // Start subtitle after 1 second
-        }
-    });
-</script>
+                // Update ball positions and handle bouncing off edges
+                const ballData = [];
+                balls.forEach(ball => {
+                    ball.position.x += ball.velocity.x;
+                    ball.position.y += ball.velocity.y;
 
+                    // Bounce off walls and clamp to bounds to prevent sticking
+                    if (ball.position.x < 0 || ball.position.x > 1) {
+                        ball.velocity.x *= -1;
+                        ball.position.x = Math.max(0, Math.min(1, ball.position.x)); 
+                    }
+                    if (ball.position.y < 0 || ball.position.y > 1) {
+                        ball.velocity.y *= -1;
+                        ball.position.y = Math.max(0, Math.min(1, ball.position.y));
+                    }
+                    // Pack ball data into a flat array for the shader
+                    ballData.push(ball.position.x, ball.position.y, ball.position.z, ball.radius);
+                });
+                metaballUniforms.u_balls.value = ballData;
+
+                renderer.render(scene, camera);
+            }
+
+            // Handle window resizing
+            function onWindowResize() {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                metaballUniforms.u_resolution.value.x = window.innerWidth;
+                metaballUniforms.u_resolution.value.y = window.innerHeight;
+            }
+
+            window.addEventListener('resize', onWindowResize);
+            onWindowResize(); // Initial call to set resolution
+
+            animate(0); // Start the animation loop
+        });
+    </script>
 </body>
 </html>
