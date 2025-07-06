@@ -439,26 +439,11 @@
 
                 <h3 id="chap2-3">2.3 The NeuroFlux "Trinity" Architecture: An Agentic RAG Blueprint</h3>
                 <p>The NeuroFlux AGRAG system is designed as a practical blueprint for Agentic RAG, embodying a "Trinity" architecture that orchestrates distinct AI roles in a seamless information pipeline. This structure facilitates sophisticated Context Engineering by clearly delineating responsibilities:</p>
-                <div class="mermaid">
-graph TD
-    subgraph User Interaction
-        UI[User Query from Frontend] --> API_EXECUTE(Initiate Agent);
-    end
-
-    subgraph The Mind (Strategist)
-        API_EXECUTE --> M_PLAN[Analyze Query & Plan Research];
-        M_PLAN --> M_SYNTHESIZE[Synthesize Insights from Research];
-    end
-
-    subgraph The Soul (Data & Retrieval Tools)
-        M_PLAN -- Research Tasks --> R_EXECUTE[Execute Research (Web, Vector DB, PostgreSQL)];
-        R_EXECUTE -- Raw Results --> M_SYNTHESIZE;
-    end
-
-    subgraph The Voice (Ghostwriter)
-        M_SYNTHESIZE -- Structured Briefing --> V_GENERATE[Expand Briefing into Final Report];
-        V_GENERATE --> F_OUTPUT[Deliver HTML Report to User];
-    end
+                </div>
+                <img src="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" alt="NeuroFlux RAG Architecture Diagram" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--code-bg); padding: 10px;">
+                <p style="text-align: center; margin-top: 10px;">
+                <a href="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: bold;">View Diagram Full Screen</a>
+                </p>
                 </div>
                 <p>In NeuroFlux, each "agent" plays a specialized role in the Context Engineering process:</p>
                 <ul>
