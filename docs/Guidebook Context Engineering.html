@@ -41,7 +41,7 @@
         }
 
         .sidebar {
-            width: 350px; /* Increased width */
+            width: 400px; /* Further Increased width as requested */
             padding: 20px;
             border-right: 1px solid var(--border-color);
             overflow-y: auto;
@@ -389,7 +389,7 @@
                 <h4>Anticipate Challenges & Design Safeguards:</h4>
                 <ul>
                     <li>What are the risks (bias, privacy, cost, latency, hallucination, data staleness)?</li>
-                    <li><strong>How-to:m</strong> Use reverse brainstorming.</li>
+                    <li><strong>How-to:</strong> Use reverse brainstorming.</li>
                     <li>What Context Engineering principles apply here (no hallucination, strict grounding, validation)?</li>
                 </ul>
                 <h4>Prioritize & Prototype:</h4>
@@ -439,8 +439,26 @@
 
                 <h3 id="chap2-3">2.3 The NeuroFlux "Trinity" Architecture: An Agentic RAG Blueprint</h3>
                 <p>The NeuroFlux AGRAG system is designed as a practical blueprint for Agentic RAG, embodying a "Trinity" architecture that orchestrates distinct AI roles in a seamless information pipeline. This structure facilitates sophisticated Context Engineering by clearly delineating responsibilities:</p>
-                
-                <img src="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" alt="RAG System Architecture Diagram" style="max-width: 100%; height: auto;">
+                <div class="mermaid">
+graph TD
+    subgraph User Interaction
+        UI[User Query from Frontend] --> API_EXECUTE(Initiate Agent);
+    end
+
+    subgraph The Mind (Strategist)
+        API_EXECUTE --> M_PLAN[Analyze Query & Plan Research];
+        M_PLAN --> M_SYNTHESIZE[Synthesize Insights from Research];
+    end
+
+    subgraph The Soul (Data & Retrieval Tools)
+        M_PLAN -- Research Tasks --> R_EXECUTE[Execute Research (Web, Vector DB, PostgreSQL)];
+        R_EXECUTE -- Raw Results --> M_SYNTHESIZE;
+    end
+
+    subgraph The Voice (Ghostwriter)
+        M_SYNTHESIZE -- Structured Briefing --> V_GENERATE[Expand Briefing into Final Report];
+        V_GENERATE --> F_OUTPUT[Deliver HTML Report to User];
+    end
                 </div>
                 <p>In NeuroFlux, each "agent" plays a specialized role in the Context Engineering process:</p>
                 <ul>
@@ -619,7 +637,7 @@
                 <ul>
                     <li><strong>OpenAI Embeddings:</strong> High quality, easy API access, widely used. (API-based, cost).</li>
                     <li><strong>Cohere Embed:</strong> Strong commercial embeddings, often good for enterprise. (API-based, cost).</li>
-                    <li><strong>E5-base/large:</strong> Another family of strong open-source embedding models, good performance-to-size ratio.</li>
+                    <li><strong>E5-base/large:</b> Another family of strong open-source embedding models, good performance-to-size ratio.</li>
                 </ul>
 
                 <h3 id="chap4-3">4.3 Vector Databases (for unstructured data)</h3>
@@ -676,7 +694,7 @@
                 <ul>
                     <li><strong>Benefits:</strong> Widely popular, open-source, easy to set up, good for web applications, strong community support.</li>
                     <li><strong>Detractors:</strong> Less feature-rich than PostgreSQL for advanced data types or complex analytical queries, scalability can be more challenging for massive datasets compared to specialized distributed DBs.</li>
-                    </ul>
+                </ul>
                 <h4>SQLite:</h4>
                 <ul>
                     <li><strong>Benefits:</strong> Serverless (database is a file), zero-configuration, extremely lightweight, ideal for embedded applications, local development, and simple data storage.</li>
