@@ -4,4 +4,4 @@ The github landing page for the blog: https://minimaxa1.github.io/Architecting-Y
 
 Book: https://www.amazon.com/Architecting-You-Bohemai-Art-ebook/dp/B0F9WDHYSL/ref=sr_1_1?sr=8-1
 
-![Architecting You - Cover3_](https://github.com/user-attachments/assets/647a953c-eeaf-478e-a5f8-66972cb236f0)
+![architecting-you-cover](https://github.com/user-attachments/assets/42075d93-70b7-4f01-81f5-ea35458a7a8b)
