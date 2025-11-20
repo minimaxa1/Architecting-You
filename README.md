@@ -1,3 +1,4 @@
+docs/713xz1YJUtL._SL1500_.jpg
 # Architecting-You
 
 The github landing page for the blog: https://minimaxa1.github.io/Architecting-You/
