@@ -1,4 +1,5 @@
-docs/713xz1YJUtL._SL1500_.jpg
+![713xz1YJUtL _SL1500_](https://github.com/user-attachments/assets/693c8912-3580-4f6b-a1d7-6177d7871abb)
+
 # Architecting-You
 
 The github landing page for the blog: https://minimaxa1.github.io/Architecting-You/
