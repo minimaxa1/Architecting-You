@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BOHEMAI PROJECT | ARCHITECTING YOU</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* === 1. VISUAL SETTINGS (THEME) === */
+        :root {
+            --cyber-black: #050505;       /* Deepest Black */
+            --cyber-gold: #FFB000;        /* Amber/Retro Monitor Gold */
+            --cyber-dim: #443300;         /* Dim Gold for borders/accents */
+            --border-style: 1px solid var(--cyber-gold);
+            --gap-size: 4px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--cyber-black);
+            color: var(--cyber-gold);
+            font-family: 'Roboto Mono', monospace;
+            overflow-x: hidden;
+            ::selection { background: var(--cyber-gold); color: var(--cyber-black); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--cyber-black); }
+        ::-webkit-scrollbar-thumb { background: var(--cyber-dim); border: 1px solid var(--cyber-gold); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cyber-gold); }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* === 2. BOOT SEQUENCE === */
+        #boot-screen {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh;
+            background: var(--cyber-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .terminal-text {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+        .blink { animation: blinker 0.8s step-end infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* === 3. HEADER & NAVIGATION === */
+        header {
+            border-bottom: var(--border-style);
+            margin-bottom: var(--gap-size);
+            background: var(--cyber-black);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px dashed var(--cyber-dim);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-family: 'VT323', monospace;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        .sub-logo {
+            font-size: 0.8rem;
+            color: #886600;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            color: var(--cyber-gold);
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+        .nav-btn:hover {
+            border: var(--border-style);
+            text-shadow: 0 0 5px var(--cyber-gold);
+            background: rgba(255, 176, 0, 0.05);
+        }
+
+        .shop-btn {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            padding: 5px 15px;
+            background-color: var(--cyber-gold);
+            color: var(--cyber-black);
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid var(--cyber-gold);
+        }
+        .shop-btn:hover {
+            background-color: transparent;
+            color: var(--cyber-gold);
+            box-shadow: 0 0 10px var(--cyber-gold);
+        }
+
+        /* Filter Controls */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 20px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--cyber-dim); 
+            color: #886600; 
+            font-family: 'Roboto Mono', monospace;
+            padding: 6px 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border: var(--border-style);
+            color: var(--cyber-gold);
+            background: rgba(255, 176, 0, 0.1);
+        }
+
+        /* === 4. THE GRID === */
+        #app { display: none; min-height: 100vh; }
+        
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--gap-size);
+            padding: 0 20px 20px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; align-items: flex-start; }
+            .nav-links { width: 100%; justify-content: flex-start; }
+            #grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 10px 10px 10px;
+            }
+            .card-title { font-size: 1.2rem !important; }
+        }
+
+        /* === 5. CARD DESIGN === */
+        .card {
+            position: relative;
+            display: block;
+            border: var(--border-style);
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(100%) contrast(120%); 
+            transition: opacity 0.1s ease;
+        }
+
+        .card-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+            opacity: 0;
+            background-color: var(--cyber-gold); 
+            color: var(--cyber-black);
+            transition: opacity 0.2s ease;
+            z-index: 2;
+        }
+
+        .card:hover img { opacity: 0; }
+        .card:hover .card-content { opacity: 1; }
+
+        .card-title {
+            font-family: 'VT323', monospace;
+            font-size: 1.6rem;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            border-top: 2px solid var(--cyber-black);
+            padding-top: 8px;
+            width: 80%;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: var(--border-style);
+            color: #886600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOOT SEQUENCE -->
+    <div id="boot-screen">
+        <div class="terminal-text">
+            <p>> INITIALIZING BOHEMAI_PROJECT...</p>
+            <p>> LOADING REPORTS... [OK]</p>
+            <p>> LOADING ARCHIVES... [OK]</p>
+            <p>> LOADING NEURAL INTERFACE... <span id="percent">0%</span></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <main id="app">
+        
+        <header>
+            <div class="top-bar">
+                <div class="branding">
+                    <div class="logo">BOHEMAI_PROJECT</div>
+                    <span class="sub-logo">INITIATIVE: ARCHITECTING_YOU</span>
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="https://minimaxa.com/en-au" class="shop-btn" target="_blank">[ SHOP ]</a>
+                    <a href="https://vimeo.com/user10399531" class="nav-btn" target="_blank">VIMEO</a>
+                    <a href="https://www.deviantart.com/bohemai" class="nav-btn" target="_blank">DEVIANT</a>
+                    <a href="https://www.youtube.com/@binarymirror" class="nav-btn" target="_blank">YOUTUBE</a>
+                    <a href="https://www.amazon.com/s?i=digital-text&rh=p_27%3ABohemai&s=relevancerank&text=Bohemai" class="nav-btn" target="_blank">AMAZON</a>
+                    <a href="https://github.com/minimaxa1" class="nav-btn" target="_blank">GITHUB</a>
+                </nav>
+            </div>
+
+            <div class="filters" id="filter-container">
+                <!-- Javascript will inject buttons here -->
+            </div>
+        </header>
+
+        <div id="grid-container">
+            <!-- Javascript will inject cards here -->
+        </div>
+
+        <footer>
+            <a href="about.html" style="margin-right:20px;">[ ABOUT US ]</a>
+            <span>© 2025 // VER 3.0 // STATUS: LIVE</span>
+        </footer>
+
+    </main>
+
+    <script>
+        // === THE MASTER DATABASE ===
+        // Mapped to your specific file names
+        const database = [
+            // --- 1. REPORTS ---
+            { title: "Guidebook Context Engineering", category: "RESEARCH", date: "2025", link: "Guidebook Context Engineering.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Context+Eng" },
+            { title: "Neuroflux - AgRag Report", category: "RESEARCH", date: "2025", link: "Neuroflux - AgRag Report.html", image: "Rag Diagram.png" },
+            { title: "Ghost in the RAG", category: "RESEARCH", date: "2025", link: "The Ghost in the RAG - On Contextual Discernment in Enterprise.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Ghost+RAG" },
+            { title: "RAPID - Long Context Inference", category: "RESEARCH", date: "2025", link: "Local tests - RAPID- Long-Context Inference with Retrieval-Augmented.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=RAPID" },
+            { title: "Generative AI Bias Mitigation", category: "RESEARCH", date: "2025", link: "generative-ai-bias-mitigation.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Bias+Mitigation" },
+            { title: "LLM Insider Threat Potential", category: "RESEARCH", date: "2025", link: "llm-insider-threat-potential.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Insider+Threat" },
+            { title: "Multi-Agent AI Systems", category: "RESEARCH", date: "2025", link: "multi-agent-ai-systems.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Multi-Agent" },
+            { title: "Agentic AI Platforms", category: "RESEARCH", date: "2025", link: "agentic ai platforms.html", image: "Agentic AI Platforms.png" },
+            { title: "Axiom Prompt Template", category: "RESEARCH", date: "2025", link: "axiom-prompt-template.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Axiom" },
+            { title: "Multimodal Vision Report", category: "RESEARCH", date: "2025", link: "multimodal-vision-report.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Vision" },
+            { title: "Lara7 Prompt Template", category: "RESEARCH", date: "2025", link: "lara-prompt-template.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Lara7" },
+            { title: "AI Investigative Report", category: "RESEARCH", date: "2025", link: "Ai Investigative Research Report.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Investigative" },
+
+            // --- 2. EXTRACTIONS (Architecting You Articles) ---
+            { title: "Pillars of Digital Panopticon", category: "EXTRACTS", date: "EXTRACT", link: "pillars-of-the-digital-panopticon-deconstructing-core-architectural-components.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Panopticon" },
+            { title: "Babbage, Lovelace, Boole", category: "EXTRACTS", date: "EXTRACT", link: "historical-evolution-of-the-construct-expanded-enrichment-pass-the-victorian-cogwheels-of-thought-ba.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Victorian" },
+            { title: "Historical Evolution of Construct", category: "EXTRACTS", date: "EXTRACT", link: "historical-evolution-of-the-construct.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Construct" },
+            { title: "Reclaiming Human Agency", category: "EXTRACTS", date: "EXTRACT", link: "reclaiming-human-agency-in-the-algorithmic-age-a-self-architects-manifesto.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Agency" },
+            { title: "Reclaiming Authentic Selfhood", category: "EXTRACTS", date: "EXTRACT", link: "reclaiming-authentic-selfhood-in-the-algorithmic-age-a-framework-for-ethical-digital-identity.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Selfhood" },
+            { title: "Computation Consciousness", category: "EXTRACTS", date: "EXTRACT", link: "A Comprehensive Inquiry into Computation Consciousness.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Consciousness" },
+            { title: "Synergistic Security Risks", category: "EXTRACTS", date: "EXTRACT", link: "synergistic security risks in the convergence of specialized ai hardware decentralized opensource platforms and agentic llms towards a novel architectural paradigm.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Synergy" },
+            { title: "The Unseen Edifice", category: "EXTRACTS", date: "EXTRACT", link: "charting-the-construct-the-architecture-of-modern-digital-life-the-unseen-edifice-defining-and-dissecting-our-modern-digital-environment-today.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Edifice" },
+
+            // --- 3. ARCHITECTING YOU (The Book Parts 1 & 2) ---
+            { title: "CH1: Charting The Construct", category: "BOOK", date: "PART I", link: "charting-the-construct.html", image: "Architecting You - Cover - tiny_.jpg" },
+            { title: "CH2: Foundations of Agency", category: "BOOK", date: "PART I", link: "foundations-of-digital-agency.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH2+Agency" },
+            { title: "CH3: Forging the Mind", category: "BOOK", date: "PART I", link: "forging-the-self.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH3+Forging" },
+            { title: "CH4: The Toolkit (FOSS)", category: "BOOK", date: "PART I", link: "the-self-architects-toolkit.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH4+Toolkit" },
+            { title: "CH5: Fortifying Digital Self", category: "BOOK", date: "PART I", link: "fortifying-the-digital-self.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH5+Fortify" },
+            { title: "CH6: The Engaged Architect", category: "BOOK", date: "PART I", link: "the-engaged-architect.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH6+Engaged" },
+            { title: "CH7: The Crucible", category: "BOOK", date: "PART I", link: "the-self-architects-crucible.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH7+Crucible" },
+            { title: "CH8: Weaver of Worlds", category: "BOOK", date: "PART I", link: "the-weaver-of-worlds.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH8+Weaver" },
+            { title: "CH9: The Unfolding Scroll", category: "BOOK", date: "PART I", link: "the-unfolding-scroll.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH9+Scroll" },
+            { title: "CH10: The Covenant", category: "BOOK", date: "PART I", link: "the-self-architects-covenant.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH10+Covenant" },
+            
+            { title: "CH11: Crucible of Change", category: "BOOK", date: "PART II", link: "forging-an-agile-and-resilient-mind-(continued).html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH11+Change" },
+            { title: "CH12: Discerning Intellect", category: "BOOK", date: "PART II", link: "the-discerning-intellect.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH12+Intellect" },
+            { title: "CH13: Spark of Ingenuity", category: "BOOK", date: "PART II", link: "the-spark-of-human-ingenuity.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH13+Spark" },
+            { title: "CH14: The Resonant Voice", category: "BOOK", date: "PART II", link: "the-resonant-voice.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH14+Voice" },
+            { title: "CH15: Learner's Compass", category: "BOOK", date: "PART II", link: "the-lifelong-learner’s-compass.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH15+Compass" },
+            { title: "CH16: Techno-Ethical Nav", category: "BOOK", date: "PART II", link: "the-techno-ethical-navigator.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH16+Ethics" },
+            { title: "CH17: Digital Guardian", category: "BOOK", date: "PART II", link: "the-digital-guardian.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH17+Guardian" },
+            { title: "CH18: Synergistic Innovator", category: "BOOK", date: "PART II", link: "the-synergistic-innovator.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH18+Innovator" },
+            { title: "CH19: Steward of Consciousness", category: "BOOK", date: "PART II", link: "the-steward-of-consciousness.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH19+Steward" },
+            { title: "CH20: Unfolding Covenant", category: "BOOK", date: "PART II", link: "the-unfolding-covenant.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=CH20+End" },
+
+            // --- 4. SCI-FI REVIEWS ---
+            { title: "I, Robot (1950)", category: "SCI-FI", date: "REVIEW", link: "i-robot-1950.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=I+Robot" },
+            { title: "Caves of Steel (1954)", category: "SCI-FI", date: "REVIEW", link: "the-caves-of-steel-1954.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Caves" },
+            { title: "Moon is Harsh Mistress", category: "SCI-FI", date: "REVIEW", link: "the-moon-is-a-harsh-mistress-1966.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Moon" },
+            { title: "Do Androids Dream?", category: "SCI-FI", date: "REVIEW", link: "do-androids-dream-of-electric-sheep-1968.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Androids" },
+            { title: "2001: Space Odyssey", category: "SCI-FI", date: "REVIEW", link: "2001-a-space-odyssey-1968.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=2001" },
+            { title: "Neuromancer (1984)", category: "SCI-FI", date: "REVIEW", link: "neuromancer-1984.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Neuromancer" },
+            { title: "Speaker for the Dead", category: "SCI-FI", date: "REVIEW", link: "speaker-for-the-dead-1986.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Speaker" },
+            { title: "Snow Crash (1992)", category: "SCI-FI", date: "REVIEW", link: "snow-crash-1992.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Snow+Crash" },
+            { title: "Permutation City", category: "SCI-FI", date: "REVIEW", link: "permutation-city-1994.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Permutation" },
+            { title: "The Diamond Age", category: "SCI-FI", date: "REVIEW", link: "the-diamond-age-1995.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Diamond+Age" },
+            { title: "Accelerando (2005)", category: "SCI-FI", date: "REVIEW", link: "accelerando-2005.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Accelerando" },
+            { title: "Daemon (2006)", category: "SCI-FI", date: "REVIEW", link: "daemon-2006.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Daemon" },
+            { title: "Lifecycle Software Objects", category: "SCI-FI", date: "REVIEW", link: "the-lifecycle-of-software-objects-2010.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Lifecycle" },
+            { title: "Ready Player One", category: "SCI-FI", date: "REVIEW", link: "ready-player-one-2011.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Ready+Player" },
+            { title: "Ancillary Justice", category: "SCI-FI", date: "REVIEW", link: "ancillary-justice-2013.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Ancillary" },
+            { title: "The Murderbot Diaries", category: "SCI-FI", date: "REVIEW", link: "the-murderbot-diaries-2017.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Murderbot" },
+            { title: "Autonomous (2017)", category: "SCI-FI", date: "REVIEW", link: "autonomous-2017.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Autonomous" },
+            { title: "Sea of Rust (2017)", category: "SCI-FI", date: "REVIEW", link: "sea-of-rust-2017.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Sea+of+Rust" },
+            { title: "Klara and the Sun", category: "SCI-FI", date: "REVIEW", link: "klara-and-the-sun-2021.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Klara" },
+            { title: "Project Hail Mary", category: "SCI-FI", date: "REVIEW", link: "project-hail-mary-2021.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Hail+Mary" },
+
+            // --- 5. NON-FICTION REVIEWS ---
+            { title: "Cybernetics (1948)", category: "NON-FIC", date: "REVIEW", link: "cybernetics-1948.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Cybernetics" },
+            { title: "Computing Machinery", category: "NON-FIC", date: "REVIEW", link: "computing-machinery-and-intelligence-1950.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Turing" },
+            { title: "What Computers Can't Do", category: "NON-FIC", date: "REVIEW", link: "what-computers-cant-do-1972.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Dreyfus" },
+            { title: "Gödel, Escher, Bach", category: "NON-FIC", date: "REVIEW", link: "godel-escher-bach-1979.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=GEB" },
+            { title: "The Society of Mind", category: "NON-FIC", date: "REVIEW", link: "the-society-of-mind-1986.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Minsky" },
+            { title: "Age of Spiritual Machines", category: "NON-FIC", date: "REVIEW", link: "the-age-of-spiritual-machines-1999.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Kurzweil" },
+            { title: "The Singularity Is Near", category: "NON-FIC", date: "REVIEW", link: "the-singularity-is-near-2005.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Singularity" },
+            { title: "The Master Algorithm", category: "NON-FIC", date: "REVIEW", link: "the-master-algorithm-2015.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Algorithm" },
+            { title: "Rise of the Robots", category: "NON-FIC", date: "REVIEW", link: "rise-of-the-robots-2015.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Rise" },
+            { title: "Superintelligence", category: "NON-FIC", date: "REVIEW", link: "superintelligence-2014.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Bostrom" },
+            { title: "Life 3.0", category: "NON-FIC", date: "REVIEW", link: "life-3-0-2017.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Life+3.0" },
+            { title: "AI Superpowers", category: "NON-FIC", date: "REVIEW", link: "ai-superpowers-2018.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Superpower" },
+            { title: "Surveillance Capitalism", category: "NON-FIC", date: "REVIEW", link: "the-age-of-surveillance-capitalism-2019.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Surveillance" },
+            { title: "Human Compatible", category: "NON-FIC", date: "REVIEW", link: "human-compatible-2019.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Compatible" },
+            { title: "The Alignment Problem", category: "NON-FIC", date: "REVIEW", link: "the-alignment-problem-2020.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Alignment" },
+            { title: "Genius Makers", category: "NON-FIC", date: "REVIEW", link: "genius-makers-2021.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Genius" },
+            { title: "The Coming Wave", category: "NON-FIC", date: "REVIEW", link: "the-coming-wave-2023.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Wave" },
+            { title: "The Worlds I See", category: "NON-FIC", date: "REVIEW", link: "the-worlds-i-see-2023.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Worlds" },
+            { title: "What Is ChatGPT Doing", category: "NON-FIC", date: "REVIEW", link: "what-is-chatgpt-doing-2023.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=ChatGPT" },
+            { title: "Architecting You (2025)", category: "NON-FIC", date: "CORE", link: "architecting-you-2025.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Architecting+You" },
+
+            // --- 6. ART & ILLUSTRATION ---
+            { title: "CYAN VITESSE", category: "ART", date: "GRAPHIC", link: "art-gallery.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Cyan+Vitesse" },
+            { title: "THE IMPROBABLE ARCHIVIST", category: "ART", date: "GRAPHIC", link: "art-gallery.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Archivist" },
+            { title: "FUGITIVE DAWN", category: "ART", date: "GRAPHIC", link: "art-gallery.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Fugitive+Dawn" },
+            { title: "Main Art Gallery", category: "ART", date: "GALLERY", link: "art-gallery.html", image: "https://placehold.co/600x600/050505/FFB000/png?text=Gallery" }
+        ];
+
+        // === SYSTEM LOGIC ===
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Boot Sequence
+            const bootScreen = document.getElementById('boot-screen');
+            const percentSpan = document.getElementById('percent');
+            const app = document.getElementById('app');
+
+            let loadPercent = 0;
+            const bootInterval = setInterval(() => {
+                loadPercent += Math.floor(Math.random() * 25);
+                if(loadPercent > 100) loadPercent = 100;
+                percentSpan.innerText = loadPercent + "%";
+
+                if(loadPercent === 100) {
+                    clearInterval(bootInterval);
+                    setTimeout(() => {
+                        bootScreen.style.display = 'none';
+                        app.style.display = 'block';
+                    }, 500);
+                }
+            }, 80);
+
+            // 2. Initialize
+            renderFilters();
+            renderGrid(database);
+        });
+
+        function renderFilters() {
+            const filterContainer = document.getElementById('filter-container');
+            const categories = ['All', ...new Set(database.map(item => item.category))];
+
+            categories.forEach((cat, index) => {
+                const btn = document.createElement('button');
+                btn.className = index === 0 ? 'filter-btn active' : 'filter-btn';
+                btn.innerText = cat === 'All' ? 'ALL // SYSTEM' : cat.toUpperCase();
+                
+                btn.onclick = () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    if(cat === 'All') {
+                        renderGrid(database);
+                    } else {
+                        const filtered = database.filter(item => item.category === cat);
+                        renderGrid(filtered);
+                    }
+                };
+                
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function renderGrid(items) {
+            const grid = document.getElementById('grid-container');
+            grid.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    <div class="card-content">
+                        <h2 class="card-title">${item.title}</h2>
+                        <div class="card-meta">
+                            <div>TYPE: ${item.category}</div>
+                            <div>DATE: ${item.date}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
