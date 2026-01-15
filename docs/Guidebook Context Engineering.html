@@ -2,133 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Guidebook: Context Engineering - Building Agentic RAG Systems</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- FONTS: VT323 (Retro Headers) & Roboto Mono (Data Text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- ICONS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
+        /* === 1. VISUAL SETTINGS (THEME) === */
         :root {
-            --grid-line-color: rgba(255, 255, 255, 0.07);
-            --bg-color: #0d0d0d;
-            --text-color: #e0e0e0;
-            --primary-color: #00aaff;
-            --accent-green: #20c997;
-            --accent-orange: #ffab70;
-            --border-color: #333;
-            --secondary-border-color: #444;
-            --code-bg-color: #2a2a2a;
+            --cyber-black: #050505;       /* Deepest Black */
+            --cyber-gold: #FFB000;        /* Amber/Retro Monitor Gold */
+            --cyber-dim: #443300;         /* Dim Gold for borders/accents */
+            --border-style: 1px solid var(--cyber-gold);
+            --gap-size: 4px;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.7;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            background-image: linear-gradient(var(--grid-line-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-color: var(--cyber-black);
+            color: var(--cyber-gold);
+            font-family: 'Roboto Mono', monospace;
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--cyber-black); }
+        ::-webkit-scrollbar-thumb { background: var(--cyber-dim); border: 1px solid var(--cyber-gold); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cyber-gold); }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* === 2. TYPOGRAPHY FOR CONTENT === */
+        h1, h2, h3, h4 { font-family: 'VT323', monospace; text-transform: uppercase; font-weight: normal; line-height: 1.2; }
+        
+        h1 { 
+            font-size: 3rem; 
+            margin-bottom: 1rem; 
+            border-bottom: var(--border-style); 
+            padding-bottom: 0.5rem;
+            color: var(--cyber-gold);
+            text-shadow: 0 0 5px rgba(255, 176, 0, 0.5);
+        }
+        
+        h2 { font-size: 2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        h3 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--cyber-gold); }
+        
+        p { margin-bottom: 1.5rem; max-width: 800px; color: #ccc; }
+        strong { color: white; }
+        
+        ul, ol { margin-bottom: 1.5rem; padding-left: 20px; max-width: 800px; color: #ccc; }
+        li { margin-bottom: 0.5rem; }
+        
+        /* Content Links */
+        .content-area a { text-decoration: underline; color: var(--cyber-gold); }
+        .content-area a:hover { background: var(--cyber-gold); color: black; text-decoration: none; }
+
+        /* === 3. HEADER & NAVIGATION === */
         header {
-            text-align: center;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            border-bottom: var(--border-style);
+            margin-bottom: 40px;
+            background: var(--cyber-black);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
-        h1, h2, h3, h4 {
-            color: var(--primary-color);
-            letter-spacing: 1px;
-            font-weight: 600;
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        h1 { font-size: 2.5rem; text-transform: uppercase; }
-        h2 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 3rem; }
-        h3 { font-size: 1.5rem; border-bottom: none; color: var(--accent-green); margin-top: 2.5rem; }
-        h4 { font-size: 1.2rem; color: var(--accent-orange); margin-top: 2rem; }
-
-        .report-section {
-            margin-bottom: 2.5rem;
-            background: rgba(20, 20, 20, 0.85);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem 2.5rem;
-            backdrop-filter: blur(8px);
-        }
-
-        p { margin-bottom: 1rem; }
-        ul, ol { padding-left: 1.5rem; }
-        li { margin-bottom: 0.75rem; }
-        
-        code {
-            background-color: var(--code-bg-color);
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-            color: var(--accent-orange);
-            font-size: 0.9em;
-        }
-
-        pre {
-            background-color: var(--code-bg-color);
-            border: 1px solid var(--secondary-border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 0.9em;
+        .logo {
+            font-family: 'VT323', monospace;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cyber-gold);
         }
         
-        .mermaid {
-            background-color: rgba(0,0,0,0.2);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 2rem;
-            text-align: center;
+        .nav-btn {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            padding: 5px 15px;
+            border: 1px solid var(--cyber-gold);
+            color: var(--cyber-gold);
+            text-transform: uppercase;
+            background: transparent;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:hover {
+            background: var(--cyber-gold);
+            color: black;
+            box-shadow: 0 0 10px var(--cyber-gold);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        th, td {
-            border: 1px solid var(--secondary-border-color);
-            padding: 1rem;
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--code-bg-color);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        blockquote {
-            border-left: 4px solid var(--accent-green);
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            font-style: italic;
-            color: #c0c0c0;
+        /* === 4. LAYOUT === */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
         }
 
         footer {
-            font-size: 0.9rem;
-            color: #888;
+            padding: 40px 20px;
             text-align: center;
-            margin-top: 4rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
+            font-size: 0.9rem;
+            border-top: var(--border-style);
+            color: var(--cyber-dim);
+            margin-top: auto;
+            font-family: 'VT323', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
     <header>
-        <h1>The Guidebook</h1>
-        <p style="font-size: 1.2rem; color: var(--primary-color); letter-spacing: 2px;">A Comprehensive Overview of Context Engineering and Agentic RAG</p>
+        <div class="top-bar">
+            <a href="index.html" class="logo">
+                SYSTEM_ARCHIVE
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <i data-lucide="arrow-left" style="width:16px;"></i> Return to Main
+                </a>
+            </div>
+        </div>
     </header>
+
+    <!-- Main Content -->
+    <main class="container content-area">
+
+    
 
     <div class="report-section">
         <h2>Abstract</h2>
@@ -276,10 +300,10 @@
 
         <h3 id="chap2-3">2.3 The NeuroFlux "Trinity" Architecture: An Agentic RAG Blueprint</h3>
         <p>The NeuroFlux AGRAG system is designed as a practical blueprint for Agentic RAG, embodying a "Trinity" architecture that orchestrates distinct AI roles in a seamless information pipeline. This structure facilitates sophisticated Context Engineering by clearly delineating responsibilities:</p>
-        <div style="text-align: center; margin: 20px 0; background-color: var(--code-bg-color); border: 1px solid var(--border-color); border-radius: 5px; padding: 20px;">
-            <img src="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" alt="NeuroFlux RAG Architecture Diagram" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-            <p style="margin-top: 15px;">
-                <a href="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" target="_blank" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">View Diagram Full Screen</a>
+        <div >
+            <img src="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" alt="NeuroFlux RAG Architecture Diagram" >
+            <p >
+                <a href="https://raw.githubusercontent.com/minimaxa1/Architecting-You/main/docs/Rag%20Diagram.png" target="_blank" >View Diagram Full Screen</a>
             </p>
         </div>
         <p>In NeuroFlux, each "agent" plays a specialized role in the Context Engineering process:</p>
@@ -914,16 +938,17 @@ POSTGRES_DB="neuroflux_db"
         <p>Future directions in LSE include self-improving embedding models that adapt based on RAG system feedback, more sophisticated multi-modal fusion in latent space, and techniques for creating truly "interpretable" latent spaces where specific dimensions correspond to human-understandable attributes.</p>
         <p>By diligently applying Latent Space Engineering principles, developers can ensure their Agentic RAG systems are built on a foundation of highly accurate and semantically rich information, leading to more intelligent, reliable, and trustworthy AI applications.</p>
         </ul>
-        </html></div><div class="cta-container"><div class="panel-title-bar">Continue the Journey</div><div class="panel-body"><p>This article is an extraction from Neuroflux on Github </p><a href="https://github.com/minimaxa1/Neuroflux" class="action-button" target="_blank">[ View on Github ]</a></div></div><div class="button-container"><a href="index.html" class="action-button">[ Back to Source ]</a></div></main></div></body></html>
-        </div>
+        </html></div><div class="cta-container"><div class="panel-title-bar">Continue the Journey</div><div class="panel-body"><p>This article is an extraction from Neuroflux on Github </p><a href="https://github.com/minimaxa1/Neuroflux" class="action-button" target="_blank">[ View on Github ]</a></div></div><div class="button-container"><a href="index.html" class="action-button">[ Back to Source ]</a></div></main></div>
+    </main>
 
-        <footer>Guidebook generated by NeuroFlux AGRAG | Version 1.0 | Sun, 29 Jun 2025 06:18:24 GMT</footer>
+    <!-- Footer -->
+    <footer>
+        <p>ARCHIVE_ID: 9940 // MEMORY FRAGMENT RESTORED</p>
+        <p style="margin-top:10px;">COPYRIGHT © 2025 BOHEMAI</p>
+    </footer>
 
-        <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'dark'
-        });
+    <script>
+        lucide.createIcons();
     </script>
 </body>
 </html>
